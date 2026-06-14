@@ -7,11 +7,11 @@
   {{- else -}}
     {{- $pageImg := $.Resources.GetMatch $img -}}
     {{- if $pageImg -}}
-      {{- $twitterImage = ($pageImg.Resize "1200x630 png").Permalink -}}
+      {{- $twitterImage = ($pageImg.Resize "1200x630 jpg q75").Permalink -}}
     {{- else -}}
       {{- $globalImg := resources.Get $img -}}
       {{- if $globalImg -}}
-        {{- $twitterImage = ($globalImg.Resize "1200x630 png").Permalink -}}
+        {{- $twitterImage = ($globalImg.Resize "1200x630 jpg q75").Permalink -}}
       {{- else -}}
         {{- $twitterImage = absURL $img -}}
       {{- end -}}
@@ -25,7 +25,7 @@
 {{- else -}}
   {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
   {{- with $banner -}}
-    {{- $twitterImage = (.Resize "1200x630 png").Permalink -}}
+    {{- $twitterImage = (.Resize "1200x630 jpg q75").Permalink -}}
   {{- else -}}
     {{- $twitterImage = absURL "images/wavey-meta/wavey-banner.png" -}}
   {{- end -}}
@@ -36,6 +36,7 @@
 <meta name="twitter:image" content="{{ $twitterImage }}">
 <meta name="twitter:image:alt" content="{{ $twitterImageAlt }}">
 {{- end -}}
+
 
 <meta name="twitter:title" content="{{ .Title }}"/>
 {{- $description := "" -}}
