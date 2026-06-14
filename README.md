@@ -2,6 +2,8 @@
   <img src="assets/images/wavey-meta/wavey-banner.png" width="100%" alt="Wavey Banner">
 </div>
 
+---
+
 <div align="center">
 
   [![Netlify Status](https://api.netlify.com/api/v1/badges/b674e295-69b9-4e34-b9b8-03c6022428dd/deploy-status)](https://app.netlify.com/sites/wavey-home/deploys)
