@@ -27,14 +27,15 @@
     "name": "Sabique Islam",
     "url": "{{ .Site.BaseURL }}"
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ .Site.Title }}",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ "images/wavey-meta/wavey-logo.png" | absURL }}"
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.png" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.png" | absURL }}{{- end -}}"
+      }
     }
-  }
+
 }
 </script>
 {{- end -}}
