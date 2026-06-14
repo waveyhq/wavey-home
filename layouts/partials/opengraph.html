@@ -1,24 +1,56 @@
 <meta property="og:title" content="{{ .Title }}" />
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+{{- $description := "" -}}
+{{- if .Description -}}
+  {{- $description = .Description -}}
+{{- else if .IsPage -}}
+  {{- $description = .Summary -}}
+{{- else -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
+{{- if $description -}}
+<meta property="og:description" content="{{ $description }}" />
+{{- end -}}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 
 {{- $ogImage := "" -}}
-{{- with .Params.image -}}
-  {{- $image := $.Resources.GetMatch . -}}
-  {{- with $image -}}
-    {{- $ogImage = (.Resize "1200x630 png").Permalink -}}
+{{- $ogImageAlt := "Wavey RF Sensing System" -}}
+{{- if .Params.image -}}
+  {{- $img := .Params.image -}}
+  {{- if (urls.Parse $img).Scheme -}}
+    {{- $ogImage = $img -}}
+  {{- else -}}
+    {{- $pageImg := $.Resources.GetMatch $img -}}
+    {{- if $pageImg -}}
+      {{- $ogImage = ($pageImg.Resize "1200x630 png").Permalink -}}
+    {{- else -}}
+      {{- $globalImg := resources.Get $img -}}
+      {{- if $globalImg -}}
+        {{- $ogImage = ($globalImg.Resize "1200x630 png").Permalink -}}
+      {{- else -}}
+        {{- $ogImage = absURL $img -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with .Params.imageAlt -}}
+    {{- $ogImageAlt = . -}}
+  {{- else -}}
+    {{- $ogImageAlt = printf "%s image" $.Title -}}
   {{- end -}}
 {{- else -}}
   {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
   {{- with $banner -}}
     {{- $ogImage = (.Resize "1200x630 png").Permalink -}}
+  {{- else -}}
+    {{- $ogImage = absURL "images/wavey-meta/wavey-banner.png" -}}
   {{- end -}}
+  {{- $ogImageAlt = "Wavey RF sensing system banner showing WiFi CSI visualization" -}}
 {{- end -}}
 {{- if $ogImage -}}
 <meta property="og:image" content="{{ $ogImage }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $ogImageAlt }}">
 {{- end -}}
 
 {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
@@ -30,7 +62,7 @@
 
 {{- with .Params.audio }}<meta property="og:audio" content="{{ . }}" />{{ end }}
 {{- with .Params.locale }}<meta property="og:locale" content="{{ . }}" />{{ end }}
-{{- with .Site.Params.title }}<meta property="og:site_name" content="{{ . }}" />{{ end }}
+{{- with .Site.Title }}<meta property="og:site_name" content="{{ . }}" />{{ end }}
 {{- with .Params.videos }}
 {{- range . }}
 <meta property="og:video" content="{{ . | absURL }}" />

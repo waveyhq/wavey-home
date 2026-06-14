@@ -1,29 +1,59 @@
 {{- $twitterImage := "" -}}
-{{- with .Params.image }}
-{{ $image := $.Resources.GetMatch . }}
-{{ with $image }}
-  {{ $thumb := .Resize "1200x630 png" }}
-  {{ $twitterImage = $thumb.Permalink }}
-{{ end }}
-{{ else }}
-  {{ $banner := resources.Get "images/wavey-meta/wavey-banner.png" }}
-  {{ with $banner }}
-    {{ $thumb := .Resize "1200x630 png" }}
-    {{ $twitterImage = $thumb.Permalink }}
-  {{ end }}
-{{ end }}
-{{ if $twitterImage }}
+{{- $twitterImageAlt := "Wavey RF Sensing System" -}}
+{{- if .Params.image -}}
+  {{- $img := .Params.image -}}
+  {{- if (urls.Parse $img).Scheme -}}
+    {{- $twitterImage = $img -}}
+  {{- else -}}
+    {{- $pageImg := $.Resources.GetMatch $img -}}
+    {{- if $pageImg -}}
+      {{- $twitterImage = ($pageImg.Resize "1200x630 png").Permalink -}}
+    {{- else -}}
+      {{- $globalImg := resources.Get $img -}}
+      {{- if $globalImg -}}
+        {{- $twitterImage = ($globalImg.Resize "1200x630 png").Permalink -}}
+      {{- else -}}
+        {{- $twitterImage = absURL $img -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with .Params.imageAlt -}}
+    {{- $twitterImageAlt = . -}}
+  {{- else -}}
+    {{- $twitterImageAlt = printf "%s image" $.Title -}}
+  {{- end -}}
+{{- else -}}
+  {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
+  {{- with $banner -}}
+    {{- $twitterImage = (.Resize "1200x630 png").Permalink -}}
+  {{- else -}}
+    {{- $twitterImage = absURL "images/wavey-meta/wavey-banner.png" -}}
+  {{- end -}}
+  {{- $twitterImageAlt = "Wavey RF sensing system banner showing WiFi CSI visualization" -}}
+{{- end -}}
+{{- if $twitterImage -}}
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="{{ $twitterImage }}">
-{{ end }}
+<meta name="twitter:image:alt" content="{{ $twitterImageAlt }}">
+{{- end -}}
 
 <meta name="twitter:title" content="{{ .Title }}"/>
-<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}"/>
-{{ with .Site.Params.Social.twitter -}}
+{{- $description := "" -}}
+{{- if .Description -}}
+  {{- $description = .Description -}}
+{{- else if .IsPage -}}
+  {{- $description = .Summary -}}
+{{- else -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
+{{- if $description -}}
+<meta name="twitter:description" content="{{ $description }}"/>
+{{- end -}}
+{{- with .Site.Params.Social.twitter -}}
 <meta name="twitter:site" content="@{{ . }}"/>
-{{ end -}}
-{{ range .Site.Params.Authors }}
-{{ with .twitter -}}
+{{- end -}}
+{{- range .Site.Params.Authors -}}
+{{- with .twitter -}}
 <meta name="twitter:creator" content="@{{ . }}"/>
-{{ end -}}
-{{ end -}}
+{{- end -}}
+{{- end -}}
