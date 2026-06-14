@@ -1,6 +1,6 @@
 baseURL = "https://wavey.nopejs.me/"
 languageCode = "en"
-title = "Wavey"
+title = "Wavey | RF Sensing System with CSI"
 enableRobotsTXT = true
 
 [params]
