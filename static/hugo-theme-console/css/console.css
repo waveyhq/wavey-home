@@ -46,7 +46,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-	--background-color: #151515;
+	--background-color: #0a0a0a;
 	--page-width: 60em;
 	--font-color: #e8e9ed;
 	--invert-font-color: #112121;
