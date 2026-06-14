@@ -4,18 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ if .IsHome }}Wavey | RF Sensing System with CSI{{ else }}{{ .Title }} | Wavey{{ end }}</title>
-    {{- $description := "" -}}
-    {{- if .Description -}}
-      {{- $description = .Description -}}
-    {{- else if .IsPage -}}
-      {{- $description = .Summary -}}
-    {{- else -}}
-      {{- $description = .Site.Params.description -}}
-    {{- end -}}
+    {{- $description := .Description | default .Summary | default .Site.Params.description -}}
     {{- if $description -}}
       <meta name="description" content="{{ $description }}">
     {{- end -}}
     <link rel="canonical" href="{{ .Permalink }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
