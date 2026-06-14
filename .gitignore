@@ -1,0 +1,5 @@
+.DS_Store
+public
+*.lock
+/resources/
+

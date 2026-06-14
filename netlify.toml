@@ -1,0 +1,24 @@
+[build]
+  command = "hugo --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.145.0"
+  HUGO_EXTENDED = "true"
+  HUGO_ENV = "production"
+
+[context.deploy-preview]
+  command = "hugo --buildFuture --buildDrafts"
+
+[context.branch-deploy]
+  command = "hugo --buildFuture"
+
+[[headers]]
+  for = "/resources/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"

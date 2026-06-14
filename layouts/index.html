@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+<div style="margin-bottom: 2rem;">
+  <img src="{{ "images/wavey-meta/wavey-banner.png" | absURL }}" width="100%" alt="Wavey Banner" style="max-width: 100%; height: auto;">
+</div>
+
+<h1>About Wavey</h1>
+
+<p>
+  Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
+</p>
+
+<p>
+  It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
+</p>
+
+<br/>
+
+<h1>Features</h1>
+
+<ul>
+  <li>Device-free occupancy detection</li>
+  <li>Motion and activity inference</li>
+  <li>Real-time RF signal visualization</li>
+  <li>Spatial occupancy estimation</li>
+  <li>Multi-node mesh sensing</li>
+  <li>Passive environmental monitoring</li>
+  <li>RF fingerprinting and scene change detection</li>
+  <li>Real-time CSI data collection and processing</li>
+  <li>ESP32-CSI based sensing nodes</li>
+  <li>Python-based analysis pipeline</li>
+</ul>
+
+<br/>
+
+<div style="margin-top: 2rem; margin-bottom: 2rem;">
+  <img src="{{ "images/wavey-meta/wavey-motion.gif" | absURL }}" width="100%" alt="Wavey GIF" style="max-width: 100%; height: auto;">
+</div>
+
+{{ end }}

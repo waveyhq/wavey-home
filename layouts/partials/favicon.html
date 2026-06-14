@@ -1,0 +1,14 @@
+{{- $logo := resources.Get "images/wavey-meta/wavey-logo.png" -}}
+{{- if $logo -}}
+    {{- $icon16 := $logo.Resize "16x16 png" -}}
+    {{- $icon32 := $logo.Resize "32x32 png" -}}
+    {{- $icon180 := $logo.Resize "180x180 png" -}}
+    {{- $icon192 := $logo.Resize "192x192 png" -}}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ $icon16.RelPermalink }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $icon32.RelPermalink }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ $icon192.RelPermalink }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $icon180.RelPermalink }}">
+{{- else -}}
+    <!-- wavey-logo.png not found in assets -->
+{{- end -}}
+<link rel="manifest" href="{{ "manifest.json" | absURL }}">

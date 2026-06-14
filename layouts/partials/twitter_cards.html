@@ -1,0 +1,29 @@
+{{- $twitterImage := "" -}}
+{{- with .Params.image }}
+{{ $image := $.Resources.GetMatch . }}
+{{ with $image }}
+  {{ $thumb := .Resize "1200x630 png" }}
+  {{ $twitterImage = $thumb.Permalink }}
+{{ end }}
+{{ else }}
+  {{ $banner := resources.Get "images/wavey-meta/wavey-banner.png" }}
+  {{ with $banner }}
+    {{ $thumb := .Resize "1200x630 png" }}
+    {{ $twitterImage = $thumb.Permalink }}
+  {{ end }}
+{{ end }}
+{{ if $twitterImage }}
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="{{ $twitterImage }}">
+{{ end }}
+
+<meta name="twitter:title" content="{{ .Title }}"/>
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}"/>
+{{ with .Site.Params.Social.twitter -}}
+<meta name="twitter:site" content="@{{ . }}"/>
+{{ end -}}
+{{ range .Site.Params.Authors }}
+{{ with .twitter -}}
+<meta name="twitter:creator" content="@{{ . }}"/>
+{{ end -}}
+{{ end -}}

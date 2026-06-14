@@ -1,0 +1,21 @@
+{
+  "name": "Wavey",
+  "short_name": "Wavey",
+  "description": "Open-source RF sensing system using WiFi Channel State Information (CSI) to observe physical environments.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#222225",
+  "theme_color": "#62c4ff",
+  "icons": [
+    {
+      "src": "/images/wavey-meta/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/wavey-meta/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
