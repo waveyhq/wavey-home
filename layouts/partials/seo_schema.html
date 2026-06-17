@@ -1,13 +1,24 @@
 {{- if .IsHome -}}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "{{ .Site.Title }}",
-  "url": "{{ .Site.BaseURL }}",
-  "description": "{{ .Site.Params.description }}"
-}
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Wavey",
+    "alternateName": "Wavey RF Sensing",
+    "url": "{{ .Site.BaseURL }}",
+    "description": "{{ .Site.Params.description }}"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Wavey",
+    "url": "{{ .Site.BaseURL }}",
+    "logo": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.ico" | absURL }}{{- end -}}"
+  }
+]
 </script>
+
 {{- else if .IsPage -}}
 <script type="application/ld+json">
 {
@@ -32,7 +43,7 @@
       "name": "{{ .Site.Title }}",
       "logo": {
         "@type": "ImageObject",
-        "url": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.png" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.png" | absURL }}{{- end -}}"
+        "url": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.ico" | absURL }}{{- end -}}"
       }
     }
 

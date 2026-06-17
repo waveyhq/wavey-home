@@ -1,3 +1,10 @@
+{{- $logo := resources.Get "images/wavey-meta/wavey-logo.ico" -}}
+{{- with $logo -}}
+<link rel="shortcut icon" href="{{ .Permalink }}" type="image/x-icon">
+<link rel="icon" href="{{ .Permalink }}" type="image/x-icon">
+<link rel="icon" type="image/x-icon" href="{{ .Permalink }}">
+{{- else -}}
 <link rel="shortcut icon" href="{{ "images/wavey-meta/wavey-logo.ico" | relURL }}" type="image/x-icon">
 <link rel="icon" href="{{ "images/wavey-meta/wavey-logo.ico" | relURL }}" type="image/x-icon">
+{{- end -}}
 <link rel="manifest" href="{{ "manifest.json" | relURL }}">

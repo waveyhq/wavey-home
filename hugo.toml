@@ -4,6 +4,7 @@ title = "Wavey | RF Sensing System with CSI"
 enableRobotsTXT = true
 
 [params]
+  siteName = "Wavey"
   description = "Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation."
   TitleCutting = false
   animateStyle = "animated fadeIn"
