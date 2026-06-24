@@ -129,12 +129,30 @@ h1 {
     margin-bottom: 150px;
 }
 
+.landing-hero .landing-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
 .landing-hero .landing-banner {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+}
+
+.landing-hero .landing-banner-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
 .landing-hero .landing-section {
     margin-bottom: 1.25rem;
+}
+
+.landing-hero .landing-about {
+    margin-bottom: 0;
 }
 
 .landing-hero h1 {
@@ -149,6 +167,14 @@ h1 {
 .landing-hero ul {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+@media only screen and (min-width: 851px) {
+    .landing-hero .landing-intro {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 2rem;
+    }
 }
 
 .content-column-content p,
