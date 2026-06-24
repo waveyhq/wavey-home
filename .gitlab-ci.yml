@@ -1,0 +1,133 @@
+# Required GitLab CI/CD variables (Settings → CI/CD → Variables):
+#   NETLIFY_SITE_ID     - Netlify site ID
+#   NETLIFY_AUTH_TOKEN  - Netlify personal access token (masked, protected optional)
+#
+# Optional:
+#   GITLAB_TOKEN        - Project access token with api scope, for MR preview comments
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+variables:
+  HUGO_VERSION: "0.145.0"
+  HUGO_ENV: "production"
+  NETLIFY_SITE_ID: $NETLIFY_SITE_ID
+  NETLIFY_AUTH_TOKEN: $NETLIFY_AUTH_TOKEN
+
+stages:
+  - build
+  - test
+  - deploy
+
+.install_hugo:
+  before_script:
+    - apk add --no-cache curl tar
+    - curl -fsSL "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" | tar -xz -C /usr/local/bin hugo
+    - hugo version
+
+build:
+  stage: build
+  image: alpine:3.20
+  extends: .install_hugo
+  script:
+    - hugo --gc --minify
+  artifacts:
+    paths:
+      - public/
+    expire_in: 1 day
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+test:
+  stage: test
+  image: node:20-alpine
+  needs:
+    - build
+  script:
+    - test -f public/index.html
+    - test -f public/sitemap.xml
+    - test -f public/robots.txt
+    - test -f public/about/index.html
+    - test -f public/contact/index.html
+    - test -f public/posts/index.html
+    - grep -q "Wavey" public/index.html
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+.deploy:
+  stage: deploy
+  image: node:20-alpine
+  needs:
+    - build
+    - test
+  before_script:
+    - apk add --no-cache curl
+    - npm install -g netlify-cli
+  artifacts:
+    reports:
+      dotenv: deploy.env
+
+deploy:preview:
+  extends: .deploy
+  environment:
+    name: preview/$CI_COMMIT_REF_SLUG
+    url: $PREVIEW_URL
+    auto_stop_in: 30 days
+  script:
+    - |
+      BRANCH_ALIAS="$(echo "${CI_COMMIT_REF_SLUG}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | cut -c1-37)"
+      echo "Deploying Netlify preview for branch: ${CI_COMMIT_REF_NAME} (alias: ${BRANCH_ALIAS})"
+      netlify deploy \
+        --site "${NETLIFY_SITE_ID}" \
+        --auth "${NETLIFY_AUTH_TOKEN}" \
+        --dir public \
+        --alias "${BRANCH_ALIAS}" \
+        --message "GitLab CI preview: ${CI_COMMIT_REF_NAME} (${CI_COMMIT_SHORT_SHA})" \
+        --json > deploy.json
+      PREVIEW_URL="$(node -e "const d=JSON.parse(require('fs').readFileSync('deploy.json','utf8')); process.stdout.write(d.deploy_ssl_url || d.deploy_url || d.url || '')")"
+      if [ -z "${PREVIEW_URL}" ]; then
+        echo "Failed to parse Netlify preview URL"
+        cat deploy.json
+        exit 1
+      fi
+      echo "PREVIEW_URL=${PREVIEW_URL}" >> deploy.env
+      echo "Netlify preview ready: ${PREVIEW_URL}"
+      if [ -n "${GITLAB_TOKEN:-}" ] && [ -n "${CI_MERGE_REQUEST_IID:-}" ]; then
+        curl --fail --silent --show-error --request POST \
+          --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" \
+          --data-urlencode "body=Netlify preview for \`${CI_COMMIT_REF_NAME}\`: ${PREVIEW_URL}" \
+          "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests/${CI_MERGE_REQUEST_IID}/notes"
+      fi
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "main"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+deploy:production:
+  extends: .deploy
+  environment:
+    name: production
+    url: https://wavey.nopejs.me/
+  script:
+    - |
+      echo "Deploying production build from ${CI_COMMIT_REF_NAME} (${CI_COMMIT_SHORT_SHA})"
+      netlify deploy \
+        --site "${NETLIFY_SITE_ID}" \
+        --auth "${NETLIFY_AUTH_TOKEN}" \
+        --dir public \
+        --prod \
+        --message "GitLab CI production: ${CI_COMMIT_REF_NAME} (${CI_COMMIT_SHORT_SHA})" \
+        --json > deploy.json
+      DEPLOY_URL="$(node -e "const d=JSON.parse(require('fs').readFileSync('deploy.json','utf8')); process.stdout.write(d.deploy_ssl_url || d.deploy_url || d.url || '')")"
+      if [ -z "${DEPLOY_URL}" ]; then
+        echo "Failed to parse Netlify production URL"
+        cat deploy.json
+        exit 1
+      fi
+      echo "PREVIEW_URL=${DEPLOY_URL}" >> deploy.env
+      echo "Netlify production deploy ready: ${DEPLOY_URL}"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
