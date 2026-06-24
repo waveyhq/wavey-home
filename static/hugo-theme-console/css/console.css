@@ -129,6 +129,28 @@ h1 {
     margin-bottom: 150px;
 }
 
+.landing-hero .landing-banner {
+    margin-bottom: 1rem;
+}
+
+.landing-hero .landing-section {
+    margin-bottom: 1.25rem;
+}
+
+.landing-hero h1 {
+    margin-bottom: 0.75rem;
+}
+
+.landing-hero p {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.landing-hero ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .content-column-content p,
 .content-column-content li {
     color: #666;
