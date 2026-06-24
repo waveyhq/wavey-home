@@ -1,39 +1,41 @@
 {{ define "main" }}
 
-<div style="margin-bottom: 2rem;">
-  <img src="{{ "images/wavey-meta/wavey-banner.png" | relURL }}" width="100%" alt="Wavey Banner" style="max-width: 100%; height: auto;">
+<div class="landing-hero">
+  <div class="landing-banner">
+    <img src="{{ "images/wavey-meta/wavey-banner.png" | relURL }}" width="100%" alt="Wavey Banner" style="max-width: 100%; height: auto;">
+  </div>
+
+  <section class="landing-section">
+    <h1>About Wavey</h1>
+
+    <p>
+      Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
+    </p>
+
+    <p>
+      It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
+    </p>
+  </section>
+
+  <section class="landing-section">
+    <h1>Features</h1>
+
+    <ul>
+      <li>Device-free occupancy detection</li>
+      <li>Motion and activity inference</li>
+      <li>Real-time RF signal visualization</li>
+      <li>Spatial occupancy estimation</li>
+      <li>Multi-node mesh sensing</li>
+      <li>Passive environmental monitoring</li>
+      <li>RF fingerprinting and scene change detection</li>
+      <li>Real-time CSI data collection and processing</li>
+      <li>ESP32-CSI based sensing nodes</li>
+      <li>Python-based analysis pipeline</li>
+    </ul>
+  </section>
 </div>
 
-<h1>About Wavey</h1>
-
-<p>
-  Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
-</p>
-
-<p>
-  It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
-</p>
-
-<br/>
-
-<h1>Features</h1>
-
-<ul>
-  <li>Device-free occupancy detection</li>
-  <li>Motion and activity inference</li>
-  <li>Real-time RF signal visualization</li>
-  <li>Spatial occupancy estimation</li>
-  <li>Multi-node mesh sensing</li>
-  <li>Passive environmental monitoring</li>
-  <li>RF fingerprinting and scene change detection</li>
-  <li>Real-time CSI data collection and processing</li>
-  <li>ESP32-CSI based sensing nodes</li>
-  <li>Python-based analysis pipeline</li>
-</ul>
-
-<br/>
-
 <script src="https://cdn.jsdelivr.net/npm/fluid-bg"></script>
-<fluid-bg fixed hash="#p=1.1,4,6.8,0.045,1,10,0,8,48,0,0,1.7778,0,0,0,0,0,0,0,0,0,4531358,6725362,15457276"></fluid-bg>
+<fluid-bg fixed hash="#p=1.1,4,5.6,0.1,1,14,0,8,48,0,0,1.7778,0,0,10,0,0,0,0,0,657434,4140,7720,2031690,-0.09"></fluid-bg>
 
 {{ end }}
