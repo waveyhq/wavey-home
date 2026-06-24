@@ -1,21 +1,23 @@
 {{ define "main" }}
 
 <div class="landing-hero">
-  <div class="landing-banner">
-    <img src="{{ "images/wavey-meta/wavey-banner.png" | relURL }}" width="100%" alt="Wavey Banner" style="max-width: 100%; height: auto;">
+  <div class="landing-intro">
+    <div class="landing-banner">
+      <img src="{{ "images/wavey-meta/wavey-banner.png" | relURL }}" alt="Wavey Banner" class="landing-banner-image">
+    </div>
+
+    <section class="landing-section landing-about">
+      <h1>About Wavey</h1>
+
+      <p>
+        Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
+      </p>
+
+      <p>
+        It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
+      </p>
+    </section>
   </div>
-
-  <section class="landing-section">
-    <h1>About Wavey</h1>
-
-    <p>
-      Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
-    </p>
-
-    <p>
-      It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
-    </p>
-  </section>
 
   <section class="landing-section">
     <h1>Features</h1>
