@@ -6,6 +6,6 @@ draft: false
 
 If you have questions, contributions, or ideas for Wavey, we'd love to hear from you!
 
-- **Discord**: [Join our Discord Server](https://discord.gg/m2zUjED3)
+- **Discord**: [Hang out with us!](https://discord.gg/m2zUjED3)
 - **GitHub**: [Wavey Project](https://github.com/trywavey)
 - **Email**: mail@wavey.nopejs.me

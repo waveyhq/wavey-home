@@ -1,14 +1,12 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-
-{{ .Date | time.Format ":date_medium" }}
-{{ with .Params.linkedin }}
-    // <a href="{{ . }}">Linkedin</a>
-{{ end }}
-{{ with .Params.twitter }}
-    // <a href="{{ . }}">Twitter</a>
-{{ end }}
-<br/><br/>
-{{ .Content }}
+<article class="post-single">
+    <header class="post-header">
+        <h1>{{ .Title }}</h1>
+        <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
+    </header>
+    <div class="post-body">
+        {{ .Content }}
+    </div>
+</article>
 {{ template "_internal/disqus.html" . }}
 {{ end }}

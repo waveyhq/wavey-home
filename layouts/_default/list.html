@@ -6,13 +6,13 @@
 <div class="posts-list">
 {{ range sort .Pages "Date" "desc" }}
     {{ if not .Params.private }}
-        <div class="post">
-            <p>
-                <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>    
-                <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
-                {{ .Summary }}
-            </p>
-        </div>
+        <article class="post">
+            <time class="date" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan. 2, 2006" }}</time>
+            <div class="post-content">
+                <h2><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h2>
+                <p class="post-summary">{{ .Description | default (.Plain | truncate 200) }}</p>
+            </div>
+        </article>
     {{ end }}
 {{ end }}
 </div>

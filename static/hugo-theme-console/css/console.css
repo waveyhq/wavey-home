@@ -107,6 +107,11 @@ body {
     font-size: var(--global-font-size);
     background-color: var(--background-color);
     margin-bottom: 75px;
+    overflow-x: clip;
+}
+
+.container {
+    max-width: min(var(--page-width), 100%);
 }
 
 h1,
@@ -129,30 +134,8 @@ h1 {
     margin-bottom: 150px;
 }
 
-.landing-hero .landing-intro {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-}
-
-.landing-hero .landing-banner {
-    margin-bottom: 0;
-}
-
-.landing-hero .landing-banner-image {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-}
-
 .landing-hero .landing-section {
     margin-bottom: 1.25rem;
-}
-
-.landing-hero .landing-about {
-    margin-bottom: 0;
 }
 
 .landing-hero h1 {
@@ -169,12 +152,9 @@ h1 {
     margin-bottom: 0;
 }
 
-@media only screen and (min-width: 851px) {
-    .landing-hero .landing-intro {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        align-items: center;
-        gap: 2rem;
-    }
+.landing-hero p,
+.landing-hero li {
+    overflow-wrap: anywhere;
 }
 
 .content-column-content p,
@@ -248,6 +228,41 @@ figure {
     color: var(--global-font-color);
 }
 
+.footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+}
+
+.footer-copy {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.footer-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+}
+
+.footer-sep {
+    color: var(--secondary-color);
+}
+
+.footer-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .image-grid {
     display: grid;
     grid-template-rows: auto;
@@ -276,28 +291,84 @@ figure {
 }
 
 .posts-list {
-    position: relative;
-    padding-left: 130px;
-    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 100%;
 }
 
-.post h1,
-.post h2 {
-    padding-top: 0;
-    margin: 0;
-    margin-bottom: 5px;
+.post {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0.25rem 2rem;
+    align-items: start;
+    max-width: 100%;
+}
+
+.post-content {
+    min-width: 0;
 }
 
 .posts-list .date {
-    display: inline-block;
-    position: absolute;
-    left: 0px;
-    width: 130px;
-    z-index: 400;
+    color: var(--secondary-color);
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.post h2 {
     padding-top: 0;
+    margin: 0 0 0.5rem;
+    font-size: 1.1em;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.post h2 a {
+    overflow-wrap: anywhere;
+}
+
+.post-summary {
+    margin: 0;
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+.post-single h1 {
+    margin-bottom: 0.5rem;
+}
+
+.post-header .date {
+    display: block;
+    color: var(--secondary-color);
+    font-size: 0.9em;
+    margin-bottom: 1.5rem;
+}
+
+.post-body p,
+.post-body li {
+    color: var(--secondary-color);
+}
+
+.post-body {
+    max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 @media only screen and (max-width: 850px) {
+    h1 {
+        margin-bottom: 2.5rem;
+    }
+
+    .terminal-prompt {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+    }
+
+    .terminal-logo {
+        max-width: 100%;
+    }
+
     .site-name {
         width: 2ch;
         overflow: hidden;
@@ -307,6 +378,7 @@ figure {
         align-items: flex-start;
         flex-direction: column;
         display: flex;
+        max-width: 100%;
     }
 
     .terminal-menu ul {
@@ -328,34 +400,23 @@ figure {
     figure {
         margin-top: 5px;
         margin-bottom: 5px;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
-    .posts-list {
-        position: relative;
-        padding-left: 0;
-        top: 0;
-    }
-
-    .post h1,
-    .post h2 {
-        padding-top: 0;
+    .post {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
     }
 
     .posts-list .date {
-        display: inline-block;
-        position: absolute;
-        left: 0px;
-        width: 150px;
-        z-index: 400;
         font-weight: bold;
-        padding-top: 0;
-        display: none;
+        font-size: 0.85em;
     }
 
     .footer {
         margin-top: 50px;
-        padding-top: 5px;
+        flex-wrap: wrap;
+        gap: 0.75rem;
     }
 }
