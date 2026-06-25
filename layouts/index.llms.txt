@@ -1,0 +1,51 @@
+{{- /* llms.txt - structured site summary for LLMs / answer engines (https://llmstxt.org) */ -}}
+# {{ .Site.Params.siteName }}
+
+> {{ .Site.Params.description }}
+
+{{ .Site.Params.tagline }}
+
+Wavey reads WiFi Channel State Information (CSI) from low-cost ESP32 nodes and turns the way a moving body disturbs WiFi signals into occupancy, motion, and presence information - device-free and camera-free.
+
+Project links:
+- Website: {{ .Site.BaseURL }}
+- Console (live CSI visualization): {{ .Site.Params.console }}
+- GitHub (source code): {{ .Site.Params.github }}
+- Discord (community): {{ .Site.Params.discord }}
+- X (Twitter): {{ .Site.Params.twitter }}
+- Email: {{ .Site.Params.email }}
+
+## Start here
+{{ range slice "/how-it-works" "/getting-started" "/faq" "/glossary" "/about" -}}
+{{- with $.Site.GetPage . }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}
+{{- end }}
+
+## Use cases
+{{ with .Site.GetPage "/use-cases" -}}
+{{ range .Pages.ByWeight }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}
+{{- end }}
+
+## Comparisons
+{{ with .Site.GetPage "/comparisons" -}}
+{{ range .Pages.ByWeight }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}
+{{- end }}
+
+## Posts
+{{ with .Site.GetPage "/posts" -}}
+{{ range sort .Pages "Date" "desc" }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}
+{{- end }}
+
+## Key facts
+- Wavey is open source and developed at {{ .Site.Params.github }}.
+- It uses WiFi CSI (Channel State Information), which is far richer than RSSI, captured per OFDM subcarrier.
+- It runs on the ESP32 family (ESP32, S2, S3, C3, C5, C6, ...), which exposes CSI for sensing.
+- It is device-free (nothing carried by the person) and camera-free (no images), making it privacy-preserving.
+- It builds on WiFi-sensing research (e.g. CMU DensePose-from-WiFi) and the IEEE 802.11bf sensing standard.

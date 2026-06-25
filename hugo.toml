@@ -1,17 +1,87 @@
 baseURL = "https://wavey.nopejs.me/"
-languageCode = "en"
-title = "Wavey | RF Sensing System with CSI"
+languageCode = "en-us"
+title = "Wavey"
 enableRobotsTXT = true
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Generate an llms.txt for LLM/answer-engine discovery (https://llmstxt.org)
+[outputs]
+  home = ["HTML", "RSS", "LLMS"]
+
+[outputFormats.LLMS]
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+  noUgly = true
 
 [params]
   siteName = "Wavey"
-  description = "Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation."
+  description = "Wavey is an open-source WiFi CSI sensing system that uses Channel State Information (CSI) on low-cost ESP32 nodes for device-free occupancy, motion, and presence detection - no cameras, wearables, or apps."
+  tagline = "Open-source WiFi CSI sensing for device-free occupancy, motion, and presence detection - no cameras, no wearables."
+  author = "Wavey Team"
+  locale = "en_US"
   TitleCutting = false
   animateStyle = "animated fadeIn"
+
+  # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
+  console = "https://console.wavey.nopejs.me"
+  github = "https://github.com/trywavey"
+  discord = "https://discord.gg/m2zUjED3"
+  twitter = "https://x.com/nopeJS"
+  email = "mail@wavey.nopejs.me"
+  repo = "https://github.com/trywavey"
+  location = "India"
+
+  keywords = [
+    "WiFi CSI sensing",
+    "WiFi sensing",
+    "Channel State Information",
+    "CSI sensing",
+    "device-free occupancy detection",
+    "ESP32 CSI",
+    "ESP32-CSI",
+    "RF sensing",
+    "WiFi motion detection",
+    "WiFi human detection",
+    "presence detection without camera",
+    "passive sensing",
+    "through-wall sensing",
+    "occupancy sensing",
+    "privacy-preserving sensing",
+  ]
+
+[params.social]
+  github = "trywavey"
+  discord = "m2zUjED3"
+  twitter = "nopeJS"
+
+[[params.authors]]
+  name = "Wavey Team"
+  twitter = "nopeJS"
+
+[[params.navlinks]]
+  name = "working"
+  url = "how-it-works/"
+
+[[params.navlinks]]
+  name = "uses"
+  url = "use-cases/"
 
 [[params.navlinks]]
   name = "posts"
   url = "posts/"
+
+[[params.navlinks]]
+  name = "faq"
+  url = "faq/"
 
 [[params.navlinks]]
   name = "about"

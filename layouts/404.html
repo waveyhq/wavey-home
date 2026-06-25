@@ -1,4 +1,14 @@
 {{ define "main" }}
-<h1>Page not found</h1>
-<p><a href="{{ .Site.BaseURL }}">Return to the home page</a>.</p>
+<h1>404 - Page not found</h1>
+<p>That page drifted out of range. Try one of these instead:</p>
+<ul>
+  <li><a href="{{ "/" | relURL }}">Home</a></li>
+  <li><a href="{{ "how-it-works/" | relURL }}">How WiFi CSI sensing works</a></li>
+  <li><a href="{{ "use-cases/" | relURL }}">Use cases</a></li>
+  <li><a href="{{ "comparisons/" | relURL }}">Comparisons</a></li>
+  <li><a href="{{ "faq/" | relURL }}">FAQ</a></li>
+  <li><a href="{{ "getting-started/" | relURL }}">Get started</a></li>
+  <li><a href="{{ "posts/" | relURL }}">Posts</a></li>
+</ul>
+<p>Or find the project on <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub</a>.</p>
 {{ end }}

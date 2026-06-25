@@ -1,0 +1,25 @@
+{{- /* Keywords: page keywords -> page tags -> site keywords */ -}}
+{{- $keywords := .Params.keywords | default .Params.tags | default .Site.Params.keywords -}}
+{{- with $keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+
+{{- with .Site.Params.author }}
+<meta name="author" content="{{ . }}">
+{{- end }}
+
+<meta name="theme-color" content="#62c4ff">
+<meta name="color-scheme" content="dark light">
+<meta name="application-name" content="{{ .Site.Params.siteName }}">
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Params.siteName }}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+
+{{- /* Sitemap discovery for crawlers and answer engines */ -}}
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL }}">
+
+{{- /* Performance: warm up third-party origins (Core Web Vitals are a ranking signal) */ -}}
+<link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+<link rel="dns-prefetch" href="https://us.i.posthog.com">
+<link rel="dns-prefetch" href="https://cloud.umami.is">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">

@@ -1,34 +1,114 @@
 {{ define "main" }}
 
 <div class="landing-hero">
-  <section class="landing-section">
-    <h1>About Wavey</h1>
+  <section class="landing-section landing-about">
+    <h1>Wavey - WiFi CSI Sensing</h1>
+    <p class="landing-tagline">{{ .Site.Params.tagline }}</p>
 
     <p>
-      Wavey is an open-source RF sensing system that uses WiFi Channel State Information (CSI) to observe changes in physical environments without cameras, wearables, or active user participation.
+      <strong>Wavey</strong> is an open-source <strong>WiFi CSI sensing</strong> system that turns ordinary
+      WiFi radios into a privacy-preserving sensor. By reading <strong>Channel State Information (CSI)</strong>
+      from low-cost <a href="{{ "how-it-works/" | relURL }}">ESP32 sensing nodes</a>, Wavey detects
+      <strong>occupancy, motion, and presence</strong> in a space - with
+      <em>no cameras, no wearables, and no app on the people being sensed</em>.
     </p>
 
-    <p>
-      It captures RF signal disturbances and converts them into spatial and motion information using low-cost ESP32-based sensing nodes and real-time signal processing.
+    <p class="landing-cta">
+      <a href="{{ "how-it-works/" | relURL }}">How it works</a> &middot;
+      <a href="{{ "use-cases/" | relURL }}">Use cases</a> &middot;
+      <a href="{{ "getting-started/" | relURL }}">Get started</a> &middot;
+      <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub</a> &middot;
+      <a href="{{ .Site.Params.console }}" target="_blank" rel="noopener">Console</a> &middot;
+      <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener">Discord</a>
     </p>
   </section>
 
   <section class="landing-section">
-    <h1>Features</h1>
+    <h2>What is WiFi CSI sensing?</h2>
+    <p>
+      <strong>Channel State Information (CSI)</strong> describes how a WiFi signal propagates from a
+      transmitter to a receiver - its amplitude, phase, and delay across many OFDM subcarriers. Unlike a
+      single <abbr title="Received Signal Strength Indicator">RSSI</abbr> value, CSI is fine-grained and
+      highly sensitive to the environment. When a person walks, gestures, or even breathes, their body
+      perturbs these radio paths in consistent, measurable ways. Wavey captures those perturbations and
+      converts them into spatial and motion information - a technique known as
+      <strong>device-free</strong>, <strong>passive WiFi sensing</strong>.
+    </p>
+    <p>
+      <a href="{{ "how-it-works/" | relURL }}">Read the full explainer &rarr;</a>
+    </p>
+  </section>
 
+  <section class="landing-section">
+    <h2>What Wavey can do</h2>
     <ul>
-      <li>Device-free occupancy detection</li>
+      <li>Device-free occupancy detection (is anyone in the room?)</li>
       <li>Motion and activity inference</li>
+      <li>Presence and micro-motion sensing (including stillness and breathing)</li>
       <li>Real-time RF signal visualization</li>
       <li>Spatial occupancy estimation</li>
       <li>Multi-node mesh sensing</li>
-      <li>Passive environmental monitoring</li>
-      <li>RF fingerprinting and scene change detection</li>
+      <li>RF fingerprinting and scene-change detection</li>
       <li>Real-time CSI data collection and processing</li>
       <li>ESP32-CSI based sensing nodes</li>
       <li>Python-based analysis pipeline</li>
     </ul>
   </section>
+
+  <section class="landing-section">
+    <h2>Use cases</h2>
+    <ul>
+      <li><a href="{{ "use-cases/occupancy-detection/" | relURL }}">Device-free occupancy detection</a></li>
+      <li><a href="{{ "use-cases/motion-activity-detection/" | relURL }}">Motion &amp; activity detection</a></li>
+      <li><a href="{{ "use-cases/presence-detection/" | relURL }}">Presence &amp; breathing detection</a></li>
+      <li><a href="{{ "use-cases/elder-care-monitoring/" | relURL }}">Elder-care &amp; fall-aware monitoring</a></li>
+      <li><a href="{{ "use-cases/security-intrusion-detection/" | relURL }}">Security &amp; intrusion detection</a></li>
+      <li><a href="{{ "use-cases/smart-home-automation/" | relURL }}">Smart-home automation</a></li>
+      <li><a href="{{ "use-cases/occupancy-analytics/" | relURL }}">Occupancy analytics</a></li>
+    </ul>
+  </section>
+
+  <section class="landing-section">
+    <h2>Why Wavey</h2>
+    <ul>
+      <li><strong>Privacy-first.</strong> No cameras and no images - Wavey senses the radio environment, not your appearance. <a href="{{ "comparisons/wifi-sensing-vs-cameras/" | relURL }}">See WiFi sensing vs cameras &rarr;</a></li>
+      <li><strong>Device-free.</strong> The people being detected carry nothing - no phone, tag, or wearable required.</li>
+      <li><strong>Low-cost hardware.</strong> Built on commodity ESP32 chips instead of expensive radar or LiDAR.</li>
+      <li><strong>Open source.</strong> Inspect, self-host, and extend it. <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">View on GitHub &rarr;</a></li>
+    </ul>
+  </section>
+
+  <section class="landing-section">
+    <h2>Built for developers and self-hosters</h2>
+    <p>
+      Wavey targets the open-source <strong>ESP32-CSI</strong> niche: real, hackable WiFi sensing you can run
+      yourself. Sensing nodes stream CSI to a <a href="{{ "getting-started/" | relURL }}">real-time pipeline</a>,
+      and you can explore live signals in the <a href="{{ .Site.Params.console }}" target="_blank" rel="noopener">Wavey Console</a>.
+      The approach builds on a growing body of WiFi-sensing research, from academic work like CMU's
+      DensePose-from-WiFi to the IEEE 802.11bf WiFi-sensing standard.
+    </p>
+    <p>
+      <a href="{{ "getting-started/" | relURL }}">Get started</a> &middot;
+      <a href="{{ "glossary/" | relURL }}">Glossary</a> &middot;
+      <a href="{{ "faq/" | relURL }}">FAQ</a> &middot;
+      <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+    </p>
+  </section>
+
+  {{ with .Params.faq }}
+  <section class="landing-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      {{ range . }}
+      <div class="faq-item">
+        <h3 class="faq-q">{{ .question }}</h3>
+        <p class="faq-a">{{ .answer }}</p>
+      </div>
+      {{ end }}
+    </div>
+    <p><a href="{{ "faq/" | relURL }}">More questions &rarr;</a></p>
+  </section>
+  {{ end }}
 </div>
 
 {{ end }}

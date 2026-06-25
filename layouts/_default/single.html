@@ -1,4 +1,22 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ .Content }}
+<article class="post-single">
+    <header class="post-header">
+        <h1>{{ .Title }}</h1>
+        {{ if .Params.schema_type }}{{ with .Lastmod }}<time class="date" datetime="{{ .Format "2006-01-02" }}">Updated {{ .Format "Jan. 2, 2006" }}</time>{{ end }}{{ end }}
+    </header>
+    <div class="post-body">
+        {{ .Content }}
+        {{ with .Params.faq }}
+        <section class="faq" aria-label="Frequently asked questions">
+            <h2>Frequently asked questions</h2>
+            {{ range . }}
+            <div class="faq-item">
+                <h3 class="faq-q">{{ .question | default .q }}</h3>
+                <div class="faq-a">{{ (.answer | default .a) | markdownify }}</div>
+            </div>
+            {{ end }}
+        </section>
+        {{ end }}
+    </div>
+</article>
 {{ end }}

@@ -1,52 +1,213 @@
-{{- if .IsHome -}}
-<script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Wavey",
-    "alternateName": "Wavey RF Sensing",
-    "url": "{{ .Site.BaseURL }}",
-    "description": "{{ .Site.Params.description }}"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Wavey",
-    "url": "{{ .Site.BaseURL }}",
-    "logo": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.ico" | absURL }}{{- end -}}"
-  }
-]
-</script>
+{{- /*
+  Connected JSON-LD @graph so Google and LLMs resolve "Wavey" as one entity:
+  Organization + WebSite + SoftwareApplication are emitted on every page and
+  cross-referenced by @id. Per-page nodes (WebPage / CollectionPage /
+  TechArticle / BlogPosting / FAQPage + BreadcrumbList) reference them back.
+*/ -}}
+{{- $base := .Site.BaseURL -}}
+{{- $orgID := printf "%s#organization" $base -}}
+{{- $siteID := printf "%s#website" $base -}}
+{{- $softwareID := printf "%s#software" $base -}}
+{{- $desc := .Site.Params.description -}}
 
-{{- else if .IsPage -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ .Title }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
-  "url": "{{ .Permalink }}",
-  "datePublished": "{{ if not .PublishDate.IsZero }}{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}{{ else }}{{ .Date.Format "2006-01-02T15:04:05-07:00" }}{{ end }}",
-  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ .Permalink }}"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Sabique Islam",
-    "url": "{{ .Site.BaseURL }}"
-  },
-    "publisher": {
-      "@type": "Organization",
-      "name": "{{ .Site.Title }}",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{- $logo := resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- with $logo -}}{{ .Permalink }}{{- else -}}{{ "images/wavey-meta/wavey-logo.ico" | absURL }}{{- end -}}"
-      }
-    }
+{{- /* Logo (prefer a processed resource, fall back to a static path) */ -}}
+{{- $logo := absURL "images/wavey-meta/wavey-logo.ico" -}}
+{{- with resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- $logo = .Permalink -}}{{- end -}}
 
-}
-</script>
+{{- /* sameAs entity links */ -}}
+{{- $sameAs := slice -}}
+{{- with .Site.Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.discord }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.console }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+
+{{- $org := dict
+  "@type" "Organization"
+  "@id" $orgID
+  "name" "Wavey"
+  "alternateName" (slice "Wavey RF Sensing" "Wavey WiFi Sensing")
+  "url" $base
+  "logo" (dict "@type" "ImageObject" "url" $logo)
+  "image" $logo
+  "description" $desc
+  "email" (printf "mailto:%s" .Site.Params.email)
+  "foundingLocation" (dict "@type" "Place" "name" .Site.Params.location)
+  "slogan" .Site.Params.tagline
+  "sameAs" $sameAs
+  "contactPoint" (dict
+    "@type" "ContactPoint"
+    "email" .Site.Params.email
+    "contactType" "technical support"
+    "url" (printf "%scontact/" $base)
+  )
+-}}
+
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" $siteID
+  "name" .Site.Params.siteName
+  "url" $base
+  "description" $desc
+  "inLanguage" "en-US"
+  "publisher" (dict "@id" $orgID)
+-}}
+
+{{- $software := dict
+  "@type" (slice "SoftwareApplication" "SoftwareSourceCode")
+  "@id" $softwareID
+  "name" "Wavey"
+  "applicationCategory" "DeveloperApplication"
+  "applicationSubCategory" "WiFi CSI Sensing / RF Sensing"
+  "operatingSystem" "ESP32, Linux, cross-platform"
+  "description" $desc
+  "url" $base
+  "codeRepository" .Site.Params.github
+  "programmingLanguage" (slice "Python" "C")
+  "runtimePlatform" "ESP32"
+  "isAccessibleForFree" true
+  "keywords" (delimit .Site.Params.keywords ", ")
+  "author" (dict "@id" $orgID)
+  "publisher" (dict "@id" $orgID)
+  "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD")
+-}}
+
+{{- $graph := slice $org $website $software -}}
+
+{{- /* Per-page image (absolute URL) */ -}}
+{{- $img := "" -}}
+{{- with .Params.image -}}
+  {{- if (urls.Parse .).Scheme -}}{{- $img = . -}}{{- else -}}{{- $img = absURL . -}}{{- end -}}
+{{- else -}}
+  {{- $img = absURL "images/wavey-meta/wavey-banner.png" -}}
 {{- end -}}
+
+{{- $pageDesc := .Description | default .Summary | default $desc -}}
+{{- $iso := "2006-01-02T15:04:05-07:00" -}}
+
+{{- /* Build FAQ question/answer list once (from a `faq:` list in front matter) */ -}}
+{{- $qa := slice -}}
+{{- with .Params.faq -}}
+  {{- range . -}}
+    {{- $q := .question | default .q -}}
+    {{- $a := .answer | default .a -}}
+    {{- if and $q $a -}}
+      {{- $qa = $qa | append (dict
+        "@type" "Question"
+        "name" $q
+        "acceptedAnswer" (dict "@type" "Answer" "text" ($a | markdownify | plainify | chomp))
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $home := dict
+    "@type" "WebPage"
+    "@id" (printf "%s#webpage" $base)
+    "url" $base
+    "name" .Site.Title
+    "description" $pageDesc
+    "inLanguage" "en-US"
+    "isPartOf" (dict "@id" $siteID)
+    "about" (dict "@id" $softwareID)
+    "primaryImageOfPage" (dict "@type" "ImageObject" "url" $img)
+  -}}
+  {{- $graph = $graph | append $home -}}
+  {{- if gt (len $qa) 0 -}}
+    {{- $graph = $graph | append (dict
+      "@type" "FAQPage"
+      "@id" (printf "%s#faq" $base)
+      "url" $base
+      "name" .Title
+      "inLanguage" "en-US"
+      "isPartOf" (dict "@id" $siteID)
+      "mainEntity" $qa
+    ) -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Decide the page schema type */ -}}
+  {{- $pageType := .Params.schema_type -}}
+  {{- if not $pageType -}}
+    {{- if or (eq .Kind "section") (eq .Kind "taxonomy") (eq .Kind "term") -}}
+      {{- $pageType = "CollectionPage" -}}
+    {{- else if eq .Section "posts" -}}
+      {{- $pageType = "BlogPosting" -}}
+    {{- else -}}
+      {{- $pageType = "TechArticle" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $pageNode := dict
+    "@type" $pageType
+    "@id" (printf "%s#webpage" .Permalink)
+    "url" .Permalink
+    "name" .Title
+    "description" $pageDesc
+    "inLanguage" "en-US"
+    "isPartOf" (dict "@id" $siteID)
+    "about" (dict "@id" $softwareID)
+    "image" (dict "@type" "ImageObject" "url" $img)
+  -}}
+
+  {{- /* Article-like nodes get authorship + dates */ -}}
+  {{- if or (eq $pageType "TechArticle") (eq $pageType "BlogPosting") (eq $pageType "Article") -}}
+    {{- $pub := cond (not .PublishDate.IsZero) (.PublishDate.Format $iso) (.Date.Format $iso) -}}
+    {{- $authorName := .Params.author | default .Site.Params.author -}}
+    {{- $pageNode = merge $pageNode (dict
+      "headline" .Title
+      "datePublished" $pub
+      "dateModified" (.Lastmod.Format $iso)
+      "articleSection" .Section
+      "author" (dict "@type" "Organization" "@id" $orgID "name" $authorName)
+      "publisher" (dict "@id" $orgID)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    ) -}}
+    {{- with (.Params.keywords | default .Params.tags) -}}
+      {{- $pageNode = merge $pageNode (dict "keywords" (delimit . ", ")) -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $pageNode = merge $pageNode (dict "publisher" (dict "@id" $orgID)) -}}
+  {{- end -}}
+
+  {{- /* If the page itself is a FAQPage, attach the Q&A directly to it */ -}}
+  {{- if and (eq $pageType "FAQPage") (gt (len $qa) 0) -}}
+    {{- $pageNode = merge $pageNode (dict "mainEntity" $qa) -}}
+  {{- end -}}
+
+  {{- $graph = $graph | append $pageNode -}}
+
+  {{- /* BreadcrumbList from ancestors + self */ -}}
+  {{- $crumbs := slice -}}
+  {{- $pos := 0 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- $pos = add $pos 1 -}}
+    {{- $name := cond .IsHome "Home" .Title -}}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" $name "item" .Permalink) -}}
+  {{- end -}}
+  {{- $pos = add $pos 1 -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) -}}
+  {{- if ge (len $crumbs) 2 -}}
+    {{- $graph = $graph | append (dict
+      "@type" "BreadcrumbList"
+      "@id" (printf "%s#breadcrumb" .Permalink)
+      "itemListElement" $crumbs
+    ) -}}
+  {{- end -}}
+
+  {{- /* Pages that are not themselves a FAQPage get a separate FAQPage node */ -}}
+  {{- if and (ne $pageType "FAQPage") (gt (len $qa) 0) -}}
+    {{- $graph = $graph | append (dict
+      "@type" "FAQPage"
+      "@id" (printf "%s#faq" .Permalink)
+      "url" .Permalink
+      "name" .Title
+      "inLanguage" "en-US"
+      "isPartOf" (dict "@id" $siteID)
+      "mainEntity" $qa
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify (dict "indent" "  ") | safeJS }}
+</script>

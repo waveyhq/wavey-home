@@ -3,13 +3,15 @@
 <br/>
 {{ .Content }}
 
+{{ $isPosts := eq .Section "posts" }}
+{{ $pages := cond $isPosts (sort .Pages "Date" "desc") .Pages.ByWeight }}
 <div class="posts-list">
-{{ range sort .Pages "Date" "desc" }}
+{{ range $pages }}
     {{ if not .Params.private }}
-        <article class="post">
-            <time class="date" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan. 2, 2006" }}</time>
+        <article class="post{{ if not $isPosts }} post--plain{{ end }}">
+            {{ if $isPosts }}<time class="date" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan. 2, 2006" }}</time>{{ end }}
             <div class="post-content">
-                <h2><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h2>
+                <h2><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .LinkTitle }}</a></h2>
                 <p class="post-summary">{{ .Description | default (.Plain | truncate 200) }}</p>
             </div>
         </article>

@@ -20,7 +20,7 @@
   {{- with .Params.imageAlt -}}
     {{- $twitterImageAlt = . -}}
   {{- else -}}
-    {{- $twitterImageAlt = printf "%s image" $.Title -}}
+    {{- $twitterImageAlt = printf "%s - Wavey" $.Title -}}
   {{- end -}}
 {{- else -}}
   {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
@@ -29,27 +29,19 @@
   {{- else -}}
     {{- $twitterImage = absURL "images/wavey-meta/wavey-banner.png" -}}
   {{- end -}}
-  {{- $twitterImageAlt = "Wavey RF sensing system banner showing WiFi CSI visualization" -}}
+  {{- $twitterImageAlt = "Wavey - open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
 {{- end -}}
-{{- if $twitterImage -}}
 <meta name="twitter:card" content="summary_large_image"/>
+{{- if $twitterImage }}
 <meta name="twitter:image" content="{{ $twitterImage }}">
 <meta name="twitter:image:alt" content="{{ $twitterImageAlt }}">
-{{- end -}}
-
-
-
-<meta name="twitter:title" content="{{ .Title }}"/>
+{{- end }}
+<meta name="twitter:title" content="{{ .Title | default .Site.Title }}"/>
 {{- $description := .Description | default .Summary | default .Site.Params.description -}}
-{{- if $description -}}
-<meta name="twitter:description" content="{{ $description }}"/>
-{{- end -}}
-
-{{- with .Site.Params.Social.twitter -}}
+{{- if $description }}
+<meta name="twitter:description" content="{{ $description | plainify | chomp }}"/>
+{{- end }}
+{{- with .Site.Params.social.twitter }}
 <meta name="twitter:site" content="@{{ . }}"/>
-{{- end -}}
-{{- range .Site.Params.Authors -}}
-{{- with .twitter -}}
 <meta name="twitter:creator" content="@{{ . }}"/>
-{{- end -}}
-{{- end -}}
+{{- end }}
