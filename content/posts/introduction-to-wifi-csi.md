@@ -61,4 +61,4 @@ sensing as a native capability of WiFi. Espressif's [ESP-CSI](https://github.com
 CSI accessible on cheap hardware. Wavey brings these threads together into an open-source system you can run.
 
 Stay tuned for more on our open-source hardware designs and Python signal-processing pipelines - and come
-build with us on [GitHub](https://github.com/trywavey) and [Discord](https://discord.gg/m2zUjED3).
+build with us on [GitHub](https://github.com/trywavey) and [Discord](https://discord.gg/sxh9r9UTtW).

@@ -10,7 +10,7 @@
   [![GitHub](https://img.shields.io/badge/GitHub-trywavey-1817C3?logo=github&logoColor=white)](https://github.com/trywavey)
   [![Website](https://img.shields.io/badge/Website-wavey.nopejs.me-00a82d?logo=google-chrome&logoColor=white)](https://wavey.nopejs.me)
   [![Console](https://img.shields.io/badge/Console-console.wavey.nopejs.me-62c4ff?logo=terminal&logoColor=white)](https://console.wavey.nopejs.me)
-  [![Discord](https://img.shields.io/badge/Discord-Join%20Us-5865F2?logo=discord&logoColor=white)](https://discord.gg/m2zUjED3)
+  [![Discord](https://img.shields.io/badge/Discord-Join%20Us-5865F2?logo=discord&logoColor=white)](https://discord.gg/sxh9r9UTtW)
 
 </div>
 

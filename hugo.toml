@@ -34,7 +34,7 @@ enableRobotsTXT = true
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
   console = "https://console.wavey.nopejs.me"
   github = "https://github.com/trywavey"
-  discord = "https://discord.gg/m2zUjED3"
+  discord = "https://discord.gg/sxh9r9UTtW"
   twitter = "https://x.com/nopeJS"
   email = "mail@wavey.nopejs.me"
   repo = "https://github.com/trywavey"
@@ -60,7 +60,7 @@ enableRobotsTXT = true
 
 [params.social]
   github = "trywavey"
-  discord = "m2zUjED3"
+  discord = "sxh9r9UTtW"
   twitter = "nopeJS"
 
 [[params.authors]]

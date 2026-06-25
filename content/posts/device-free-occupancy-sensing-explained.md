@@ -54,4 +54,4 @@ for [smart-home automation](/use-cases/smart-home-automation/) - all without a c
 
 Wavey is open source. Start with [how it works](/how-it-works/) and
 [occupancy detection](/use-cases/occupancy-detection/), then [get started](/getting-started/) or join us on
-[Discord](https://discord.gg/m2zUjED3).
+[Discord](https://discord.gg/sxh9r9UTtW).

@@ -55,5 +55,5 @@ Wavey is built in the open and we'd love your help.
 
 - **GitHub:** [github.com/trywavey](https://github.com/trywavey)
 - **Console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
-- **Discord:** [Join the community](https://discord.gg/m2zUjED3)
+- **Discord:** [Join the community](https://discord.gg/sxh9r9UTtW)
 - **Email:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)

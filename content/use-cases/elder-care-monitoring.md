@@ -47,4 +47,4 @@ privacy-first awareness layer rather than a certified medical device.
 ## Get involved
 
 Building something for care at home? Start with [how Wavey works](/how-it-works/),
-[get started](/getting-started/), or come talk to us on [Discord](https://discord.gg/m2zUjED3).
+[get started](/getting-started/), or come talk to us on [Discord](https://discord.gg/sxh9r9UTtW).

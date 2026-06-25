@@ -62,7 +62,7 @@ The easiest wins come first. We recommend starting with the most robust capabili
 
 - **Code & releases:** [github.com/trywavey](https://github.com/trywavey)
 - **Live console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
-- **Community:** [Discord](https://discord.gg/m2zUjED3)
+- **Community:** [Discord](https://discord.gg/sxh9r9UTtW)
 - **Contact:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
 
 New to the field? Read [how Wavey works](/how-it-works/), skim the [glossary](/glossary/), or browse the
