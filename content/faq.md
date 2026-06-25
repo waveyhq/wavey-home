@@ -4,6 +4,8 @@ linkTitle: "FAQ"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.9
 schema_type: "FAQPage"
 description: "Frequently asked questions about WiFi CSI sensing and Wavey - how it works, privacy, hardware, accuracy, through-wall sensing, and how it differs from cameras and WiFi tracking."
 keywords:

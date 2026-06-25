@@ -4,6 +4,8 @@ linkTitle: "Smart-home automation"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 60
 schema_type: "TechArticle"
 description: "Trigger lights, climate, and scenes from real presence - not motion timeouts - using device-free WiFi CSI sensing. How Wavey powers smart-home automation."

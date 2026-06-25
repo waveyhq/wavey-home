@@ -8,6 +8,10 @@
 <meta name="author" content="{{ . }}">
 {{- end }}
 
+{{- with .Site.Params.bing_site_verification }}
+<meta name="msvalidate.01" content="{{ . }}">
+{{- end }}
+
 <meta name="theme-color" content="#62c4ff">
 <meta name="color-scheme" content="dark light">
 <meta name="application-name" content="{{ .Site.Params.siteName }}">

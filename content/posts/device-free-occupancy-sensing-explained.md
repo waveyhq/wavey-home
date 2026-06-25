@@ -3,6 +3,8 @@ title: "Device-Free Occupancy Sensing, Explained"
 date: 2026-06-22T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "What device-free occupancy sensing is, why it beats PIR and cameras for 'is anyone here?', and how WiFi CSI makes it private and affordable with Wavey."
 keywords:
   - device-free occupancy detection

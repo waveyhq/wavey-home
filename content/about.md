@@ -3,6 +3,8 @@ title: "About Wavey"
 date: 2026-06-13T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "Wavey is an open-source WiFi CSI sensing project making spatial awareness private, affordable, and device-free using ESP32 Channel State Information instead of cameras."
 keywords:
   - about Wavey

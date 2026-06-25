@@ -4,6 +4,8 @@ linkTitle: "WiFi sensing vs wearables"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 40
 schema_type: "TechArticle"
 description: "WiFi CSI sensing vs wearables and phone/MAC tracking: why device-free sensing needs nothing on the person and avoids device-identifier privacy issues."

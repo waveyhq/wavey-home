@@ -4,6 +4,8 @@ linkTitle: "WiFi sensing vs mmWave radar"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 20
 schema_type: "TechArticle"
 description: "WiFi CSI sensing vs mmWave radar for presence and motion: privacy, cost, hardware, and accuracy compared - and when each makes sense."

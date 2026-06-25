@@ -4,6 +4,8 @@ linkTitle: "Use cases"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "Real-world use cases for Wavey's WiFi CSI sensing - device-free occupancy detection, motion and activity inference, presence and breathing sensing, elder-care, security, smart-home automation, and occupancy analytics."
 keywords:
   - WiFi sensing use cases

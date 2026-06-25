@@ -14,6 +14,9 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
+User-agent: GoogleOther
+Allow: /
+
 # --- AI / answer engines (explicitly allowed for discovery & citation) ---
 User-agent: GPTBot
 Allow: /
@@ -60,4 +63,12 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 Sitemap: {{ "sitemap.xml" | absURL }}
+
+# LLM discovery: {{ "llms.txt" | absURL }}

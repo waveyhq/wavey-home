@@ -3,11 +3,15 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
     {{ range .Pages }}
         {{ if not .Params.private }}
+        {{- $priority := .Sitemap.Priority -}}
+        {{- if and (or (eq .Kind "taxonomy") (eq .Kind "term")) (eq $priority 0.5) -}}
+            {{- $priority = 0.4 -}}
+        {{- end -}}
         <url>
             <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
             <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
-            <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
-            <priority>{{ .Sitemap.Priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
+            <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge $priority 0.0 }}
+            <priority>{{ $priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
             <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>{{ end }}
             <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>{{ end }}
         </url>

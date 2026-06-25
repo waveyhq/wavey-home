@@ -4,6 +4,8 @@ linkTitle: "WiFi sensing vs cameras"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 10
 schema_type: "TechArticle"
 description: "WiFi CSI sensing vs cameras for detecting people: privacy, lighting, coverage, and cost compared - and why WiFi sensing is a privacy-first alternative."

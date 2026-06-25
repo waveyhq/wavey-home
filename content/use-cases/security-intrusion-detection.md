@@ -4,6 +4,8 @@ linkTitle: "Security & intrusion detection"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 50
 schema_type: "TechArticle"
 description: "Detect intruders by the way they disturb WiFi - device-free, camera-free security sensing that works in the dark and around corners. How Wavey enables it."

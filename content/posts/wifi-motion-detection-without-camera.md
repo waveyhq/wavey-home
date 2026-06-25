@@ -3,6 +3,8 @@ title: "WiFi Motion Detection Without a Camera"
 date: 2026-06-18T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "How WiFi motion detection works without a camera - using Channel State Information to sense movement in the dark, around corners, and without tracking devices."
 keywords:
   - WiFi motion detection

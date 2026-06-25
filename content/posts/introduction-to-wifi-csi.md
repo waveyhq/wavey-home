@@ -3,6 +3,8 @@ title: "Introduction to WiFi CSI Sensing"
 date: 2026-06-13T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "How WiFi Channel State Information (CSI) can be used to passively sense movement and environments without cameras - the basics behind Wavey."
 keywords:
   - WiFi CSI

@@ -4,6 +4,8 @@ linkTitle: "WiFi sensing vs PIR"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 30
 schema_type: "TechArticle"
 description: "WiFi CSI sensing vs PIR motion sensors: why WiFi detects still occupants, covers more area, and avoids the 'empty room' false-off that plagues PIR."

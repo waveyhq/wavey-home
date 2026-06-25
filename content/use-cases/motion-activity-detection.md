@@ -4,6 +4,8 @@ linkTitle: "Motion & activity detection"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 20
 schema_type: "TechArticle"
 description: "Detect movement and infer activity from WiFi CSI - WiFi motion detection without a camera, using Wavey's ESP32 sensing nodes and signal processing."

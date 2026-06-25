@@ -4,6 +4,8 @@ linkTitle: "Get started"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.9
 schema_type: "TechArticle"
 description: "Get started with Wavey, the open-source WiFi CSI sensing system. The architecture, the ESP32-CSI approach, and how to follow development and contribute."
 keywords:

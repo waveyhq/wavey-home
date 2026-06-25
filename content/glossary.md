@@ -4,6 +4,8 @@ linkTitle: "Glossary"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 schema_type: "TechArticle"
 description: "Plain-English definitions of WiFi sensing terms - CSI, RSSI, OFDM, subcarriers, device-free sensing, multipath, ESP32-CSI, IEEE 802.11bf, and more."
 keywords:

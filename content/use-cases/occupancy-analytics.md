@@ -4,6 +4,8 @@ linkTitle: "Occupancy analytics"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 70
 schema_type: "TechArticle"
 description: "Understand how spaces are used - without cameras or device tracking. How Wavey's WiFi CSI sensing enables anonymous, privacy-first occupancy analytics."

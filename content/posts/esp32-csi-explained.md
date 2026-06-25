@@ -3,6 +3,8 @@ title: "ESP32 CSI Explained: A $5 Chip That Senses a Room"
 date: 2026-06-24T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "What ESP32 CSI is and why a low-cost ESP32 can capture WiFi Channel State Information for device-free sensing - the hardware foundation of Wavey."
 keywords:
   - ESP32 CSI

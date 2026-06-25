@@ -1,7 +1,7 @@
 {
   "name": "Wavey",
   "short_name": "Wavey",
-  "description": "Open-source RF sensing system using WiFi Channel State Information (CSI) to observe physical environments.",
+  "description": "Open-source WiFi CSI sensing for device-free occupancy, motion, and presence detection on ESP32 - no cameras, wearables, or apps.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#222225",

@@ -4,6 +4,8 @@ linkTitle: "Presence & breathing detection"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 30
 schema_type: "TechArticle"
 description: "Detect a still person - even by their breathing - using WiFi CSI. How Wavey does device-free presence and micro-motion sensing without cameras or wearables."

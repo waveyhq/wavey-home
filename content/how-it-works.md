@@ -4,6 +4,8 @@ linkTitle: "How it works"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.9
 schema_type: "TechArticle"
 description: "A clear explainer of how WiFi CSI sensing works - what Channel State Information is, how a moving body changes WiFi signals, and how Wavey turns ESP32 CSI into occupancy and motion detection."
 keywords:

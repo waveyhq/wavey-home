@@ -4,6 +4,8 @@ linkTitle: "Occupancy detection"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 10
 schema_type: "TechArticle"
 description: "Detect whether a room is empty or occupied using WiFi CSI - no cameras, no wearables, no PIR blind spots. How Wavey does device-free occupancy detection."

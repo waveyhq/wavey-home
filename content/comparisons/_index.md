@@ -4,6 +4,8 @@ linkTitle: "Comparisons"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 description: "How WiFi CSI sensing compares to cameras, mmWave radar, PIR motion sensors, and wearables - on privacy, cost, coverage, and accuracy."
 keywords:
   - WiFi sensing vs cameras

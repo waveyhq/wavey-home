@@ -4,6 +4,8 @@ linkTitle: "Elder-care monitoring"
 date: 2026-06-20T12:00:00Z
 lastmod: 2026-06-25T12:00:00Z
 draft: false
+sitemap:
+  priority: 0.7
 weight: 40
 schema_type: "TechArticle"
 description: "Monitor wellbeing at home without cameras or wearables. How Wavey's WiFi CSI sensing supports dignified, privacy-first elder-care monitoring."
