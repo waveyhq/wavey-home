@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "Wavey",
   "short_name": "Wavey",
   "description": "Open-source WiFi CSI sensing for device-free occupancy, motion, and presence detection on ESP32 - no cameras, wearables, or apps.",
@@ -8,14 +9,40 @@
   "theme_color": "#62c4ff",
   "icons": [
     {
-      "src": "/images/wavey-meta/icon-192.png",
+      "src": "/images/wavey-meta/icon-192-any.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "sizes": "192x192"
+      "purpose": "any"
     },
     {
-      "src": "/images/wavey-meta/icon-512.png",
+      "src": "/images/wavey-meta/icon-512-any.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "any"
+    },
+    {
+      "src": "/images/wavey-meta/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/wavey-meta/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/wavey-meta/icon-192-monochrome.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "monochrome"
+    },
+    {
+      "src": "/images/wavey-meta/icon-512-monochrome.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "monochrome"
     }
   ]
 }
