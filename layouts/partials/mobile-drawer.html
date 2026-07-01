@@ -1,0 +1,41 @@
+{{ partial "footer-icons.html" . }}
+<button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav-drawer">
+  <span class="nav-toggle-bar" aria-hidden="true"></span>
+  <span class="nav-toggle-bar" aria-hidden="true"></span>
+  <span class="nav-toggle-bar" aria-hidden="true"></span>
+</button>
+
+<div class="nav-overlay" hidden></div>
+
+<aside id="site-nav-drawer" class="nav-drawer" aria-hidden="true">
+  <div class="nav-drawer-header">
+    <a href="{{ .Site.BaseURL }}" class="nav-drawer-logo">{{ .Site.Title }}</a>
+  </div>
+  <nav class="terminal-menu" aria-label="Main navigation">
+    <ul>
+      {{ range .Site.Params.navlinks }}
+      <li>
+        <a href="{{ relURL .url }}">{{ .name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+  <div class="nav-drawer-bottom">
+    <nav class="nav-drawer-more" aria-label="More links">
+      <ul>
+        <li><a href="{{ "comparisons/" | relURL }}">Comparisons</a></li>
+        <li><a href="{{ "getting-started/" | relURL }}">Get started</a></li>
+        <li><a href="{{ "glossary/" | relURL }}">Glossary</a></li>
+      </ul>
+    </nav>
+    <div class="nav-drawer-footer">
+      <button type="button" class="theme-toggle nav-drawer-theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <span class="footer-icon-slot">
+          <span class="theme-icon theme-icon-sun">{{ template "icon-sun" . }}</span>
+          <span class="theme-icon theme-icon-moon">{{ template "icon-moon" . }}</span>
+        </span>
+        <span class="nav-drawer-theme-label">Toggle theme</span>
+      </button>
+    </div>
+  </div>
+</aside>

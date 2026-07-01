@@ -53,15 +53,7 @@
               {{ $.Scratch.Add "path" .Site.BaseURL }}
               <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~#
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
-          <nav class="terminal-menu">
-            <ul>
-                {{ range .Site.Params.navlinks }}
-                <li>
-                    <a href="{{ relURL .url }}">{{ .name }}</a>
-                </li>
-                {{ end }}
-            </ul>
-          </nav>
+          {{ partial "mobile-drawer.html" . }}
         </div>
     </div>
 
@@ -84,13 +76,62 @@
         if(meta)meta.setAttribute('content',theme==='dark'?'#0a0a0a':'#ffffff');
       }
       applyTheme(getTheme());
-      var toggle=document.querySelector('.theme-toggle');
-      if(toggle){
+      document.querySelectorAll('.theme-toggle').forEach(function(toggle){
         toggle.addEventListener('click',function(){
           var next=getTheme()==='dark'?'light':'dark';
           localStorage.setItem('theme',next);
           applyTheme(next);
         });
+      });
+
+      var navToggle=document.querySelector('.nav-toggle');
+      var navDrawer=document.getElementById('site-nav-drawer');
+      var navOverlay=document.querySelector('.nav-overlay');
+      if(!navToggle||!navDrawer||!navOverlay)return;
+
+      var reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function setDrawerOpen(open){
+        navToggle.classList.toggle('is-open',open);
+        navDrawer.classList.toggle('is-open',open);
+        navOverlay.classList.toggle('is-open',open);
+        document.body.classList.toggle('nav-open',open);
+        navToggle.setAttribute('aria-expanded',open?'true':'false');
+        navToggle.setAttribute('aria-label',open?'Close menu':'Open menu');
+        navDrawer.setAttribute('aria-hidden',open?'false':'true');
+        if(open){
+          navOverlay.removeAttribute('hidden');
+          var firstLink=navDrawer.querySelector('a');
+          if(firstLink)firstLink.focus();
+        }else{
+          navOverlay.setAttribute('hidden','');
+          navToggle.focus();
+        }
+      }
+
+      function closeDrawer(){
+        setDrawerOpen(false);
+      }
+
+      navToggle.addEventListener('click',function(){
+        setDrawerOpen(!navDrawer.classList.contains('is-open'));
+      });
+
+      navOverlay.addEventListener('click',closeDrawer);
+
+      navDrawer.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click',closeDrawer);
+      });
+
+      document.addEventListener('keydown',function(e){
+        if(e.key==='Escape'&&navDrawer.classList.contains('is-open')){
+          closeDrawer();
+        }
+      });
+
+      if(reducedMotion){
+        navDrawer.style.transition='none';
+        navOverlay.style.transition='none';
       }
     })();
     </script>
