@@ -1,5 +1,5 @@
 ---
-title: "Wavey - WiFi CSI Sensing System (Device-Free, No Cameras)"
+title: "Wavey | WiFi CSI Sensing System (Device-Free, No Cameras)"
 description: "Wavey is an open-source WiFi CSI sensing system using ESP32 Channel State Information for device-free occupancy, motion, and presence detection - no cameras or wearables."
 sitemap:
   priority: 1.0

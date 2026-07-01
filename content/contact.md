@@ -1,7 +1,13 @@
 ---
 title: "Contact Us"
 date: 2026-06-13T12:00:00Z
+lastmod: 2026-06-13T12:00:00Z
 draft: false
+description: "Get in touch with the Wavey team for questions, contributions, or ideas about open-source WiFi CSI sensing."
+keywords:
+  - contact Wavey
+  - Wavey support
+  - WiFi CSI sensing help
 sitemap:
   priority: 0.7
 ---
