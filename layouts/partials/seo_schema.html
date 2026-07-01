@@ -11,8 +11,8 @@
 {{- $desc := .Site.Params.description -}}
 
 {{- /* Logo (prefer a processed resource, fall back to a static path) */ -}}
-{{- $logo := absURL "images/wavey-meta/wavey-logo.ico" -}}
-{{- with resources.Get "images/wavey-meta/wavey-logo.ico" -}}{{- $logo = .Permalink -}}{{- end -}}
+{{- $logo := absURL "images/wavey-meta/wavey-logo.png" -}}
+{{- with resources.Get "images/wavey-meta/wavey-logo.png" -}}{{- $logo = .Permalink -}}{{- end -}}
 
 {{- /* sameAs entity links */ -}}
 {{- $sameAs := slice -}}
@@ -124,7 +124,7 @@
       "mainEntity" $qa
     ) -}}
   {{- end -}}
-{{- else -}}
+{{- else if ne .Kind "404" -}}
   {{- /* Decide the page schema type */ -}}
   {{- $pageType := .Params.schema_type -}}
   {{- if not $pageType -}}
@@ -152,16 +152,25 @@
   {{- /* Article-like nodes get authorship + dates */ -}}
   {{- if or (eq $pageType "TechArticle") (eq $pageType "BlogPosting") (eq $pageType "Article") -}}
     {{- $pub := cond (not .PublishDate.IsZero) (.PublishDate.Format $iso) (.Date.Format $iso) -}}
+    {{- $mod := "" -}}
+    {{- if not .Lastmod.IsZero -}}
+      {{- $mod = .Lastmod.Format $iso -}}
+    {{- else if not .Date.IsZero -}}
+      {{- $mod = .Date.Format $iso -}}
+    {{- end -}}
     {{- $authorName := .Params.author | default .Site.Params.author -}}
-    {{- $pageNode = merge $pageNode (dict
+    {{- $articleFields := dict
       "headline" .Title
       "datePublished" $pub
-      "dateModified" (.Lastmod.Format $iso)
       "articleSection" .Section
       "author" (dict "@type" "Organization" "@id" $orgID "name" $authorName)
       "publisher" (dict "@id" $orgID)
       "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
-    ) -}}
+    -}}
+    {{- if $mod -}}
+      {{- $articleFields = merge $articleFields (dict "dateModified" $mod) -}}
+    {{- end -}}
+    {{- $pageNode = merge $pageNode $articleFields -}}
     {{- with (.Params.keywords | default .Params.tags) -}}
       {{- $pageNode = merge $pageNode (dict "keywords" (delimit . ", ")) -}}
     {{- end -}}

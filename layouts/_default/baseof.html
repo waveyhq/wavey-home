@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2Y7RXDFJ06"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2Y7RXDFJ06');
-    </script>
     <meta charset="utf-8">
+    <script>
+    (function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ if .IsHome }}{{ .Title | default .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Params.siteName }}{{ end }}</title>
@@ -21,19 +15,16 @@
     <link rel="canonical" href="{{ .Permalink }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    {{- $robots := "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" -}}
+    {{- if eq .Kind "404" -}}
+      {{- $robots = "noindex, nofollow" -}}
+    {{- else if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+      {{- $robots = "noindex, follow" -}}
+    {{- end -}}
+    <meta name="robots" content="{{ $robots }}">
+    <meta name="googlebot" content="{{ $robots }}">
     <meta name="google-site-verification" content="Q_4YQonYh0O1JZmmhSFWL7sWdwUU5oVhPHISgWOD6u0" />
     {{- partial "head_extra.html" . -}}
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="e3c85a19-53ec-4ed5-84af-e4b85ed2194f"></script>
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="rn sn init kn Qr wn Cn yn capture calculateEventProperties Rn register register_once register_for_session unregister unregister_for_session An getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Fn identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty On En createPersonProfile setInternalOrTestUser Ln gn $n opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing In debug Kr Pn getPageViewId captureTraceFeedback captureTraceMetric vn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_kGNRGpo66JEu5c9VXWryZ4rfPrxFansdCR3z78EDWooX', {
-            api_host: 'https://us.i.posthog.com',
-            defaults: '2026-05-30',
-            person_profiles: 'identified_only',
-        })
-    </script>
 
     <link rel="stylesheet" href="{{ "hugo-theme-console/css/terminal-0.7.4.min.css" | relURL }}">
     <link rel="stylesheet" href="{{ "hugo-theme-console/css/animate-4.1.1.min.css" | relURL }}">
@@ -51,9 +42,6 @@
     {{ end }}
     {{- partial "opengraph.html" . -}}
     {{- partial "twitter_cards.html" . -}}
-    {{ template "_internal/google_analytics.html" . }}
-
-    {{- partial "header.html" . -}}
     {{- partial "seo_schema.html" . -}}
 </head>
 <body class="terminal">
@@ -63,15 +51,13 @@
             <div class="logo terminal-prompt">
               {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
               {{ $.Scratch.Add "path" .Site.BaseURL }}
-              <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
+              <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~#
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
           <nav class="terminal-menu">
-            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
-                {{ range $index, $element := .Site.Params.navlinks }}
-                <li property="itemListElement" typeof="ListItem">
-                    <a property="item" typeof="WebPage" href="{{ relURL .url }}">
-                    <span property="name">{{ .name }}</span></a>
-                    <meta property="position" content="{{ add $index 1}}" />
+            <ul>
+                {{ range .Site.Params.navlinks }}
+                <li>
+                    <a href="{{ relURL .url }}">{{ .name }}</a>
                 </li>
                 {{ end }}
             </ul>
@@ -84,5 +70,45 @@
         {{ end }}
         {{ partial "footer.html" . }}
     </div>
+
+    <script>
+    (function(){
+      function getTheme(){
+        var stored=localStorage.getItem('theme');
+        if(stored==='dark'||stored==='light')return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+      }
+      function applyTheme(theme){
+        document.documentElement.setAttribute('data-theme',theme);
+        var meta=document.querySelector('meta[name="theme-color"]');
+        if(meta)meta.setAttribute('content',theme==='dark'?'#0a0a0a':'#ffffff');
+      }
+      applyTheme(getTheme());
+      var toggle=document.querySelector('.theme-toggle');
+      if(toggle){
+        toggle.addEventListener('click',function(){
+          var next=getTheme()==='dark'?'light':'dark';
+          localStorage.setItem('theme',next);
+          applyTheme(next);
+        });
+      }
+    })();
+    </script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2Y7RXDFJ06"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2Y7RXDFJ06');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="e3c85a19-53ec-4ed5-84af-e4b85ed2194f"></script>
+    <script defer>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="rn sn init kn Qr wn Cn yn capture calculateEventProperties Rn register register_once register_for_session unregister unregister_for_session An getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Fn identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty On En createPersonProfile setInternalOrTestUser Ln gn $n opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing In debug Kr Pn getPageViewId captureTraceFeedback captureTraceMetric vn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_kGNRGpo66JEu5c9VXWryZ4rfPrxFansdCR3z78EDWooX', {
+            api_host: 'https://us.i.posthog.com',
+            defaults: '2026-05-30',
+            person_profiles: 'identified_only',
+        })
+    </script>
   </body>
 </html>

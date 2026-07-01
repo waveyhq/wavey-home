@@ -13,6 +13,7 @@
 <meta property="og:locale" content="{{ .Site.Params.locale | default "en_US" }}" />
 
 {{- $ogImage := "" -}}
+{{- $ogImageType := "image/png" -}}
 {{- $ogImageAlt := "Wavey RF Sensing System" -}}
 {{- if .Params.image -}}
   {{- $img := .Params.image -}}
@@ -22,10 +23,12 @@
     {{- $pageImg := $.Resources.GetMatch $img -}}
     {{- if $pageImg -}}
       {{- $ogImage = ($pageImg.Resize "1200x630 q82 webp").Permalink -}}
+      {{- $ogImageType = "image/webp" -}}
     {{- else -}}
       {{- $globalImg := resources.Get $img -}}
       {{- if $globalImg -}}
         {{- $ogImage = ($globalImg.Resize "1200x630 q82 webp").Permalink -}}
+        {{- $ogImageType = "image/webp" -}}
       {{- else -}}
         {{- $ogImage = absURL $img -}}
       {{- end -}}
@@ -34,20 +37,21 @@
   {{- with .Params.imageAlt -}}
     {{- $ogImageAlt = . -}}
   {{- else -}}
-    {{- $ogImageAlt = printf "%s - Wavey" $.Title -}}
+    {{- $ogImageAlt = printf "%s | Wavey" $.Title -}}
   {{- end -}}
 {{- else -}}
   {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
   {{- with $banner -}}
     {{- $ogImage = (.Resize "1200x630 q82 webp").Permalink -}}
+    {{- $ogImageType = "image/webp" -}}
   {{- else -}}
     {{- $ogImage = absURL "images/wavey-meta/wavey-banner.png" -}}
   {{- end -}}
-  {{- $ogImageAlt = "Wavey - open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
+  {{- $ogImageAlt = "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
 {{- end -}}
 {{- if $ogImage }}
 <meta property="og:image" content="{{ $ogImage }}">
-<meta property="og:image:type" content="image/webp">
+<meta property="og:image:type" content="{{ $ogImageType }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ $ogImageAlt }}">
@@ -72,7 +76,11 @@
 {{- with $.Site.Params.author }}
 <meta property="article:author" content="{{ . }}" />
 {{- end }}
+{{- with $.Site.Params.twitter }}
+<meta property="article:publisher" content="{{ . }}" />
+{{- else }}
 <meta property="article:publisher" content="{{ .Site.BaseURL }}" />
+{{- end }}
 {{- end }}{{/* .IsPage */}}
 
 {{- with .Params.locale }}

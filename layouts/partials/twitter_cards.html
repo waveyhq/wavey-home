@@ -20,7 +20,7 @@
   {{- with .Params.imageAlt -}}
     {{- $twitterImageAlt = . -}}
   {{- else -}}
-    {{- $twitterImageAlt = printf "%s - Wavey" $.Title -}}
+    {{- $twitterImageAlt = printf "%s | Wavey" $.Title -}}
   {{- end -}}
 {{- else -}}
   {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
@@ -29,7 +29,7 @@
   {{- else -}}
     {{- $twitterImage = absURL "images/wavey-meta/wavey-banner.png" -}}
   {{- end -}}
-  {{- $twitterImageAlt = "Wavey - open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
+  {{- $twitterImageAlt = "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
 {{- end -}}
 <meta name="twitter:card" content="summary_large_image"/>
 {{- if $twitterImage }}
