@@ -36,6 +36,7 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
   console = "https://console.wavey.nopejs.me"
+  status = "https://status.wavey.nopejs.me/"
   github = "https://github.com/trywavey"
   discord = "https://discord.gg/sxh9r9UTtW"
   twitter = "https://x.com/nopeJS"
