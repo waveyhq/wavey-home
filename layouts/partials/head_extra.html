@@ -23,7 +23,9 @@
 <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL }}">
 
 {{- /* Performance: warm up third-party origins (Core Web Vitals are a ranking signal) */ -}}
-<link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+<link rel="preconnect" href="https://js.sentry-cdn.com" crossorigin>
+<link rel="preconnect" href="https://browser.sentry-cdn.com" crossorigin>
+<link rel="dns-prefetch" href="https://us-assets.i.posthog.com">
 <link rel="dns-prefetch" href="https://us.i.posthog.com">
 <link rel="dns-prefetch" href="https://cloud.umami.is">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">

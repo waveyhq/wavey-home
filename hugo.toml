@@ -3,6 +3,9 @@ languageCode = "en-us"
 title = "Wavey"
 enableRobotsTXT = true
 
+[security.funcs]
+getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
+
 [taxonomies]
   tag = "tags"
   category = "categories"

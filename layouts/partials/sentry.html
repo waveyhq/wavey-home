@@ -1,0 +1,19 @@
+{{- /* Sentry Browser SDK (Loader Script) — configure before loader, load before other third-party scripts */ -}}
+<script>
+  window.sentryOnLoad = function () {
+    Sentry.init({
+      {{- with getenv "COMMIT_REF" }}
+      release: "wavey-home@{{ . }}",
+      {{- end }}
+      environment: "{{ hugo.Environment }}",
+      tracesSampleRate: 1.0,
+      replaysSessionSampleRate: 0.1,
+      replaysOnErrorSampleRate: 1.0,
+      enableLogs: true,
+    });
+  };
+</script>
+<script
+  src="https://js.sentry-cdn.com/df11951f77abb628b6abe51167c70557.min.js"
+  crossorigin="anonymous"
+></script>
