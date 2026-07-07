@@ -1049,20 +1049,25 @@ body.nav-open {
     }
 
     .footer-col-product {
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: start;
-    }
-
-    .footer-col-resources {
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
         text-align: right;
     }
 
-    .footer-col-resources .footer-links {
+    .footer-col-product .footer-links {
         align-items: flex-end;
+    }
+
+    .footer-col-resources {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+        text-align: left;
+    }
+
+    .footer-col-resources .footer-links {
+        align-items: flex-start;
     }
 
     .footer-col-connect {
