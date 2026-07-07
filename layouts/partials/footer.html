@@ -1,39 +1,51 @@
 {{ partial "footer-icons.html" . }}
 <footer class="footer">
-  <nav class="footer-nav" aria-label="Site links">
-    <a href="{{ "how-it-works/" | relURL }}">Working</a>
-    <a href="{{ "use-cases/" | relURL }}">Uses</a>
-    <a href="{{ "comparisons/" | relURL }}">Comparisons</a>
-    <a href="{{ "faq/" | relURL }}">FAQ</a>
-    <a href="{{ "getting-started/" | relURL }}">Get started</a>
-    <a href="{{ "glossary/" | relURL }}">Glossary</a>
-  </nav>
-  <div class="footer-bar">
-    <span class="footer-copy">&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</span>
-    <div class="footer-social">
-      <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="footer-icon-link" title="GitHub" aria-label="GitHub">
-        <span class="footer-icon-slot">{{ template "icon-github" . }}</span>
-        <span class="footer-icon-label">GitHub</span>
-      </a>
-      <a href="{{ .Site.Params.console }}" target="_blank" rel="noopener" class="footer-icon-link" title="Wavey Console" aria-label="Wavey Console">
-        <span class="footer-icon-slot">{{ template "icon-console" . }}</span>
-        <span class="footer-icon-label">Console</span>
-      </a>
-      <a href="mailto:{{ .Site.Params.email }}" class="footer-icon-link" title="Email" aria-label="Email">
-        <span class="footer-icon-slot">{{ template "icon-email" . }}</span>
-        <span class="footer-icon-label">Email</span>
-      </a>
-      <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener" class="footer-icon-link" title="Discord" aria-label="Discord">
-        <span class="footer-icon-slot">{{ template "icon-discord" . }}</span>
-        <span class="footer-icon-label">Discord</span>
-      </a>
-      <button type="button" class="theme-toggle footer-icon-link" aria-label="Toggle dark/light theme" title="Toggle theme">
-        <span class="footer-icon-slot">
-          <span class="theme-icon theme-icon-sun">{{ template "icon-sun" . }}</span>
-          <span class="theme-icon theme-icon-moon">{{ template "icon-moon" . }}</span>
-        </span>
-        <span class="footer-icon-label">Theme</span>
-      </button>
+  <div class="footer-main">
+    <nav class="footer-col footer-col-product" aria-label="Product">
+      <h2 class="footer-col-title">Product</h2>
+      <ul class="footer-links">
+        <li><a href="{{ "how-it-works/" | relURL }}">Working</a></li>
+        <li><a href="{{ "use-cases/" | relURL }}">Uses</a></li>
+        <li><a href="{{ "comparisons/" | relURL }}">Comparisons</a></li>
+        <li><a href="{{ "getting-started/" | relURL }}">Get started</a></li>
+        <li><a href="{{ .Site.Params.console }}" target="_blank" rel="noopener">Console</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col footer-col-resources" aria-label="Resources">
+      <h2 class="footer-col-title">Resources</h2>
+      <ul class="footer-links">
+        <li><a href="{{ "faq/" | relURL }}">FAQ</a></li>
+        <li><a href="{{ "glossary/" | relURL }}">Glossary</a></li>
+      </ul>
+    </nav>
+    <div class="footer-col footer-col-connect">
+      <h2 class="footer-col-title">Connect</h2>
+      <div class="footer-social">
+        <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="footer-icon-link" title="GitHub" aria-label="GitHub">
+          <span class="footer-icon-slot">{{ template "icon-github" . }}</span>
+          <span class="footer-icon-label">GitHub</span>
+        </a>
+        <a href="mailto:{{ .Site.Params.email }}" class="footer-icon-link" title="Email" aria-label="Email">
+          <span class="footer-icon-slot">{{ template "icon-email" . }}</span>
+          <span class="footer-icon-label">Email</span>
+        </a>
+        <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener" class="footer-icon-link" title="Discord" aria-label="Discord">
+          <span class="footer-icon-slot">{{ template "icon-discord" . }}</span>
+          <span class="footer-icon-label">Discord</span>
+        </a>
+      </div>
     </div>
   </div>
+  <div class="footer-bar">
+    <a href="{{ .Site.Params.status }}" target="_blank" rel="noopener" class="status-link footer-status-link" data-status-api="{{ .Site.Params.status }}index.json" aria-label="Service uptime"><span class="status-dot" aria-hidden="true"></span><span class="status-label">Uptime</span></a>
+    <span class="footer-copy">&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</span>
+    <button type="button" class="theme-toggle footer-theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+      <span class="footer-icon-slot">
+        <span class="theme-icon theme-icon-sun">{{ template "icon-sun" . }}</span>
+        <span class="theme-icon theme-icon-moon">{{ template "icon-moon" . }}</span>
+      </span>
+      <span class="footer-icon-label">Theme</span>
+    </button>
+  </div>
 </footer>
+<script src="{{ "js/status-indicator.js" | relURL }}"></script>
