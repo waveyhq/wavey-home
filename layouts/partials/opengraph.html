@@ -1,4 +1,5 @@
-{{- $title := .Title | default .Site.Title -}}
+{{- $siteName := .Site.Params.siteName | default .Site.Title -}}
+{{- $title := cond .IsHome (.Title | default .Site.Title) (printf "%s | %s" .Title $siteName) -}}
 <meta property="og:title" content="{{ $title }}" />
 {{- $description := .Description | default .Summary | default .Site.Params.description -}}
 {{- if $description }}
@@ -76,10 +77,8 @@
 {{- with $.Site.Params.author }}
 <meta property="article:author" content="{{ . }}" />
 {{- end }}
-{{- with $.Site.Params.twitter }}
+{{- with $.Site.BaseURL }}
 <meta property="article:publisher" content="{{ . }}" />
-{{- else }}
-<meta property="article:publisher" content="{{ .Site.BaseURL }}" />
 {{- end }}
 {{- end }}{{/* .IsPage */}}
 

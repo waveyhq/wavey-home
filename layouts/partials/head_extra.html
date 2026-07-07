@@ -21,6 +21,7 @@
 
 {{- /* Sitemap discovery for crawlers and answer engines */ -}}
 <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL }}">
+<link rel="alternate" type="text/plain" href="{{ "llms.txt" | absURL }}" title="LLMs overview">
 
 {{- /* Performance: warm up third-party origins (Core Web Vitals are a ranking signal) */ -}}
 <link rel="preconnect" href="https://js.sentry-cdn.com" crossorigin>

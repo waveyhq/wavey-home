@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
     {{ range .Pages }}
-        {{ if not .Params.private }}
+        {{ if and (not .Params.private) (ne .Kind "taxonomy") (ne .Kind "term") }}
         {{- $priority := .Sitemap.Priority -}}
         {{- if and (or (eq .Kind "taxonomy") (eq .Kind "term")) (eq $priority 0.5) -}}
             {{- $priority = 0.4 -}}

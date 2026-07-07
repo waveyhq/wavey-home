@@ -19,6 +19,7 @@
 {{- with .Site.Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- with .Site.Params.discord }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- with .Site.Params.console }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.status }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- with .Site.Params.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 
 {{- $org := dict

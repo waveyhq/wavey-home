@@ -12,7 +12,7 @@
     <title>{{ if .IsHome }}{{ .Title | default .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Params.siteName }}{{ end }}</title>
     {{- $description := .Description | default .Summary | default .Site.Params.description -}}
     {{- if $description -}}
-      <meta name="description" content="{{ $description }}">
+      <meta name="description" content="{{ $description | plainify | chomp }}">
     {{- end -}}
     <link rel="canonical" href="{{ .Permalink }}">
 
