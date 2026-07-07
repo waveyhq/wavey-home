@@ -1,0 +1,25 @@
+{{- /* Datadog RUM — CDN async loader */ -}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v7/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      applicationId: '622d431d-6a46-4ebc-9980-10d193728150',
+      clientToken: 'pub8afde6412d49bc86fb51b5285f2a5fe1',
+      site: 'us5.datadoghq.com',
+      service: 'wavey-home',
+      env: '{{ hugo.Environment }}',
+      {{- with getenv "COMMIT_REF" }}
+      version: '{{ . }}',
+      {{- end }}
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackResources: true,
+      trackUserInteractions: true,
+      trackLongTasks: true,
+    });
+  })
+</script>
