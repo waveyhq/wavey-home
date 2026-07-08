@@ -258,12 +258,11 @@ figure {
     padding-bottom: env(safe-area-inset-bottom, 0px);
     border-top: 1px solid var(--secondary-color);
     color: var(--global-font-color);
-    overflow: visible;
 }
 
 .footer-main {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(min-content, 1fr);
+    grid-template-columns: 1fr auto 1fr;
     align-items: start;
     gap: 2rem 2.5rem;
     margin-bottom: 1.75rem;
@@ -289,12 +288,6 @@ figure {
 .footer-col-connect {
     justify-self: end;
     text-align: left;
-    min-width: min-content;
-    overflow: visible;
-}
-
-.footer-col-connect.footer-col {
-    min-width: min-content;
 }
 
 .footer-col {
@@ -395,12 +388,10 @@ figure {
 .status-dot--maintenance { background-color: #3b82f6; }
 .status-dot--unknown { background-color: #9ca3af; }
 
-.footer-col-connect .footer-social {
+.footer-col-connect .footer-icon-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.35rem;
-    min-width: min-content;
-    overflow: visible;
 }
 
 .footer-bar {
@@ -440,16 +431,15 @@ figure {
     line-height: 1;
 }
 
-.footer-social {
+.footer-icon-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem 0.75rem;
     align-items: center;
-    color: var(--font-color);
 }
 
 .footer-icon-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: flex-start;
     gap: 0.35rem;
@@ -459,46 +449,6 @@ figure {
     color: var(--font-color);
     background-color: transparent;
     line-height: 1;
-    flex-shrink: 0;
-}
-
-.footer-icon-link .footer-icon-slot svg path,
-.footer-icon-slot svg path {
-    fill: currentColor;
-}
-
-html[data-theme="dark"] .footer-icon-link .footer-icon-slot svg path,
-html[data-theme="dark"] .footer-icon-slot svg path {
-    fill: #e8e9ed;
-}
-
-html[data-theme="light"] .footer-icon-link .footer-icon-slot svg path,
-html[data-theme="light"] .footer-icon-slot svg path {
-    fill: #151515;
-}
-
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme]) .footer-icon-link .footer-icon-slot svg path,
-    html:not([data-theme]) .footer-icon-slot svg path {
-        fill: #e8e9ed;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    html:not([data-theme]) .footer-icon-link .footer-icon-slot svg path,
-    html:not([data-theme]) .footer-icon-slot svg path {
-        fill: #151515;
-    }
-}
-
-.footer-icon-link:hover .footer-icon-slot svg path,
-.footer-icon-link:focus-visible .footer-icon-slot svg path {
-    fill: #1a95e0;
-}
-
-html[data-theme="dark"] .footer-icon-link:hover .footer-icon-slot svg path,
-html[data-theme="dark"] .footer-icon-link:focus-visible .footer-icon-slot svg path {
-    fill: #62c4ff;
 }
 
 .footer-icon-link:hover,
@@ -509,19 +459,19 @@ html[data-theme="dark"] .footer-icon-link:focus-visible .footer-icon-slot svg pa
 }
 
 .footer-icon-slot {
-    display: block;
-    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 20px;
     height: 20px;
-    flex: 0 0 20px;
-    color: inherit;
-    overflow: visible;
+    flex-shrink: 0;
 }
 
 .footer-icon-slot svg {
     display: block;
     width: 20px;
     height: 20px;
+    fill: currentColor;
 }
 
 .theme-toggle {
@@ -545,7 +495,6 @@ html[data-theme="dark"] .footer-icon-link:focus-visible .footer-icon-slot svg pa
 }
 
 .theme-toggle .theme-icon svg {
-    display: block;
     width: 20px;
     height: 20px;
 }
@@ -1122,15 +1071,13 @@ body.nav-open {
     }
 
     .footer-col-connect {
-        grid-column: 1 / 3;
+        grid-column: 1 / -1;
         grid-row: 2;
         justify-self: start;
         text-align: left;
-        min-width: min-content;
-        overflow: visible;
     }
 
-    .footer-col-connect .footer-social {
+    .footer-col-connect .footer-icon-row {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
@@ -1189,18 +1136,18 @@ body.nav-open {
         width: 100%;
     }
 
-    .footer-social {
-        justify-content: flex-start;
+    .footer-icon-row {
+        justify-content: space-between;
         flex-wrap: wrap;
-        gap: 0.35rem 0.75rem;
+        gap: 0.35rem;
         max-width: 100%;
     }
 
     .footer-icon-link {
-        justify-content: flex-start;
-        min-width: 36px;
+        justify-content: center;
+        min-width: 0;
         min-height: 36px;
-        padding: 0.25rem 0.35rem;
+        padding: 0.25rem;
         flex: 0 0 auto;
     }
 
