@@ -439,7 +439,7 @@ figure {
 }
 
 .footer-icon-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 0.35rem;
@@ -449,6 +449,7 @@ figure {
     color: var(--font-color);
     background-color: transparent;
     line-height: 1;
+    flex-shrink: 0;
 }
 
 .footer-icon-link:hover,
@@ -459,19 +460,25 @@ figure {
 }
 
 .footer-icon-slot {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     flex-shrink: 0;
+    color: var(--font-color);
 }
 
 .footer-icon-slot svg {
     display: block;
     width: 20px;
     height: 20px;
-    fill: currentColor;
+    min-width: 20px;
+    min-height: 20px;
+    flex-shrink: 0;
+    fill: var(--font-color);
 }
 
 .theme-toggle {
@@ -1137,17 +1144,17 @@ body.nav-open {
     }
 
     .footer-social {
-        justify-content: space-between;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 0.35rem;
+        gap: 0.35rem 0.75rem;
         max-width: 100%;
     }
 
     .footer-icon-link {
-        justify-content: center;
-        min-width: 0;
+        justify-content: flex-start;
+        min-width: 36px;
         min-height: 36px;
-        padding: 0.25rem;
+        padding: 0.25rem 0.35rem;
         flex: 0 0 auto;
     }
 
