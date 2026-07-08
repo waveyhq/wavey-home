@@ -22,15 +22,15 @@
       <h2 class="footer-col-title">Connect</h2>
       <div class="footer-social">
         <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="footer-icon-link" title="GitHub" aria-label="GitHub">
-          {{ template "icon-github" . }}
+          <span class="footer-icon-slot">{{ template "icon-github" . }}</span>
           <span class="footer-icon-label">GitHub</span>
         </a>
         <a href="mailto:{{ .Site.Params.email }}" class="footer-icon-link" title="Email" aria-label="Email">
-          {{ template "icon-email" . }}
+          <span class="footer-icon-slot">{{ template "icon-email" . }}</span>
           <span class="footer-icon-label">Email</span>
         </a>
         <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener" class="footer-icon-link" title="Discord" aria-label="Discord">
-          {{ template "icon-discord" . }}
+          <span class="footer-icon-slot">{{ template "icon-discord" . }}</span>
           <span class="footer-icon-label">Discord</span>
         </a>
       </div>
