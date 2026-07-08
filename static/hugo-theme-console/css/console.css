@@ -436,6 +436,7 @@ figure {
     flex-wrap: wrap;
     gap: 0.35rem 0.75rem;
     align-items: center;
+    color: var(--font-color);
 }
 
 .footer-icon-link {
@@ -449,7 +450,51 @@ figure {
     color: var(--font-color);
     background-color: transparent;
     line-height: 1;
-    flex-shrink: 0;
+}
+
+.footer-icon-link > svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+}
+
+.footer-icon-link > svg path {
+    fill: currentColor;
+}
+
+html[data-theme="dark"] .footer-icon-link > svg path,
+html[data-theme="dark"] .footer-icon-slot svg path {
+    fill: #e8e9ed;
+}
+
+html[data-theme="light"] .footer-icon-link > svg path,
+html[data-theme="light"] .footer-icon-slot svg path {
+    fill: #151515;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) .footer-icon-link > svg path,
+    html:not([data-theme]) .footer-icon-slot svg path {
+        fill: #e8e9ed;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) .footer-icon-link > svg path,
+    html:not([data-theme]) .footer-icon-slot svg path {
+        fill: #151515;
+    }
+}
+
+.footer-icon-link:hover > svg path,
+.footer-icon-link:focus-visible > svg path {
+    fill: #1a95e0;
+}
+
+html[data-theme="dark"] .footer-icon-link:hover > svg path,
+html[data-theme="dark"] .footer-icon-link:focus-visible > svg path {
+    fill: #62c4ff;
 }
 
 .footer-icon-link:hover,
@@ -460,25 +505,18 @@ figure {
 }
 
 .footer-icon-slot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    position: relative;
     width: 20px;
     height: 20px;
-    min-width: 20px;
-    min-height: 20px;
-    flex-shrink: 0;
-    color: var(--font-color);
+    flex: 0 0 20px;
+    color: inherit;
 }
 
 .footer-icon-slot svg {
     display: block;
     width: 20px;
     height: 20px;
-    min-width: 20px;
-    min-height: 20px;
-    flex-shrink: 0;
-    fill: var(--font-color);
 }
 
 .theme-toggle {
@@ -502,6 +540,7 @@ figure {
 }
 
 .theme-toggle .theme-icon svg {
+    display: block;
     width: 20px;
     height: 20px;
 }
