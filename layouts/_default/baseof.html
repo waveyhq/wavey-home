@@ -46,7 +46,7 @@
     {{- partial "twitter_cards.html" . -}}
     {{- partial "seo_schema.html" . -}}
 </head>
-<body class="terminal">
+<body class="terminal" data-page-section="{{ .Section }}">
     <div class="container">
         <div class="terminal-nav">
           <header class="terminal-logo">
@@ -153,5 +153,6 @@
             person_profiles: 'identified_only',
         })
     </script>
+    <script defer src="{{ "js/analytics.js" | relURL }}"></script>
   </body>
 </html>
