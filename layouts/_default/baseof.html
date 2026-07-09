@@ -62,6 +62,7 @@
     <div class="container {{ .Site.Params.animateStyle }}" >
         {{ block "main" . }}
         {{ end }}
+        {{ partial "feedback-form.html" . }}
         {{ partial "footer.html" . }}
     </div>
 

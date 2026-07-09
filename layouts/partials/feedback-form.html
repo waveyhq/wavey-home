@@ -1,0 +1,34 @@
+<section class="feedback-form" aria-labelledby="feedback-heading">
+  <h2 id="feedback-heading" class="feedback-heading">What do you think?</h2>
+  <p class="feedback-intro">Tell us what you like, or what we could do better.</p>
+
+  <form
+    name="feedback"
+    method="POST"
+    netlify
+    netlify-honeypot="bot-field"
+    class="feedback-fields"
+  >
+    <input type="hidden" name="page" value="{{ .Permalink }}">
+    <p hidden>
+      <label>Don't fill this out: <input name="bot-field"></label>
+    </p>
+
+    <label class="feedback-label">
+      <span class="feedback-label-text">Name <span class="feedback-optional">(optional)</span></span>
+      <input type="text" name="name" autocomplete="name">
+    </label>
+
+    <label class="feedback-label">
+      <span class="feedback-label-text">Your feedback</span>
+      <textarea name="message" rows="4" required placeholder="What you like, what you'd change..."></textarea>
+    </label>
+
+    <p class="feedback-aside">
+      Prefer to chat? Join us on
+      <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener">Discord</a>.
+    </p>
+
+    <button type="submit" class="feedback-submit">Send feedback</button>
+  </form>
+</section>

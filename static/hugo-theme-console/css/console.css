@@ -251,9 +251,108 @@ figure {
     margin-right: 60px;
 }
 
+.feedback-form {
+    margin-top: 4rem;
+    max-width: 36em;
+}
+
+.feedback-heading {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.feedback-intro {
+    margin: 0 0 1.25rem;
+    color: var(--secondary-color);
+    font-size: 0.95em;
+}
+
+.feedback-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feedback-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.feedback-label-text {
+    font-size: 0.85em;
+    color: var(--secondary-color);
+}
+
+.feedback-optional {
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.feedback-fields input[type="text"],
+.feedback-fields textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    font-family: var(--font-stack);
+    font-size: 0.95em;
+    line-height: var(--global-line-height);
+    color: var(--font-color);
+    background: var(--background-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 0;
+    resize: vertical;
+}
+
+.feedback-fields input[type="text"]:focus,
+.feedback-fields textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.feedback-aside {
+    margin: 0;
+    font-size: 0.85em;
+    color: var(--secondary-color);
+}
+
+.feedback-aside a {
+    color: var(--primary-color);
+}
+
+.feedback-aside a:hover,
+.feedback-aside a:focus-visible {
+    background-color: var(--primary-color);
+    color: #151515;
+}
+
+.feedback-submit {
+    align-self: flex-start;
+    padding: 0.45rem 0.9rem;
+    font-family: var(--font-stack);
+    font-size: 0.9em;
+    color: var(--font-color);
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.feedback-submit:hover:not(:disabled),
+.feedback-submit:focus-visible:not(:disabled) {
+    color: #151515;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.feedback-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .footer {
     clear: both;
-    margin-top: 100px;
+    margin-top: 3rem;
     padding-top: 2rem;
     padding-bottom: env(safe-area-inset-bottom, 0px);
     border-top: 1px solid var(--secondary-color);
