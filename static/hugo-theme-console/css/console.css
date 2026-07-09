@@ -170,7 +170,11 @@ h1 {
 }
 
 .landing-hero .landing-section {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+hr {
+    margin: 1.75rem 0;
 }
 
 .landing-hero p {
@@ -252,7 +256,7 @@ figure {
 }
 
 .feedback-form {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     max-width: 36em;
 }
 

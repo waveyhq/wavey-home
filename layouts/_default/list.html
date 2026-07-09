@@ -2,10 +2,12 @@
 <h1>{{ .Page.Title }}</h1>
 <br/>
 {{ .Content }}
-
+{{ if .Pages }}
+<hr>
+{{ end }}
+<div class="posts-list">
 {{ $isPosts := eq .Section "posts" }}
 {{ $pages := cond $isPosts (sort .Pages "Date" "desc") .Pages.ByWeight }}
-<div class="posts-list">
 {{ range $pages }}
     {{ if not .Params.private }}
         <article class="post{{ if not $isPosts }} post--plain{{ end }}">

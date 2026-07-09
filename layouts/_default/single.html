@@ -7,6 +7,7 @@
     <div class="post-body">
         {{ .Content }}
         {{ with .Params.faq }}
+        <hr>
         <section class="faq" aria-label="Frequently asked questions">
             <h2>Frequently asked questions</h2>
             {{ range . }}
