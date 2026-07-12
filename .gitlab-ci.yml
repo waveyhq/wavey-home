@@ -1,0 +1,15 @@
+# Wavey Home — GitLab CI entrypoint.
+# Pipeline logic is split into modular files under .gitlab/workflows/.
+# https://docs.gitlab.com/ci/yaml/includes/
+
+stages:
+  - validate
+  - build
+  - deploy
+
+include:
+  - local: '.gitlab/workflows/variables.yml'
+  - local: '.gitlab/workflows/templates.yml'
+  - local: '.gitlab/workflows/validate.yml'
+  - local: '.gitlab/workflows/build.yml'
+  - local: '.gitlab/workflows/deploy-netlify.yml'

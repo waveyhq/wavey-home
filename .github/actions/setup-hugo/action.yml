@@ -1,0 +1,16 @@
+name: Setup Hugo
+description: Install Hugo Extended (version pinned in netlify.toml)
+
+inputs:
+  hugo-version:
+    description: Hugo version to install
+    required: false
+    default: "0.145.0"
+
+runs:
+  using: composite
+  steps:
+    - uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: ${{ inputs.hugo-version }}
+        extended: true

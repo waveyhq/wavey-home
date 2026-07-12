@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  HUGO_VERSION: "0.145.0"
+  HUGO_ENV: production
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: ./.github/actions/setup-hugo
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+
+      - name: Build site
+        run: hugo --gc --minify --printPathWarnings
+
+      - name: Verify outputs
+        uses: ./.github/actions/verify-site
+
+  build:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: ./.github/actions/setup-hugo
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Verify outputs
+        uses: ./.github/actions/verify-site
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: public
+          retention-days: 30

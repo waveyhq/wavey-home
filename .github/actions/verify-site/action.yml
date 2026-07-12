@@ -1,0 +1,12 @@
+name: Verify site output
+description: Assert required Hugo build artifacts exist
+
+runs:
+  using: composite
+  steps:
+    - name: Check build outputs
+      shell: bash
+      run: |
+        test -f public/index.html
+        test -f public/sitemap.xml
+        test -f public/llms.txt

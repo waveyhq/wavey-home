@@ -1,0 +1,43 @@
+name: Deploy to Netlify
+
+# Optional manual deploy from GitHub Actions.
+# Netlify already deploys on push via netlify.toml; use this as a fallback.
+# Requires secrets: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID
+
+on:
+  workflow_dispatch:
+
+env:
+  HUGO_VERSION: "0.145.0"
+  HUGO_ENV: production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://wavey.nopejs.me
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: ./.github/actions/setup-hugo
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Verify outputs
+        uses: ./.github/actions/verify-site
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: ./public
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Manual deploy from GitHub Actions (${{ github.sha }})"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

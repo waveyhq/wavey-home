@@ -1,0 +1,11 @@
+# Production build on the default branch; artifacts feed deploy jobs.
+
+hugo:build:
+  extends: .hugo:build
+  stage: build
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

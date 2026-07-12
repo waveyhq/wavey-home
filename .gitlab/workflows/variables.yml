@@ -1,0 +1,7 @@
+# Shared CI/CD variables for all workflow modules.
+
+variables:
+  HUGO_VERSION: "0.145.0"
+  HUGO_EXTENDED: "true"
+  HUGO_ENV: "production"
+  GIT_DEPTH: "1"

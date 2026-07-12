@@ -1,0 +1,16 @@
+# Optional Netlify deploy from GitLab CI.
+# Set masked CI/CD variables: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID
+
+deploy:netlify:
+  stage: deploy
+  image: node:20-bookworm
+  needs:
+    - job: hugo:build
+      artifacts: true
+  script:
+    - npm install -g netlify-cli
+    - netlify deploy --prod --dir=public --message "Deploy ${CI_COMMIT_SHORT_SHA} from GitLab CI"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true

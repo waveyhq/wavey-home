@@ -1,0 +1,13 @@
+# Validate Hugo build on merge requests and non-default branches.
+
+hugo:validate:
+  extends: .hugo:build
+  stage: validate
+  script:
+    - hugo --gc --minify --printPathWarnings
+    - test -f public/index.html
+    - test -f public/sitemap.xml
+    - test -f public/llms.txt
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
