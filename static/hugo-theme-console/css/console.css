@@ -673,6 +673,7 @@ figure {
 .theme-toggle .theme-icon svg {
     width: 20px;
     height: 20px;
+    transform: translateY(0.5px);
 }
 
 html[data-theme="dark"] .theme-toggle .theme-icon-sun {
