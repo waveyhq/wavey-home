@@ -51,6 +51,11 @@ def extract_logo(img: Image.Image, threshold: int = 40) -> Image.Image:
 
 
 logo = extract_logo(raw)
+nobg_bbox = logo.getbbox()
+if nobg_bbox:
+    nobg_path = out_dir / "wavey-logo-nobg.png"
+    logo.crop(nobg_bbox).save(nobg_path, optimize=True)
+    print(f"wrote {nobg_path}")
 
 
 def shape_mask(size: int, shape: str) -> Image.Image:

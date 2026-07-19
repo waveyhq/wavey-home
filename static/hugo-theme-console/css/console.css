@@ -244,6 +244,24 @@ strong {
     font-weight: normal;
 }
 
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    vertical-align: baseline;
+}
+
+.site-brand-icon {
+    display: block;
+    width: 1.15em;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.site-brand-text {
+    display: inline-block;
+}
+
 .terminal-menu li {
     margin-right: 30px;
 }
