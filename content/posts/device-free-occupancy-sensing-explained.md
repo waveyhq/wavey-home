@@ -21,7 +21,7 @@ categories:
 
 "Is anyone in this room?" sounds simple, but the way you answer it has big consequences for **privacy, cost,
 and reliability**. **Device-free occupancy sensing** answers it without cameras and without asking anyone to
-carry a device.
+carry a device. See also the [occupancy detection use case](/use-cases/occupancy-detection/).
 
 ## What "device-free" means
 

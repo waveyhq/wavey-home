@@ -53,4 +53,4 @@ faq:
 
 Common questions about **WiFi CSI sensing** and **Wavey** - what it is, whether it's private, what hardware
 it needs, and how it compares to cameras and WiFi tracking. New to the topic? The
-[how-it-works explainer](/how-it-works/) and [glossary](/glossary/) are good next reads.
+[how-it-works explainer](/how-it-works/), [glossary](/glossary/), and [blog](/posts/) are good next reads.

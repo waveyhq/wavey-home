@@ -19,3 +19,20 @@ Wavey turns ordinary WiFi into a sensor, which opens up a surprising range of ap
 **device-free** and **camera-free**. Here are the main ways people use **WiFi CSI sensing** with Wavey.
 Each starts from the same foundation: a moving body changes WiFi signals, and Wavey reads those changes.
 New here? Start with [how it works](/how-it-works/).
+
+## Occupancy and presence
+
+- [Device-free occupancy detection](/use-cases/occupancy-detection/) - answer "is anyone here?" without cameras or wearables
+- [Presence & breathing detection](/use-cases/presence-detection/) - detect a still person via subtle CSI shifts
+- [Occupancy analytics](/use-cases/occupancy-analytics/) - privacy-first footfall and space-utilization metrics
+
+## Motion, safety, and automation
+
+- [Motion & activity detection](/use-cases/motion-activity-detection/) - WiFi motion sensing without a camera
+- [Elder-care & fall-aware monitoring](/use-cases/elder-care-monitoring/) - ambient awareness without video
+- [Security & intrusion detection](/use-cases/security-intrusion-detection/) - detect unexpected movement
+- [Smart-home automation](/use-cases/smart-home-automation/) - presence-aware lighting, HVAC, and scenes
+
+## Compare the alternatives
+
+Not sure WiFi sensing fits your scenario? See [how WiFi CSI compares to cameras, radar, PIR, and wearables](/comparisons/).

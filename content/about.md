@@ -5,6 +5,7 @@ lastmod: 2026-06-25T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
+schema_type: "TechArticle"
 description: "Wavey is an open-source WiFi CSI sensing project making spatial awareness private, affordable, and device-free using ESP32 Channel State Information instead of cameras."
 keywords:
   - about Wavey
@@ -59,3 +60,5 @@ Wavey is built in the open and we'd love your help.
 - **Console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
 - **Discord:** [Join the community](https://discord.gg/sxh9r9UTtW)
 - **Email:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
+
+Questions or partnerships? See [contact](/contact/).

@@ -67,5 +67,5 @@ The easiest wins come first. We recommend starting with the most robust capabili
 - **Community:** [Discord](https://discord.gg/sxh9r9UTtW)
 - **Contact:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
 
-New to the field? Read [how Wavey works](/how-it-works/), skim the [glossary](/glossary/), or browse the
-[FAQ](/faq/).
+New to the field? Read [how Wavey works](/how-it-works/), skim the [glossary](/glossary/), browse the
+[FAQ](/faq/), read posts like [ESP32 CSI explained](/posts/esp32-csi-explained/), or learn more [about Wavey](/about/).

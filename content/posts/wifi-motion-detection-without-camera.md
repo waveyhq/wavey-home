@@ -21,7 +21,8 @@ categories:
 
 Can you detect motion in a room without a camera, without a wearable, and even in complete darkness? With
 **WiFi** - yes. Here's how **WiFi motion detection without a camera** actually works, and why it's often a
-better fit than the usual sensors.
+better fit than the usual sensors. For the full use-case write-up, see
+[motion & activity detection](/use-cases/motion-activity-detection/).
 
 ## The core idea
 

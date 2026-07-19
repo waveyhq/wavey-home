@@ -22,6 +22,7 @@ categories:
 
 Welcome to Wavey! In this post we cover the basics of **WiFi Channel State Information (CSI)** and how we use
 it to observe spatial environments - without cameras, wearables, or any device on the people being sensed.
+Prefer a structured guide? See [how Wavey works](/how-it-works/).
 
 ## What is WiFi CSI?
 

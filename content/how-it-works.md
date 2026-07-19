@@ -16,15 +16,6 @@ keywords:
   - ESP32 CSI
   - device-free sensing
   - WiFi sensing pipeline
-faq:
-  - question: "Can WiFi really detect people without a camera?"
-    answer: "Yes. WiFi sensing detects people through the way their bodies disturb radio signals, not through images. Because the human body reflects and absorbs WiFi, a moving person changes the signal measurably even with no camera and no device on the person. Carnegie Mellon's DensePose-from-WiFi research even reconstructed human pose from WiFi alone."
-  - question: "What is the difference between CSI and RSSI?"
-    answer: "RSSI is a single number describing overall signal strength. CSI (Channel State Information) is far richer: it captures amplitude and phase across many individual OFDM subcarriers, so it can sense subtle changes - like breathing - that RSSI would miss entirely."
-  - question: "Does WiFi CSI sensing work through walls?"
-    answer: "Partially. WiFi passes through many interior walls, so CSI sensing can detect motion and presence in non-line-of-sight conditions better than cameras. Accuracy drops with thicker or denser materials, and through-wall pose reconstruction remains an active research area."
-  - question: "What hardware do I need for WiFi CSI sensing?"
-    answer: "Wavey uses low-cost ESP32 modules, which expose CSI across the ESP32 family (ESP32, S2, S3, C3, C5, C6 and more). You pair one or more sensing nodes with a host running Wavey's Python analysis pipeline."
 ---
 
 WiFi CSI sensing lets you detect people and motion in a space using only the WiFi signals already
@@ -120,4 +111,6 @@ Wavey brings these ideas into an open-source system you can actually run.
 - [Explore use cases](/use-cases/)
 - [Compare WiFi sensing to cameras, radar, and wearables](/comparisons/)
 - [Browse the glossary](/glossary/) or [read the FAQ](/faq/)
+- From the blog: [Introduction to WiFi CSI](/posts/introduction-to-wifi-csi/) and [ESP32 CSI explained](/posts/esp32-csi-explained/)
+- Common questions: [WiFi CSI sensing FAQ](/faq/)
 - Star or contribute on [GitHub](https://github.com/waveyhq)

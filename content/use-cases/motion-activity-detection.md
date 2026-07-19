@@ -49,5 +49,6 @@ technical context, read [how Wavey works](/how-it-works/).
 
 ## Get started
 
-Jump into [getting started](/getting-started/) or explore the live signals in the
+Jump into [getting started](/getting-started/), read the related post
+[WiFi motion detection without a camera](/posts/wifi-motion-detection-without-camera/), or explore live signals in the
 [Wavey Console](https://console.wavey.nopejs.me).

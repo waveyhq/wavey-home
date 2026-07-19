@@ -82,3 +82,8 @@ their environment. Its existence shows sensing is becoming a native capability o
 **Occupancy** asks "is anyone here?" and is the most robust signal. **Presence** goes further to confirm a
 **still** person is there (for example, by [breathing](/use-cases/presence-detection/)), which is where CSI
 clearly beats motion-only sensors.
+
+## Related reading
+
+- [Blog posts](/posts/) on CSI fundamentals, ESP32 hardware, and use cases
+- [How WiFi CSI sensing works](/how-it-works/)

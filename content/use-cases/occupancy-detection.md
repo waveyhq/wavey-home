@@ -48,5 +48,6 @@ classic weakness of PIR sensors. (See [how it works](/how-it-works/) for the ful
 
 ## Get started
 
-Read [how Wavey works](/how-it-works/), then head to [getting started](/getting-started/) or the
-[GitHub repo](https://github.com/waveyhq).
+Read [how Wavey works](/how-it-works/), the related post
+[device-free occupancy sensing, explained](/posts/device-free-occupancy-sensing-explained/), then head to
+[getting started](/getting-started/) or the [GitHub repo](https://github.com/waveyhq).
