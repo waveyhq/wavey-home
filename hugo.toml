@@ -27,8 +27,8 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 
 [params]
   siteName = "Wavey"
-  description = "Wavey is an open-source WiFi CSI sensing system that uses Channel State Information (CSI) on low-cost ESP32 nodes for device-free occupancy, motion, and presence detection - no cameras, wearables, or apps."
-  tagline = "Open-source WiFi CSI sensing for device-free occupancy, motion, and presence detection - no cameras, no wearables."
+  description = "Open-source WiFi CSI sensing on ESP32: device-free occupancy, motion, and presence detection without cameras or wearables."
+  tagline = "Occupancy, motion, and presence from the WiFi environment."
   author = "Wavey Team"
   locale = "en_US"
   TitleCutting = false
