@@ -73,20 +73,16 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   twitter = "nopeJS"
 
 [[params.navlinks]]
+  name = "Posts"
+  url = "posts/"
+
+[[params.navlinks]]
   name = "Working"
   url = "how-it-works/"
 
 [[params.navlinks]]
   name = "Uses"
   url = "use-cases/"
-
-[[params.navlinks]]
-  name = "Comparisons"
-  url = "comparisons/"
-
-[[params.navlinks]]
-  name = "FAQ"
-  url = "faq/"
 
 [[params.navlinks]]
   name = "About"
