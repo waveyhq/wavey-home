@@ -244,22 +244,21 @@ strong {
     font-weight: normal;
 }
 
-.site-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45em;
-    vertical-align: baseline;
-}
-
 .site-brand-icon {
-    display: block;
-    width: 1.15em;
-    height: auto;
-    flex-shrink: 0;
+    height: 1.12em;
+    width: auto;
+    vertical-align: -0.28em;
+    margin-right: 0.2em;
 }
 
-.site-brand-text {
-    display: inline-block;
+html[data-theme="light"] .site-brand-icon {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) .site-brand-icon {
+        filter: invert(1);
+    }
 }
 
 .terminal-menu li {
