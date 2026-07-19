@@ -480,6 +480,8 @@ figure {
 .footer-status-link {
     font-size: 0.85em;
     justify-self: start;
+    min-height: 0;
+    transform: translateY(-1px);
 }
 
 .status-label {
@@ -585,10 +587,6 @@ figure {
     min-width: 0;
     overflow-wrap: anywhere;
     text-align: center;
-}
-
-.footer-status-link {
-    justify-self: start;
 }
 
 .footer-theme-toggle {
