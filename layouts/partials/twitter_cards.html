@@ -1,40 +1,10 @@
-{{- $twitterImage := "" -}}
-{{- $twitterImageAlt := "Wavey RF Sensing System" -}}
-{{- if .Params.image -}}
-  {{- $img := .Params.image -}}
-  {{- if (urls.Parse $img).Scheme -}}
-    {{- $twitterImage = $img -}}
-  {{- else -}}
-    {{- $pageImg := $.Resources.GetMatch $img -}}
-    {{- if $pageImg -}}
-      {{- $twitterImage = ($pageImg.Resize "1200x630 q82 webp").Permalink -}}
-    {{- else -}}
-      {{- $globalImg := resources.Get $img -}}
-      {{- if $globalImg -}}
-        {{- $twitterImage = ($globalImg.Resize "1200x630 q82 webp").Permalink -}}
-      {{- else -}}
-        {{- $twitterImage = absURL $img -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-  {{- with .Params.imageAlt -}}
-    {{- $twitterImageAlt = . -}}
-  {{- else -}}
-    {{- $twitterImageAlt = printf "%s | Wavey" $.Title -}}
-  {{- end -}}
-{{- else -}}
-  {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
-  {{- with $banner -}}
-    {{- $twitterImage = (.Resize "1200x630 q82 webp").Permalink -}}
-  {{- else -}}
-    {{- $twitterImage = absURL "images/wavey-meta/wavey-banner.png" -}}
-  {{- end -}}
-  {{- $twitterImageAlt = "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
-{{- end -}}
+{{- if ne .Kind "404" -}}
+{{- partial "social-banner.html" . -}}
+{{- $twitterImage := .Scratch.Get "socialImage" -}}
 <meta name="twitter:card" content="summary_large_image"/>
 {{- if $twitterImage }}
 <meta name="twitter:image" content="{{ $twitterImage }}">
-<meta name="twitter:image:alt" content="{{ $twitterImageAlt }}">
+<meta name="twitter:image:alt" content="{{ .Scratch.Get "socialImageAlt" }}">
 {{- end }}
 {{- $siteName := .Site.Params.siteName | default .Site.Title -}}
 {{- $title := cond .IsHome (.Title | default .Site.Title) (printf "%s | %s" .Title $siteName) -}}
@@ -46,4 +16,5 @@
 {{- with .Site.Params.social.twitter }}
 <meta name="twitter:site" content="@{{ . }}"/>
 <meta name="twitter:creator" content="@{{ . }}"/>
+{{- end }}
 {{- end }}

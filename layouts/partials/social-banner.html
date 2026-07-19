@@ -1,0 +1,13 @@
+{{- /* Shared wavey-banner social preview (1200x630 webp from assets). */ -}}
+{{- $image := "" -}}
+{{- $type := "image/png" -}}
+{{- $alt := "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
+{{- with resources.Get "images/wavey-meta/wavey-banner.png" -}}
+  {{- $image = (.Resize "1200x630 q82 webp").Permalink -}}
+  {{- $type = "image/webp" -}}
+{{- else -}}
+  {{- $image = absURL "images/wavey-meta/wavey-banner.png" -}}
+{{- end -}}
+{{- $.Scratch.Set "socialImage" $image -}}
+{{- $.Scratch.Set "socialImageType" $type -}}
+{{- $.Scratch.Set "socialImageAlt" $alt -}}

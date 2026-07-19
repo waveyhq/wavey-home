@@ -4,9 +4,6 @@
     {{ range .Pages }}
         {{ if and (not .Params.private) (ne .Kind "taxonomy") (ne .Kind "term") }}
         {{- $priority := .Sitemap.Priority -}}
-        {{- if and (or (eq .Kind "taxonomy") (eq .Kind "term")) (eq $priority 0.5) -}}
-            {{- $priority = 0.4 -}}
-        {{- end -}}
         <url>
             <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
             <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}

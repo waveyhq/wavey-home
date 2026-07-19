@@ -22,11 +22,19 @@
 {{- with .Site.Params.status }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- with .Site.Params.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 
+{{- $orgAlt := .Site.Params.siteAlternateNames | default (slice "Wavey RF Sensing" "Wavey WiFi Sensing") -}}
+
+{{- /* Social/schema banner (processed webp from assets) */ -}}
+{{- $bannerImg := absURL "images/wavey-meta/wavey-banner.png" -}}
+{{- with resources.Get "images/wavey-meta/wavey-banner.png" -}}
+  {{- $bannerImg = (.Resize "1200x630 q82 webp").Permalink -}}
+{{- end -}}
+
 {{- $org := dict
   "@type" "Organization"
   "@id" $orgID
   "name" "Wavey"
-  "alternateName" (slice "Wavey RF Sensing" "Wavey WiFi Sensing")
+  "alternateName" $orgAlt
   "url" $base
   "logo" (dict "@type" "ImageObject" "url" $logo)
   "image" $logo
@@ -52,6 +60,9 @@
   "inLanguage" "en-US"
   "publisher" (dict "@id" $orgID)
 -}}
+{{- with .Site.Params.siteAlternateNames }}
+  {{- $website = merge $website (dict "alternateName" .) }}
+{{- end }}
 
 {{- $software := dict
   "@type" (slice "SoftwareApplication" "SoftwareSourceCode")
@@ -74,13 +85,8 @@
 
 {{- $graph := slice $org $website $software -}}
 
-{{- /* Per-page image (absolute URL) */ -}}
-{{- $img := "" -}}
-{{- with .Params.image -}}
-  {{- if (urls.Parse .).Scheme -}}{{- $img = . -}}{{- else -}}{{- $img = absURL . -}}{{- end -}}
-{{- else -}}
-  {{- $img = absURL "images/wavey-meta/wavey-banner.png" -}}
-{{- end -}}
+{{- /* Per-page image — shared wavey-banner for all pages */ -}}
+{{- $img := $bannerImg -}}
 
 {{- $pageDesc := .Description | default .Summary | default $desc -}}
 {{- $iso := "2006-01-02T15:04:05-07:00" -}}
@@ -114,17 +120,6 @@
     "primaryImageOfPage" (dict "@type" "ImageObject" "url" $img)
   -}}
   {{- $graph = $graph | append $home -}}
-  {{- if gt (len $qa) 0 -}}
-    {{- $graph = $graph | append (dict
-      "@type" "FAQPage"
-      "@id" (printf "%s#faq" $base)
-      "url" $base
-      "name" .Title
-      "inLanguage" "en-US"
-      "isPartOf" (dict "@id" $siteID)
-      "mainEntity" $qa
-    ) -}}
-  {{- end -}}
 {{- else if ne .Kind "404" -}}
   {{- /* Decide the page schema type */ -}}
   {{- $pageType := .Params.schema_type -}}
@@ -204,18 +199,6 @@
     ) -}}
   {{- end -}}
 
-  {{- /* Pages that are not themselves a FAQPage get a separate FAQPage node */ -}}
-  {{- if and (ne $pageType "FAQPage") (gt (len $qa) 0) -}}
-    {{- $graph = $graph | append (dict
-      "@type" "FAQPage"
-      "@id" (printf "%s#faq" .Permalink)
-      "url" .Permalink
-      "name" .Title
-      "inLanguage" "en-US"
-      "isPartOf" (dict "@id" $siteID)
-      "mainEntity" $qa
-    ) -}}
-  {{- end -}}
 {{- end -}}
 
 <script type="application/ld+json">

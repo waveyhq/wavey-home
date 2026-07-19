@@ -1,3 +1,4 @@
+{{- if ne .Kind "404" -}}
 {{- $siteName := .Site.Params.siteName | default .Site.Title -}}
 {{- $title := cond .IsHome (.Title | default .Site.Title) (printf "%s | %s" .Title $siteName) -}}
 <meta property="og:title" content="{{ $title }}" />
@@ -7,55 +8,19 @@
 {{- end }}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
-{{- $siteName := .Site.Params.siteName | default .Site.Title }}
 {{- with $siteName }}
 <meta property="og:site_name" content="{{ . }}" />
 {{- end }}
 <meta property="og:locale" content="{{ .Site.Params.locale | default "en_US" }}" />
 
-{{- $ogImage := "" -}}
-{{- $ogImageType := "image/png" -}}
-{{- $ogImageAlt := "Wavey RF Sensing System" -}}
-{{- if .Params.image -}}
-  {{- $img := .Params.image -}}
-  {{- if (urls.Parse $img).Scheme -}}
-    {{- $ogImage = $img -}}
-  {{- else -}}
-    {{- $pageImg := $.Resources.GetMatch $img -}}
-    {{- if $pageImg -}}
-      {{- $ogImage = ($pageImg.Resize "1200x630 q82 webp").Permalink -}}
-      {{- $ogImageType = "image/webp" -}}
-    {{- else -}}
-      {{- $globalImg := resources.Get $img -}}
-      {{- if $globalImg -}}
-        {{- $ogImage = ($globalImg.Resize "1200x630 q82 webp").Permalink -}}
-        {{- $ogImageType = "image/webp" -}}
-      {{- else -}}
-        {{- $ogImage = absURL $img -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-  {{- with .Params.imageAlt -}}
-    {{- $ogImageAlt = . -}}
-  {{- else -}}
-    {{- $ogImageAlt = printf "%s | Wavey" $.Title -}}
-  {{- end -}}
-{{- else -}}
-  {{- $banner := resources.Get "images/wavey-meta/wavey-banner.png" -}}
-  {{- with $banner -}}
-    {{- $ogImage = (.Resize "1200x630 q82 webp").Permalink -}}
-    {{- $ogImageType = "image/webp" -}}
-  {{- else -}}
-    {{- $ogImage = absURL "images/wavey-meta/wavey-banner.png" -}}
-  {{- end -}}
-  {{- $ogImageAlt = "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
-{{- end -}}
+{{- partial "social-banner.html" . -}}
+{{- $ogImage := .Scratch.Get "socialImage" -}}
 {{- if $ogImage }}
 <meta property="og:image" content="{{ $ogImage }}">
-<meta property="og:image:type" content="{{ $ogImageType }}">
+<meta property="og:image:type" content="{{ .Scratch.Get "socialImageType" }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{{ $ogImageAlt }}">
+<meta property="og:image:alt" content="{{ .Scratch.Get "socialImageAlt" }}">
 {{- end }}
 
 {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
@@ -77,10 +42,10 @@
 {{- with $.Site.Params.author }}
 <meta property="article:author" content="{{ . }}" />
 {{- end }}
-{{- with $.Site.BaseURL }}
+{{- with $.Site.Params.twitter }}
 <meta property="article:publisher" content="{{ . }}" />
 {{- end }}
-{{- end }}{{/* .IsPage */}}
+{{- end }}
 
 {{- with .Params.locale }}
 <meta property="og:locale" content="{{ . }}" />
@@ -88,3 +53,4 @@
 {{- with .Params.videos }}{{ range . }}
 <meta property="og:video" content="{{ . | absURL }}" />
 {{- end }}{{ end }}
+{{- end }}

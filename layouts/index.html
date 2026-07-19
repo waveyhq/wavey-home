@@ -12,6 +12,15 @@
     <p>
       The output is <strong>occupancy, motion, and presence</strong> inference for a space&mdash;without turning the room into a camera network or asking people to carry a device.
     </p>
+    <p>
+      <a href="{{ "getting-started/" | relURL }}">Get started</a> &middot;
+      <a href="{{ "glossary/" | relURL }}">Glossary</a> &middot;
+      <a href="{{ "faq/" | relURL }}">FAQ</a> &middot;
+      <a href="{{ "about/" | relURL }}">About</a> &middot;
+      <a href="{{ "contact/" | relURL }}">Contact</a> &middot;
+      <a href="{{ .Site.Params.console }}">Console</a> &middot;
+      <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+    </p>
   </section>
   <hr>
 
@@ -47,23 +56,7 @@
   </section>
   <hr>
 
-  <section class="landing-section">
-    <h2>Built for developers and self-hosters</h2>
-    <p>
-      A typical deployment has three layers: <strong>ESP32 sensing nodes</strong> capture CSI from WiFi;
-      a host runs the <strong>Python pipeline</strong> (ingest, clean, featurize, infer against a baseline);
-      results stream to the <a href="{{ .Site.Params.console }}" target="_blank" rel="noopener">Wavey Console</a> for live visualization and can feed automations or analytics.
-    </p>
-    <p>
-      <a href="{{ "getting-started/" | relURL }}">Get started</a> &middot;
-      <a href="{{ "glossary/" | relURL }}">Glossary</a> &middot;
-      <a href="{{ "faq/" | relURL }}">FAQ</a> &middot;
-      <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
-    </p>
-  </section>
-
   {{ with .Params.faq }}
-  <hr>
   <section class="landing-section">
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
