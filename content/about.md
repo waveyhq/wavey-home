@@ -1,12 +1,12 @@
 ---
 title: "About Wavey"
 date: 2026-06-13T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 schema_type: "TechArticle"
-description: "Wavey is an open-source WiFi CSI sensing project making spatial awareness private, affordable, and device-free using ESP32 Channel State Information instead of cameras."
+description: "Wavey is an open-source WiFi CSI sensing project — subcarrier physics, signal processing pipelines, and deployable detection on commodity ESP32 hardware."
 keywords:
   - about Wavey
   - WiFi CSI sensing
@@ -41,16 +41,17 @@ detection, motion tracking, and behavioral inference while keeping raw signals o
 
 CSI describes how a WiFi signal propagates across many OFDM subcarriers - far richer than a single RSSI
 value. A moving body perturbs those radio paths in consistent, measurable ways, and Wavey converts those
-perturbations into spatial and motion information. If you're new to the field, start with
-[how Wavey works](/how-it-works/) or the [glossary](/glossary/).
+perturbations into spatial and motion information. Start with [how it works](/how-it-works/), the
+[sensing pipeline](/sensing-pipeline/), or the [glossary](/glossary/).
 
 ## Where Wavey fits
 
-WiFi sensing has moved from research labs to real products and standards. Academic work such as
-Carnegie Mellon's [DensePose-from-WiFi](https://arxiv.org/abs/2301.00250) showed that WiFi signals can
-recover detailed human pose, and the [IEEE 802.11bf](https://en.wikipedia.org/wiki/IEEE_802.11bf) amendment
-is standardizing WiFi sensing itself. Wavey lives in the open-source, ESP32-CSI corner of this space -
-practical, hackable sensing you can run yourself.
+WiFi sensing has moved from research labs to standards and commodity hardware. IEEE 802.11bf is
+standardizing native WiFi sensing APIs; most deployed APs already emit beamforming feedback that can
+reconstruct multipath without CSI firmware hacks. ESP32 nodes make CSI capture accessible at scale. Wavey
+sits in the open-source, deployable corner — occupancy, motion, and presence on hardware you control, with
+honest scope boundaries (no pose, no identity). See the [detection ladder](/detection/) for what is
+feasible today vs research frontier.
 
 ## Get involved
 

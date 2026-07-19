@@ -2,37 +2,34 @@
 title: "WiFi CSI Sensing Use Cases"
 linkTitle: "Use cases"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
-description: "Real-world use cases for Wavey's WiFi CSI sensing - device-free occupancy detection, motion and activity inference, presence and breathing sensing, elder-care, security, smart-home automation, and occupancy analytics."
+description: "WiFi CSI sensing applications — occupancy, HAR, micro-presence, elder-care, security, automation, and analytics. Each page covers one technical angle."
 keywords:
   - WiFi sensing use cases
   - device-free occupancy detection
-  - WiFi motion detection
-  - presence detection without camera
-  - occupancy analytics
+  - WiFi human activity recognition
 ---
 
-Wavey turns ordinary WiFi into a sensor, which opens up a surprising range of applications - all
-**device-free** and **camera-free**. Here are the main ways people use **WiFi CSI sensing** with Wavey.
-Each starts from the same foundation: a moving body changes WiFi signals, and Wavey reads those changes.
-New here? Start with [how it works](/how-it-works/).
+Each use case below covers a distinct technical problem — not a restatement of how CSI works. Start with the
+[detection ladder](/detection/) to see which tasks are feasible, then pick the scenario that matches your
+deployment.
 
 ## Occupancy and presence
 
-- [Device-free occupancy detection](/use-cases/occupancy-detection/) - answer "is anyone here?" without cameras or wearables
-- [Presence & breathing detection](/use-cases/presence-detection/) - detect a still person via subtle CSI shifts
-- [Occupancy analytics](/use-cases/occupancy-analytics/) - privacy-first footfall and space-utilization metrics
+- [Occupancy detection](/use-cases/occupancy-detection/) — change-point detection on empty-room baselines
+- [Presence & breathing](/use-cases/presence-detection/) — micro-Doppler and respiration-band sensing
+- [Occupancy analytics](/use-cases/occupancy-analytics/) — temporal aggregation and utilization metrics
 
 ## Motion, safety, and automation
 
-- [Motion & activity detection](/use-cases/motion-activity-detection/) - WiFi motion sensing without a camera
-- [Elder-care & fall-aware monitoring](/use-cases/elder-care-monitoring/) - ambient awareness without video
-- [Security & intrusion detection](/use-cases/security-intrusion-detection/) - detect unexpected movement
-- [Smart-home automation](/use-cases/smart-home-automation/) - presence-aware lighting, HVAC, and scenes
+- [Motion & activity](/use-cases/motion-activity-detection/) — HAR taxonomy and spectrogram classifiers
+- [Elder-care monitoring](/use-cases/elder-care-monitoring/) — fall kinematics and inactivity patterns
+- [Security & intrusion](/use-cases/security-intrusion-detection/) — NLOS zone-level motion detection
+- [Smart-home automation](/use-cases/smart-home-automation/) — presence-hold event semantics
 
-## Compare the alternatives
+## Compare alternatives
 
-Not sure WiFi sensing fits your scenario? See [how WiFi CSI compares to cameras, radar, PIR, and wearables](/comparisons/).
+[WiFi CSI vs cameras, radar, PIR, and wearables](/comparisons/) — technical tradeoffs by sensing mechanism.

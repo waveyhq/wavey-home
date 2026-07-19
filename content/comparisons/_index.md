@@ -2,33 +2,28 @@
 title: "WiFi CSI Sensing vs Cameras, Radar & Wearables"
 linkTitle: "Comparisons"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
-description: "How WiFi CSI sensing compares to cameras, mmWave radar, PIR motion sensors, and wearables - on privacy, cost, coverage, and accuracy."
+description: "Technical comparison of WiFi CSI sensing vs cameras, mmWave radar, PIR, and wearables — sensing mechanism, latency, coverage, and deployment cost."
 keywords:
-  - WiFi sensing vs cameras
-  - WiFi sensing vs radar
-  - WiFi sensing vs PIR
+  - WiFi sensing comparison
   - occupancy sensor comparison
-  - privacy-first sensing
+  - WiFi sensing vs cameras
+  - WiFi sensing vs PIR
 ---
 
-How does **WiFi CSI sensing** stack up against the other ways to detect people? The short version: Wavey
-trades a bit of precision for big wins in **privacy, cost, and ease of deployment**. Pick a head-to-head
-comparison below.
+How WiFi CSI compares to other sensing modalities on **mechanism, coverage, and deployment cost** — not
+marketing checklists. For what CSI can detect, see the [detection ladder](/detection/).
 
-## Privacy and coverage
+## By sensing mechanism
 
-- [WiFi sensing vs cameras](/comparisons/wifi-sensing-vs-cameras/) - occupancy and motion without images
-- [WiFi sensing vs wearables](/comparisons/wifi-sensing-vs-wearables/) - truly device-free detection
+- [WiFi vs cameras](/comparisons/wifi-sensing-vs-cameras/) — visual vs radio channel measurement
+- [WiFi vs mmWave radar](/comparisons/wifi-sensing-vs-mmwave-radar/) — commodity WiFi vs dedicated RF front-end
+- [WiFi vs PIR](/comparisons/wifi-sensing-vs-pir/) — infrared motion cone vs whole-room CSI
+- [WiFi vs wearables](/comparisons/wifi-sensing-vs-wearables/) — device-free vs opt-in tracking
 
-## Hardware alternatives
+## Background
 
-- [WiFi sensing vs mmWave radar](/comparisons/wifi-sensing-vs-mmwave-radar/) - cost, coverage, and deployment
-- [WiFi sensing vs PIR](/comparisons/wifi-sensing-vs-pir/) - whole-room coverage vs line-of-sight motion
-
-## Where to go next
-
-New to CSI? Read [how it works](/how-it-works/), then explore [use cases](/use-cases/) or [get started](/getting-started/).
+[How it works](/how-it-works/) · [Sensing pipeline](/sensing-pipeline/) · [Use cases](/use-cases/)

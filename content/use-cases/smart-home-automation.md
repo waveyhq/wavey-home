@@ -2,48 +2,69 @@
 title: "Smart-Home Automation with WiFi Presence Sensing"
 linkTitle: "Smart-home automation"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 60
 schema_type: "TechArticle"
-description: "Trigger lights, climate, and scenes from real presence - not motion timeouts - using device-free WiFi CSI sensing. How Wavey powers smart-home automation."
+description: "WiFi presence sensing for home automation — presence-hold vs motion-pulse events, debouncing, hysteresis, and why occupancy beats PIR for HVAC and lighting scenes."
 keywords:
-  - WiFi presence sensing smart home
-  - smart home occupancy sensor
+  - WiFi smart home automation
   - presence based automation
-  - device-free smart home
-  - Home Assistant WiFi sensing
-faq:
-  - question: "Why is WiFi presence sensing better for automation than motion sensors?"
-    answer: "Motion sensors turn lights off when you stop moving, so you end up waving at the ceiling. WiFi CSI sensing detects that you are still present - even sitting still - so automations stay on while the room is genuinely occupied and turn off when it is truly empty."
-  - question: "Can Wavey integrate with my smart-home setup?"
-    answer: "Wavey is open source and emits presence and motion events, which makes it well suited to feed automation platforms and custom integrations. Check the GitHub project for current integration options."
+  - occupancy sensor smart home
+  - WiFi presence sensing
 ---
 
-The most annoying thing in a "smart" home is lights that switch off while you're sitting still. The fix is
-**presence**, not just motion - and that's exactly what **WiFi CSI sensing** provides, device-free.
+The most common smart-home failure is lights switching off while you are sitting still. The root cause is
+using **motion pulses** where **presence holds** are needed. WiFi CSI provides the hold signal.
 
-## Automate on real presence
+## Presence-hold vs motion-pulse
 
-Wavey detects whether a room is genuinely [occupied](/use-cases/occupancy-detection/) -
-including a [still, breathing person](/use-cases/presence-detection/) - and emits events you can wire into
-automations:
+| Event type | Semantics | Good for |
+|------------|-----------|----------|
+| Motion pulse | Something moved, now | Triggering on entry, security alerts |
+| Presence hold | Someone is here, still | Keeping lights on, HVAC running |
+| Absence clear | Space is empty | Shutting down scenes, energy savings |
 
-- Lights that stay on while you're present and off when the room is empty
-- Climate and HVAC that follow real occupancy for energy savings
-- Scenes that respond to [movement and activity](/use-cases/motion-activity-detection/)
-- Whole-home occupancy without a sensor in every fixture
+PIR emits motion pulses. When motion stops, the pulse ends and the automation assumes empty. CSI occupancy
+and [presence detection](/use-cases/presence-detection/) emit holds — the space remains "occupied" while a
+still person breathes in it.
 
-## Why device-free matters at home
+Automation platforms should subscribe to hold/clear events, not motion edges, for anything that should
+persist while a person is present.
 
-No wearables, no phone dependency, and no [cameras](/comparisons/wifi-sensing-vs-cameras/) in living spaces.
-A couple of inexpensive ESP32 nodes can cover a room, which is far cheaper than
-[mmWave radar](/comparisons/wifi-sensing-vs-mmwave-radar/) in every zone. Because Wavey is open source, you
-can adapt the events to your platform of choice.
+## Debouncing and hysteresis
 
-## Get started
+Raw CSI flickers at detection boundaries — a person near the edge of coverage, environmental noise, or
+multipath fading can toggle occupancy rapidly. Production automations need:
 
-See [how Wavey works](/how-it-works/), follow [getting started](/getting-started/), and join the build on
-[Discord](https://discord.gg/sxh9r9UTtW) or [GitHub](https://github.com/waveyhq).
+- **Entry debounce** — require N consecutive occupied samples before declaring presence (prevents false
+  triggers from brief noise).
+- **Exit hysteresis** — require M consecutive empty samples before clearing (prevents lights-off while
+  you pause between keystrokes).
+- **Minimum hold time** — once occupied, maintain hold for at least T seconds regardless of brief dips.
+
+These are application-layer concerns on top of Wavey's raw events. The [sensing pipeline](/sensing-pipeline/)
+produces the signal; your automation logic defines the UX.
+
+## HVAC and scene design
+
+Occupancy-aware HVAC needs a sustained signal, not a motion trigger. A home office occupied for three hours
+of focused work should not cycle ventilation off because the occupant stopped typing.
+
+Wire occupancy holds to climate zones. Use motion pulses for entry scenes ("arrived home" triggers). Layer
+[activity detection](/use-cases/motion-activity-detection/) only when you need behavior-responsive scenes,
+not for basic presence.
+
+## Integration surface
+
+Wavey emits structured events — occupancy state, motion intensity, presence confidence — suitable for
+Home Assistant, custom MQTT bridges, or direct API integration. The open-source stack on
+[GitHub](https://github.com/waveyhq) documents current event schemas.
+
+## Further reading
+
+- [Occupancy detection](/use-cases/occupancy-detection/) — the hold signal source
+- [Getting started](/getting-started/) — deployment architecture
+- [Comparisons](/comparisons/wifi-sensing-vs-pir/) — why PIR fails for presence holds

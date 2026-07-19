@@ -1,9 +1,11 @@
 ---
 title: "Posts"
 linkTitle: "Posts"
-description: "Articles on WiFi CSI sensing fundamentals, ESP32 hardware, and device-free occupancy and motion use cases from the Wavey project."
+description: "Technical essays on WiFi CSI sensing — channel structure, commodity hardware limits, activity classifiers, and baseline engineering from the Wavey project."
 sitemap:
   priority: 0.7
 ---
 
-Short reads on **WiFi CSI sensing** topics — fundamentals, hardware, and practical use cases. For the full guides, start with [how it works](/how-it-works/) and [getting started](/getting-started/).
+Technical deep-dives on WiFi CSI sensing — each post covers one angle the pillar pages do not. For the
+structured guides, start with [how it works](/how-it-works/), the [sensing pipeline](/sensing-pipeline/),
+and the [detection ladder](/detection/).

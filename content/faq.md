@@ -2,55 +2,53 @@
 title: "WiFi CSI Sensing FAQ"
 linkTitle: "FAQ"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.9
 schema_type: "FAQPage"
-description: "Frequently asked questions about WiFi CSI sensing and Wavey - how it works, privacy, hardware, accuracy, through-wall sensing, and how it differs from cameras and WiFi tracking."
+description: "Practical questions about WiFi CSI sensing and Wavey — hardware, privacy, accuracy, through-wall sensing, and how to get started."
 keywords:
   - WiFi CSI sensing FAQ
   - WiFi sensing questions
-  - is WiFi sensing private
-  - WiFi sensing through walls
   - ESP32 CSI
 faq:
   - question: "What is WiFi CSI sensing?"
-    answer: "WiFi CSI (Channel State Information) sensing measures how a WiFi signal travels between a transmitter and a receiver across many OFDM subcarriers. When a person moves through the space, their body disturbs those signals in measurable ways, and those changes can be turned into occupancy, motion, and activity information - all without a camera or a device on the person."
+    answer: "Measuring how WiFi signals travel across OFDM subcarriers and inferring environmental changes — occupancy, motion, presence — from those measurements. See how it works for the physics."
   - question: "What is Wavey?"
-    answer: "Wavey is an open-source RF sensing system that uses WiFi CSI on low-cost ESP32 nodes to detect occupancy, motion, and presence. It pairs ESP32-CSI sensing nodes with a Python analysis pipeline and a live console at console.wavey.nopejs.me."
+    answer: "An open-source WiFi CSI sensing system: ESP32 nodes capture CSI, a Python pipeline processes it, and the Console visualizes results. Code at github.com/waveyhq."
   - question: "Can WiFi really detect people without a camera?"
-    answer: "Yes. The human body reflects and absorbs WiFi, so a moving person changes the signal measurably - no camera and nothing carried by the person required. Carnegie Mellon's DensePose-from-WiFi research even reconstructed human body pose from WiFi signals alone."
+    answer: "Yes — bodies perturb multipath, which shifts CSI amplitude and phase. What you can detect depends on the task; see the detection ladder for feasibility by task type."
   - question: "Does WiFi sensing work through walls?"
-    answer: "Partially. WiFi passes through many interior walls, so CSI sensing can detect motion and presence in non-line-of-sight conditions better than cameras. Accuracy drops with thicker or denser materials, and detailed through-wall reconstruction remains a research topic."
-  - question: "Is WiFi CSI sensing private? Does it record images?"
-    answer: "It is private by design. Wavey never captures images - it reads the radio environment, not your appearance. Industry guidance rates camera-based sensing as the highest privacy risk and non-visual sensing as far lower, which is exactly where WiFi CSI sits."
+    answer: "Partially. Interior drywall allows zone-level motion detection in adjacent rooms. Concrete and metal block most signal. Precise through-wall mapping is not realistic on commodity hardware."
+  - question: "Is WiFi CSI sensing private?"
+    answer: "Wavey captures no images and no device identifiers. It reads radio channel measurements, not appearance or MAC addresses."
   - question: "What is the difference between CSI and RSSI?"
-    answer: "RSSI is a single signal-strength number. CSI is much richer: it captures amplitude and phase across many individual subcarriers, so it can detect subtle changes - like breathing - that RSSI cannot."
-  - question: "What hardware do I need to run Wavey?"
-    answer: "Low-cost ESP32 modules, which expose WiFi CSI across the ESP32 family (ESP32, S2, S3, C3, C5, C6 and more), plus a host running Wavey's Python pipeline. You can start with a single sensing node and add more for coverage."
-  - question: "Does the person being detected need to carry a device?"
-    answer: "No. Wavey is device-free. Unlike wearables or phone/MAC-address tracking, it senses the body's effect on WiFi directly, so it detects everyone in a space - not just people carrying a specific device."
+    answer: "RSSI is one power number. CSI is amplitude and phase per subcarrier — dozens of measurements per packet. See the glossary."
+  - question: "What hardware do I need?"
+    answer: "CSI-capable ESP32 modules plus a host for the Python pipeline. Any ESP32 family chip works. Details in getting started and the GitHub repo."
+  - question: "Does the person need to carry a device?"
+    answer: "No. Wavey is device-free — it senses the body's effect on WiFi, not phones or wearables."
   - question: "How accurate is WiFi CSI sensing?"
-    answer: "Occupancy and motion are robust and reliable; presence and breathing are achievable with good setup; precise multi-person tracking, pose, and identity are harder and improve with research. Wavey is designed to lead with the dependable signals first."
+    answer: "Occupancy and motion are robust with good node placement. Presence and HAR need preprocessing and often per-site tuning. Pose, identity, and headcount are research-frontier tasks."
   - question: "Can Wavey tell multiple people apart?"
-    answer: "Not reliably. Separating several people in one space is still an active research area. Wavey leads with occupancy and coarse motion, not exact head counts."
+    answer: "Not reliably. Multipath superposition from multiple bodies is ambiguous without dense spatial sampling."
   - question: "How does Wavey handle multiple floors?"
-    answer: "CSI is environment-specific: each floor or zone needs its own nodes and baseline. WiFi attenuates more through floors than through interior walls, so treat each level as separate coverage rather than expecting one deployment to model a whole building. Multiple nodes on a floor can extend reach within that space."
+    answer: "Each floor needs its own nodes and baseline. WiFi attenuates heavily through concrete floors."
   - question: "What about busy or crowded spaces?"
-    answer: "More people and motion mean more multipath change - not always a clear on/off signal. Occupancy and coarse activity remain the strongest use cases; precise counting and per-person separation get harder. Good node placement, enough nodes, and a baseline of normal activity help more than expecting camera-like precision."
-  - question: "Can WiFi sensing measure breathing or vital signs?"
-    answer: "WiFi CSI is sensitive enough to detect the chest motion of breathing, and research has demonstrated respiration-rate estimation from CSI. Reliability depends on range, environment, and signal quality, and Wavey treats this as awareness rather than a medical device."
-  - question: "How is this different from WiFi MAC-address tracking?"
-    answer: "MAC-based tracking follows device identifiers, which can be personal data and tends to miscount (one person with several devices, or many people sharing one). Wavey reads CSI - the body's effect on the signal - so it produces anonymous occupancy without tracking phones or individuals."
-  - question: "Is Wavey open source, and where is the code?"
-    answer: "Yes. Wavey is open source and developed in the open at github.com/waveyhq. You can follow progress there, join the community on Discord, and reach the team at mail@wavey.nopejs.me."
+    answer: "Occupancy and coarse motion remain strong. Per-person separation and exact counts degrade. See the detection ladder."
+  - question: "Can WiFi sensing measure breathing?"
+    answer: "CSI can detect periodic chest motion after phase sanitization, but reliability depends on range and environment. Awareness, not medical vitals."
+  - question: "How is this different from WiFi MAC tracking?"
+    answer: "MAC tracking follows device identifiers. Wavey reads CSI — how bodies disturb the signal — producing anonymous occupancy without tracking phones."
+  - question: "Is Wavey open source?"
+    answer: "Yes. github.com/waveyhq, Discord community, mail@wavey.nopejs.me."
   - question: "What is IEEE 802.11bf?"
-    answer: "IEEE 802.11bf is the amendment to the WiFi standard dedicated to WiFi sensing. Its existence signals that sensing is becoming a first-class, standardized capability of WiFi itself - the same phenomenon Wavey builds on with CSI."
-  - question: "How do I get started with Wavey?"
-    answer: "Start with the how-it-works explainer, then the getting-started guide for the architecture and hardware approach, and follow or contribute on GitHub. The Wavey Console lets you visualize live CSI."
+    answer: "The WiFi standard amendment for native sensing. Signals that WiFi sensing is becoming a first-class capability."
+  - question: "How do I get started?"
+    answer: "Read how it works, the sensing pipeline, and getting started. Follow the GitHub repo for current setup steps."
 ---
 
-Common questions about **WiFi CSI sensing** and **Wavey** - what it is, whether it's private, what hardware
-it needs, and how it compares to cameras and WiFi tracking. New to the topic? The
-[how-it-works explainer](/how-it-works/), [glossary](/glossary/), and [blog](/posts/) are good next reads.
+Practical questions about **WiFi CSI sensing** and **Wavey**. For technical depth, see
+[how it works](/how-it-works/), the [sensing pipeline](/sensing-pipeline/), the
+[detection ladder](/detection/), and [technical deep-dives](/posts/).

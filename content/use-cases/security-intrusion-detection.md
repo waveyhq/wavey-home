@@ -2,51 +2,74 @@
 title: "WiFi Sensing for Security & Intrusion Detection"
 linkTitle: "Security & intrusion detection"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 50
 schema_type: "TechArticle"
-description: "Detect intruders by the way they disturb WiFi - device-free, camera-free security sensing that works in the dark and around corners. How Wavey enables it."
+description: "Zone-level intrusion detection with WiFi CSI — NLOS motion through drywall, darkness-invariant sensing, device-free vs MAC tracking, and what you learn vs what you cannot."
 keywords:
   - WiFi intrusion detection
   - WiFi security sensing
-  - motion detection in the dark
+  - through-wall motion detection
   - device-free security
-  - WiFi burglar alarm
-faq:
-  - question: "Can WiFi sensing work as a security sensor in the dark?"
-    answer: "Yes. WiFi sensing does not rely on light, so it detects motion in complete darkness and around obstacles where cameras and PIR struggle. An intruder disturbs the WiFi field whether the lights are on or off."
-  - question: "Can someone defeat it by not carrying a phone?"
-    answer: "WiFi CSI sensing is device-free, so it does not depend on the intruder carrying anything. It detects the body's effect on the signal itself, unlike systems that only track phones or device MAC addresses."
 ---
 
-A burglar won't carry a tracker for you - which is exactly why **device-free** sensing is valuable for
-security. **WiFi CSI sensing** detects an intruder by how their body disturbs the radio field, with no
-camera, no light, and no cooperation required.
+Security sensing needs to work when lights are off, cameras are blind, and the intruder carries nothing. WiFi
+CSI detects bodies by how they disturb the radio field — device-free, darkness-invariant, and effective
+through many interior walls.
 
-## Why WiFi sensing suits security
+## NLOS motion through building materials
 
-- **Works in the dark.** No dependence on lighting, unlike cameras.
-- **Sees around corners.** WiFi penetrates many interior walls, covering non-line-of-sight areas.
-- **Device-free.** Detects the person, not their phone - so it can't be dodged by leaving a device behind.
-- **No images.** Continuous monitoring without the privacy baggage of cameras.
+WiFi at 2.4 and 5 GHz penetrates drywall, plaster, and wooden doors. An intruder moving in an adjacent
+room perturbs multipath paths that traverse the wall — amplitude shifts propagate to the receiver even
+without line of sight.
 
-## How Wavey approaches it
+This is zone-level detection: "motion occurred in this area," not "person at coordinates (x, y)." Concrete,
+brick, and metal-shielded walls attenuate heavily; interior drywall partitions are the practical case.
 
-Wavey baselines the protected space and watches for [motion](/use-cases/motion-activity-detection/) and
-[presence](/use-cases/presence-detection/) that shouldn't be there. Because it reads
-[CSI](/glossary/) rather than pixels, it complements existing alarms as a privacy-respecting layer that
-keeps working at night. See [how it works](/how-it-works/) for the detection pipeline.
+The [detection ladder](/detection/) places through-wall localization at rung 10 — partial motion detection
+yes, precise reconstruction no.
 
-## Sensible limitations
+## Darkness and obstacle invariance
 
-WiFi sensing tells you *that* something is moving in a space, not *who* it is. For most security use cases
-that's the point - but it means WiFi sensing is best paired with other measures for verification rather
-than used for identification.
+CSI does not depend on ambient light. WiVi (CVPR Workshop 2019) demonstrated this quantitatively: a vision
+classifier dropped from 95% to 46.67% accuracy with lights off, while a WiFi CSI classifier held at 95.83%.
+Their system disables the vision module when brightness falls below threshold and falls back to WiFi-only —
+decision-level fusion, not feature fusion, so one modality failing does not corrupt the other.
 
-## Get started
+A PIR sensor in a dark corner may miss an intruder crawling below its cone. A camera needs illumination or
+infrared supplementation. WiFi sensing reads the same signal at midnight and noon.
 
-Read [how Wavey works](/how-it-works/), then [get started](/getting-started/) or explore the
-[GitHub project](https://github.com/waveyhq).
+Coverage is whole-room from a node pair, not a single cone. Obstacles that block line of sight to a camera
+may still allow radio paths to reach the receiver.
+
+## Device-free vs MAC tracking
+
+MAC-address security tracks phones and laptops — useless when the intruder carries nothing, or when you want
+to detect any body regardless of device ownership. CSI sensing detects the physical perturbation of a human
+body on the channel itself.
+
+This also means CSI cannot be defeated by leaving a phone behind. The body is the signal.
+
+## What you learn and what you do not
+
+| Signal | Available | Not available |
+|--------|-----------|---------------|
+| Motion in a zone | Yes | — |
+| Approximate timing | Yes | — |
+| Identity | — | No (research: 91% gait ID among 20 enrolled subjects; not Wavey scope) |
+| Appearance | — | No |
+| Precise position | — | No (without dense node grid) |
+| Through concrete walls | — | No |
+
+Wavey baselines the protected space during known-empty periods and flags [motion](/use-cases/motion-activity-detection/)
+and [presence](/use-cases/presence-detection/) that violate the baseline. Pair with conventional alarms for
+verification — CSI tells you *something moved*, not *who*.
+
+## Further reading
+
+- [Motion & activity detection](/use-cases/motion-activity-detection/) — motion event semantics
+- [Detection ladder](/detection/) — through-wall feasibility
+- [Getting started](/getting-started/)

@@ -2,88 +2,125 @@
 title: "WiFi Sensing Glossary"
 linkTitle: "Glossary"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 schema_type: "TechArticle"
-description: "Plain-English definitions of WiFi sensing terms - CSI, RSSI, OFDM, subcarriers, device-free sensing, multipath, ESP32-CSI, IEEE 802.11bf, and more."
+description: "Technical definitions for WiFi CSI sensing — OFDM subcarriers, multipath, micro-Doppler, phase sanitization, spectrograms, domain shift, HAR, and more."
 keywords:
   - WiFi sensing glossary
   - Channel State Information definition
   - CSI vs RSSI
-  - device-free sensing definition
-  - ESP32 CSI
-  - IEEE 802.11bf
+  - phase sanitization
+  - human activity recognition WiFi
 ---
 
-A plain-English glossary of the **WiFi sensing** terms used across this site. For how these fit together,
-read [how Wavey works](/how-it-works/).
+Definitions for terms used across the Wavey documentation. For how they connect, start with
+[how it works](/how-it-works/), the [sensing pipeline](/sensing-pipeline/), and the
+[detection ladder](/detection/).
 
 ## Channel State Information (CSI)
 
-A fine-grained measurement of how a WiFi signal travels from transmitter to receiver - its **amplitude and
-phase across many OFDM subcarriers**. CSI is far richer than RSSI and is the core signal Wavey uses for
-sensing. Because it's sensitive to tiny changes, CSI can pick up motion as small as breathing.
+A per-subcarrier measurement of how a WiFi signal traveled from transmitter to receiver — amplitude and
+phase at each OFDM frequency slice. The core sensing signal. See [how it works](/how-it-works/).
 
 ## RSSI (Received Signal Strength Indicator)
 
-A single number describing overall received signal strength. Useful for "how strong is the signal?" but too
-coarse for detailed sensing - it collapses the whole channel into one value, unlike [CSI](/glossary/).
+A single scalar: total received power. Too coarse for micro-motion or activity recognition. CSI preserves
+the per-subcarrier detail RSSI discards.
 
-## OFDM (Orthogonal Frequency-Division Multiplexing)
+## OFDM subcarrier
 
-The modulation scheme modern WiFi uses, which splits a channel into many narrow frequency slices called
-**subcarriers**. CSI is measured per subcarrier, which is what gives it such rich detail.
-
-## Subcarrier
-
-One of the many narrow frequency components of an OFDM WiFi channel. Measuring amplitude and phase across
-dozens of subcarriers is what lets CSI sense subtle environmental changes.
-
-## Device-free sensing
-
-Sensing in which the person being detected carries **no device** - no phone, tag, or wearable. Wavey is
-device-free: it reads the body's effect on WiFi directly. Contrast with
-[wearables and phone tracking](/comparisons/wifi-sensing-vs-wearables/).
-
-## Passive sensing
-
-Sensing that uses signals already present in the environment rather than emitting a special probe. WiFi CSI
-sensing is passive in the sense that it leverages ordinary WiFi traffic to perceive a space.
+One narrow frequency component of an OFDM WiFi channel. CSI is measured independently at each subcarrier,
+giving dozens of parallel channel measurements per packet.
 
 ## Multipath
 
-The fact that a radio signal reaches the receiver via many paths at once - direct and reflected. People and
-objects change these paths, and those changes are exactly what CSI captures.
+Radio signals arrive via multiple paths (direct, reflected, scattered). The received channel is a
+superposition of these paths. Bodies add and modify paths, changing CSI.
 
-## Baseline
+## Micro-Doppler
 
-A learned reference of what a space's CSI looks like when empty. Wavey compares live signals against the
-baseline to decide what changed - the foundation of [occupancy detection](/use-cases/occupancy-detection/).
+Small periodic motion (breathing, heartbeat) that modulates CSI phase at low frequencies (0.1–0.5 Hz for
+respiration). Far weaker than macro-motion signatures.
+
+## Phase sanitization
+
+Preprocessing that removes hardware-induced phase artifacts (CFO, SFO, per-antenna offsets) before inference.
+Mandatory for micro-motion detection. See the [sensing pipeline](/sensing-pipeline/).
+
+## Spectrogram
+
+A time-frequency representation — typically STFT of CSI amplitude or phase over a sliding window. The
+standard input representation for deep learning activity classifiers.
+
+## Baseline fingerprint
+
+A statistical model of CSI in an empty room — mean amplitude profile, variance envelope, phase reference.
+Live CSI compared against the baseline powers occupancy detection.
+
+## Domain shift
+
+When a model or threshold trained in one environment fails in another because multipath fingerprints differ.
+Cross-site generalization is a core engineering challenge. See
+[baselines and generalization](/posts/device-free-occupancy-sensing-explained/).
+
+## HAR (Human Activity Recognition)
+
+Classifying what a person is doing (walk, sit, stand, gesture) from CSI patterns, typically via spectrogram
+classifiers. Harder than binary occupancy; needs labeled data per environment.
+
+## Beamforming feedback (CBR)
+
+Compressed beamforming reports from standard 802.11ac/ax APs — channel quality feedback used for beam
+steering. BeamSense reconstructs multipath from CBR when raw CSI is unavailable. Nearly ubiquitous on
+deployed chipsets; raw CSI is not.
+
+## Signal tendency index (STI)
+
+Shape similarity between adjacent CSI amplitude curves. Used in FreeDetector and WiFree for occupancy
+detection with greedy subcarrier selection. WiFree reported 99.1% occupancy accuracy on building-scale
+deployments.
+
+## Roaming model
+
+An offline model (CrossSense) that synthesizes target-environment CSI training data from source-site
+calibration samples, enabling cross-site activity recognition without full relabeling.
+
+## FallNet
+
+An autoencoder (SiFall) trained on normal daily activities. Falls detected as high reconstruction error —
+anomaly detection, not fall-template classification.
+
+## C3SL
+
+Convex shapelet learning on 3-way CSI tensors for gait-based identification. 91% among 20 enrolled people
+in controlled conditions. Distinct from anonymous occupancy sensing.
+
+## Device-free sensing
+
+The person being detected carries no device. Wavey reads the body's effect on WiFi directly.
+
+## Passive sensing
+
+Using signals already present in the environment rather than emitting a dedicated probe signal.
 
 ## ESP32-CSI
 
-The use of low-cost **ESP32** WiFi chips to capture CSI. The entire ESP32 family supports CSI, which makes
-it the popular, affordable hardware base for open-source WiFi sensing - including Wavey.
-
-## RF sensing
-
-"Radio-frequency sensing" - inferring information about a physical space from radio signals. WiFi CSI
-sensing is one form of RF sensing; radar is another.
+CSI capture on low-cost ESP32 WiFi microcontrollers via Espressif's ESP-CSI library. See
+[commodity CSI limits](/posts/esp32-csi-explained/).
 
 ## IEEE 802.11bf
 
-The amendment to the WiFi standard dedicated to **WiFi sensing**, formalizing how WiFi devices can sense
-their environment. Its existence shows sensing is becoming a native capability of WiFi.
+The WiFi standard amendment for native environment sensing — formalizing sensing alongside data delivery.
 
 ## Occupancy vs presence
 
-**Occupancy** asks "is anyone here?" and is the most robust signal. **Presence** goes further to confirm a
-**still** person is there (for example, by [breathing](/use-cases/presence-detection/)), which is where CSI
-clearly beats motion-only sensors.
+**Occupancy** — binary: is anyone here? Most robust. **Presence** — confirms a *still* person via
+micro-motion (breathing). See the [detection ladder](/detection/).
 
 ## Related reading
 
-- [Blog posts](/posts/) on CSI fundamentals, ESP32 hardware, and use cases
-- [How WiFi CSI sensing works](/how-it-works/)
+- [Technical deep-dives](/posts/)
+- [Getting started](/getting-started/)

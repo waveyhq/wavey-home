@@ -2,53 +2,60 @@
 title: "WiFi CSI Sensing vs PIR Motion Sensors"
 linkTitle: "WiFi sensing vs PIR"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 30
 schema_type: "TechArticle"
-description: "WiFi CSI sensing vs PIR motion sensors: why WiFi detects still occupants, covers more area, and avoids the 'empty room' false-off that plagues PIR."
+description: "WiFi CSI vs PIR — infrared motion cone vs radio channel sensing, still-detection mechanism, coverage geometry, and why PIR false-offs happen."
 keywords:
   - WiFi sensing vs PIR
   - PIR false off
   - presence vs motion sensor
-  - still occupant detection
-faq:
-  - question: "Why do PIR sensors turn the lights off when I'm still?"
-    answer: "PIR sensors only detect changes in infrared from motion. If you sit still, the PIR sees no change and reports the room as empty - the well-known 'false-off' problem. WiFi CSI sensing detects micro-motion like breathing, so it knows you're still there."
-  - question: "Is PIR still useful?"
-    answer: "Yes - PIR is extremely cheap, simple, and low-power, and it's great as a basic motion trigger. WiFi sensing is the better choice when you need true presence (not just motion), wider coverage, or detection of a still person."
 ---
 
-PIR (passive infrared) motion sensors are cheap and everywhere - and they share one famous flaw: they only
-see **motion**, not **presence**. **WiFi CSI sensing** fixes exactly that.
+PIR and WiFi CSI both detect people without cameras. They measure completely different physical quantities.
 
-## At a glance
+## Sensing mechanism
 
-**Still occupants**
-- *PIR:* a motionless person reads as an empty room (the "false-off"). Documented as a real limitation of PIR occupancy sensing ([research overview](https://www.diva-portal.org/smash/get/diva2:2003023/FULLTEXT01.pdf)).
-- *Wavey (WiFi CSI):* detects [breathing-level micro-motion](/use-cases/presence-detection/), so a still person still counts.
+**PIR** detects changes in infrared radiation within a ~120° cone. A motionless person emits constant IR —
+no change, no trigger. After a timeout, the sensor reports empty. This is the "lights off while I'm sitting
+still" failure mode — a fundamental property of differential IR sensing, not a firmware bug.
 
-**Coverage**
-- *PIR:* a single cone of view; needs line of sight.
-- *Wavey:* whole-room coverage from a node or two; works around obstacles.
+**WiFi CSI** detects changes in radio channel state across the whole room. A still person modulates phase
+via breathing (micro-Doppler at 0.1–0.5 Hz). Macro-motion variance may be near zero while periodic
+phase modulation confirms presence.
 
-**Multiple people / detail**
-- *PIR:* binary motion; can't distinguish multiple people.
-- *Wavey:* richer signal for motion, activity, and occupancy.
+## Coverage geometry
 
-**Cost & power**
-- *PIR:* extremely cheap and low-power.
-- *Wavey:* low-cost ESP32 nodes, reusing existing WiFi.
+| | PIR | WiFi CSI |
+|---|-----|----------|
+| Field of view | ~120° cone, line of sight | Whole room from node pair |
+| Range | 5–12 m typical | Room-scale (depends on link geometry) |
+| Through obstacles | No | Partial (drywall) |
+| Darkness | Works (IR-based) | Works (radio-based) |
+| Mounting | Aimed at zone | Placed for link geometry |
 
-## Why it matters
+One PIR per zone, aimed carefully. Two CSI nodes cover a room regardless of furniture layout.
 
-The "lights turning off while I sit still" problem is a PIR limitation, not an automation bug. By sensing
-the whole radio environment instead of a single infrared cone, Wavey reports **true occupancy** - ideal for
-[smart-home automation](/use-cases/smart-home-automation/) and lighting/HVAC control.
+## Event semantics
 
-## The bottom line
+PIR emits **motion pulses** — edge triggers when IR changes. Automations must infer presence from motion
+timeouts, which fail for still occupants.
 
-Use PIR for the cheapest possible motion trigger. Use [Wavey](/how-it-works/) when "is someone *there*?"
-matters more than "did something *move*?" Compare the rest in [comparisons](/comparisons/).
+CSI supports **presence holds** — sustained occupied state while a person breathes in the space. See
+[smart-home automation](/use-cases/smart-home-automation/) for event design.
+
+## Cost and power
+
+PIR: $2–5, microwatts standby, decades of battery life. The cheapest motion trigger available.
+
+CSI: $5–10 per ESP32 node, milliwatts (needs power), but provides presence holds PIR cannot.
+
+## When to choose which
+
+**PIR:** cheapest motion trigger, outdoor lighting, zones where still-detection does not matter.
+
+**WiFi CSI:** occupancy-aware HVAC, presence-based automation, elder-care awareness, anywhere "is someone
+*here*" matters more than "did something *move*."

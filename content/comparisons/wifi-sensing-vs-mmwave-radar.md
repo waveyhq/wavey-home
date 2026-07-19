@@ -2,54 +2,56 @@
 title: "WiFi CSI Sensing vs mmWave Radar"
 linkTitle: "WiFi sensing vs mmWave radar"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 20
 schema_type: "TechArticle"
-description: "WiFi CSI sensing vs mmWave radar for presence and motion: privacy, cost, hardware, and accuracy compared - and when each makes sense."
+description: "WiFi CSI vs mmWave radar — RF front-end cost, ranging precision, fine-motion SNR, deployment scale, and when dedicated radar beats commodity WiFi."
 keywords:
   - WiFi sensing vs mmWave radar
   - mmWave vs WiFi CSI
   - radar occupancy alternative
-  - low-cost presence sensing
-faq:
-  - question: "Is mmWave radar more accurate than WiFi sensing?"
-    answer: "Often, yes - dedicated mmWave radar is purpose-built for fine motion and ranging and can be very precise. The trade-off is cost and hardware: radar needs specialized, more expensive sensors, while WiFi CSI sensing reuses commodity ESP32 WiFi chips you can deploy cheaply at scale."
-  - question: "Are both private?"
-    answer: "Yes. Both mmWave radar and WiFi CSI sensing are non-visual and do not capture images, so both are far more privacy-friendly than cameras. They differ mainly on cost, availability, and ecosystem."
 ---
 
-Both **mmWave radar** and **WiFi CSI sensing** are privacy-friendly, non-visual ways to detect people. The
-real difference is **hardware cost and ubiquity**.
+Both are non-visual RF sensors. The tradeoff is **dedicated ranging hardware vs commodity WiFi reuse**.
 
-## At a glance
+## RF front-end
 
-**Privacy**
-- *mmWave radar:* non-visual, no images - very low privacy risk.
-- *Wavey (WiFi CSI):* also non-visual, no images - reads the body's effect on WiFi.
+mmWave radar uses a purpose-built transceiver (typically 60 GHz) with chirp modulation designed for
+range-Doppler processing. Resolution: centimeter-range distance, sub-Hz Doppler for micro-motion.
 
-**Hardware & cost**
-- *mmWave radar:* dedicated radar modules; more expensive and specialized. Research literature notes radar and LiDAR are "expensive and power-intensive" ([DensePose From WiFi](https://arxiv.org/abs/2301.00250)).
-- *Wavey:* commodity ESP32 WiFi chips; cheap, widely available, OTA-upgradable.
+WiFi CSI uses the existing 2.4/5 GHz WiFi PHY. Resolution: limited by wavelength (~6 cm at 5 GHz) and
+packet-rate sampling. Fine-ranging is not the design goal.
 
-**Precision**
-- *mmWave radar:* excellent fine-motion sensing and ranging; purpose-built.
-- *Wavey:* strong presence/motion; fine-grained tasks are harder but improving.
+## Fine-motion SNR
 
-**Ubiquity**
-- *mmWave radar:* extra hardware everywhere you sense.
-- *Wavey:* uses the WiFi that's already in the building.
+Radar front-ends are optimized for detecting sub-millimeter chest displacement — breathing and heartbeat
+are first-class signals. ESP32 CSI can detect breathing after phase sanitization, but the hardware noise
+floor is higher and SNR is placement-dependent.
 
-## Why it matters
+For clinical-grade vitals, radar wins. For presence awareness ("someone is still in the room"), CSI is
+often sufficient.
 
-If you need lab-grade ranging in a single zone, radar is hard to beat. But if you want privacy-friendly
-sensing **spread cheaply across a whole space**, WiFi CSI wins on economics - you're reusing the radios you
-already have, on hardware that costs a few dollars per node.
+## Cost and scale
 
-## The bottom line
+| | mmWave radar module | ESP32 CSI node |
+|---|---------------------|----------------|
+| Unit cost | $10–50+ per module | $3–8 per module |
+| Dedicated hardware | Yes — radar in every zone | Reuses existing WiFi infrastructure |
+| OTA upgrade | Module-specific | Standard ESP32 firmware |
+| Ecosystem | Smaller, vendor-specific | Huge (Home Assistant, MQTT, etc.) |
 
-Pick mmWave radar for maximum per-zone precision; pick [Wavey](/how-it-works/) for affordable, scalable,
-privacy-first coverage. See it in action for [presence](/use-cases/presence-detection/) and
-[occupancy](/use-cases/occupancy-detection/), or browse the other [comparisons](/comparisons/).
+Covering a 10-room office with radar means 10+ dedicated modules. With CSI, a few nodes per room on
+hardware you may already have deployed for other purposes.
+
+## When to choose which
+
+**mmWave radar:** per-zone ranging, fall detection with low false-alarm requirements, vital signs in a
+clinical-adjacent setting, single-room precision.
+
+**WiFi CSI:** whole-building occupancy at scale, multi-room analytics, smart-home presence holds, security
+zone detection — anywhere economics and ubiquity matter more than centimeter ranging.
+
+See [presence detection](/use-cases/presence-detection/) for CSI micro-motion scope.

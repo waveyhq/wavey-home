@@ -1,52 +1,80 @@
 ---
-title: "Privacy-First Elder-Care Monitoring with WiFi Sensing"
+title: "Elder-Care Monitoring with WiFi Sensing"
 linkTitle: "Elder-care monitoring"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 40
 schema_type: "TechArticle"
-description: "Monitor wellbeing at home without cameras or wearables. How Wavey's WiFi CSI sensing supports dignified, privacy-first elder-care monitoring."
+description: "Ambient elder-care sensing with WiFi CSI — anomaly-based fall detection, inactivity monitoring, online adaptation, and non-medical boundaries."
 keywords:
-  - elder care monitoring without camera
   - WiFi fall detection
+  - elder care monitoring WiFi
   - aging in place sensing
-  - privacy-first elder care
-  - device-free health monitoring
-faq:
-  - question: "Why use WiFi sensing for elder care instead of cameras?"
-    answer: "Cameras in bedrooms and bathrooms feel invasive and create privacy and security risks. WiFi CSI sensing is device-free and image-free: it can detect presence, movement, and inactivity without ever capturing what someone looks like, which makes continuous monitoring far more dignified."
-  - question: "Does the person being monitored need to wear anything?"
-    answer: "No. Unlike pendants or smartwatches, WiFi sensing is fully device-free. There is nothing to charge, wear, or remember - which matters most for the people who need monitoring."
+  - inactivity monitoring WiFi
 ---
 
-For aging in place, the goal is safety **without surveillance**. Cameras are invasive, and wearables get
-forgotten or left on the nightstand. **WiFi CSI sensing** offers a middle path: continuous, device-free,
-image-free awareness of movement and presence in the home.
+Aging in place needs continuous awareness without cameras in bedrooms and without wearables that get left on
+the nightstand. WiFi CSI offers ambient monitoring — presence, movement patterns, and fall-like events —
+from nodes already in the home.
 
-## What Wavey can support
+## Why fall is not a classification problem
 
-- **Presence and inactivity awareness** - confirm normal movement through the day, and notice unusually long stillness. Built on Wavey's [presence detection](/use-cases/presence-detection/).
-- **Room-level activity patterns** - understand routines without identifying anyone, using [motion & activity detection](/use-cases/motion-activity-detection/).
-- **No-wearable operation** - nothing for the person to carry or charge.
+Most early RF fall detectors train a classifier: fall vs walk vs sit. That assumes falls produce reproducible
+CSI signatures you can label and match. In practice, falls are accidents — impact varies with surface, body
+angle, and what they hit. Labeling enough real elderly falls to train a classifier is ethically and practically
+hard; most training data is simulated.
 
-## Why families and caregivers prefer it
+SiFall (SenSys 2022) reframes the problem:
 
-The biggest objection to in-home monitoring is privacy. Because Wavey senses the radio environment rather
-than capturing images, it sidesteps the camera problem entirely - see
-[WiFi sensing vs cameras](/comparisons/wifi-sensing-vs-cameras/). It's also far cheaper to deploy than
-[radar](/comparisons/wifi-sensing-vs-mmwave-radar/) and doesn't depend on the person remembering a
-[wearable](/comparisons/wifi-sensing-vs-wearables/).
+1. **Learn normal** — an autoencoder (FallNet) models the distribution of repeatable daily activities
+   (walking, sitting, standing) for this person in this room.
+2. **Front-end signal chain** — CSI amplitude (not phase) → conjugate multiplication denoising → channel
+   dynamics via cosine similarity across subcarrier vectors → acceleration threshold (Θ = 2.5 m/s²) to
+   segment candidate events → STFT → FallNet input.
+3. **Detect abnormal** — a fall produces a CSI segment with high reconstruction error because it does not
+   match any learned normal pattern.
+4. **Adapt online** — self-supervised incremental learning updates the normal-activity model as routines
+   evolve, without requiring fall labels.
 
-## Honest expectations
+Reported 98.3% in real-world tests, 94.1% over 3-day continuous monitoring with one false alarm. This is
+fundamentally different from spike-plus-immobility heuristics. It handles variable fall kinematics because
+anything outside the routine distribution triggers — not because it matched a fall template.
 
-WiFi sensing is excellent at presence, movement, and inactivity trends. Precise fall classification and
-medical-grade vital signs are harder and remain active research areas, so Wavey is best used as a
-privacy-first awareness layer rather than a certified medical device.
+Limitations from the published system: largely single-room operation, simulated fall data, and unvalidated on
+subjects over 60. False positives from unusual but non-fall activities (dropping onto a couch) remain a
+tuning problem.
 
-## Get involved
+## Inactivity monitoring
 
-Building something for care at home? Start with [how Wavey works](/how-it-works/),
-[get started](/getting-started/), or come talk to us on [Discord](https://discord.gg/sxh9r9UTtW).
+Less dramatic but equally useful: **prolonged absence of expected motion**. If someone who normally moves
+through the kitchen every morning has not triggered motion by noon, that is a signal worth surfacing — built
+on [presence detection](/use-cases/presence-detection/) and motion baselines, not fall classification.
+
+Routine patterns emerge from temporal aggregation over days: typical wake time, movement frequency, room
+transitions. Deviations from routine are the alert, not a single event classifier.
+
+## What Wavey is not
+
+Wavey is an **awareness layer**, not a medical device:
+
+- No certified fall detection with regulatory clearance.
+- No clinical-grade respiration rate or heart rate.
+- No identity — the system does not know *who* fell, only *that* an anomaly occurred in a zone.
+
+For the full feasibility picture, see fall detection at rung 6 on the [detection ladder](/detection/).
+
+## Deployment considerations
+
+- **Node placement** — links should cross high-traffic areas (hallway, bedroom doorway) where falls are most
+  likely to perturb CSI.
+- **Baseline stability** — furniture changes and new occupants require re-baselining.
+- **Multi-person homes** — superposition makes per-person fall attribution unreliable without spatial diversity.
+
+## Further reading
+
+- [Presence detection](/use-cases/presence-detection/) — confirming someone is still in the room
+- [Motion & activity](/use-cases/motion-activity-detection/) — activity patterns over time
+- [Getting started](/getting-started/)

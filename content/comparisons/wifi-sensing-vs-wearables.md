@@ -2,54 +2,63 @@
 title: "WiFi CSI Sensing vs Wearables & Phone Tracking"
 linkTitle: "WiFi sensing vs wearables"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 40
 schema_type: "TechArticle"
-description: "WiFi CSI sensing vs wearables and phone/MAC tracking: why device-free sensing needs nothing on the person and avoids device-identifier privacy issues."
+description: "WiFi CSI vs wearables and MAC tracking — device-free body sensing vs opt-in device telemetry, coverage completeness, and data model differences."
 keywords:
   - device-free vs wearable
   - WiFi sensing vs phone tracking
   - MAC address tracking privacy
-  - no-wearable sensing
-faq:
-  - question: "What does 'device-free' actually mean?"
-    answer: "Device-free means the person being sensed carries nothing - no phone, tag, wristband, or app. Wavey detects the body's effect on WiFi signals directly, unlike wearables or phone/MAC tracking that only work if the person carries a specific device."
-  - question: "Isn't WiFi tracking a privacy concern?"
-    answer: "Phone/MAC-address tracking can be, because device identifiers may count as personal data. Wavey is different: it reads Channel State Information (how the body disturbs the signal), not device identifiers, so it doesn't track phones or individuals."
 ---
 
-Wearables and phone-based presence work only when people **carry the right device**. **WiFi CSI sensing** is
-**device-free** - it needs nothing on the person at all.
+Wearables and phone tracking sense **devices**. WiFi CSI senses **bodies**. The coverage and data models
+are fundamentally different.
 
-## At a glance
+## What gets detected
 
-**What the person carries**
-- *Wearables / phone tracking:* a watch, tag, or phone with the right app/radio on.
-- *Wavey (WiFi CSI):* nothing - the body itself is what's sensed.
+| | Wearable / phone tracking | WiFi CSI |
+|---|--------------------------|----------|
+| Signal source | BLE beacon, UWB tag, WiFi probe/MAC | Body perturbation of radio channel |
+| Requires cooperation | Yes — person carries device | No — device-free |
+| Misses | Anyone without the device | No one in RF coverage |
+| Identity | Device ID (often personal data) | Anonymous — no identifiers |
 
-**Who it can miss**
-- *Wearables:* anyone without the device (guests, kids, visitors, intruders).
-- *Wavey:* detects anyone in the space, carried-device or not.
+A guest, child, intruder, or elder who forgot their pendant is invisible to device tracking. CSI detects
+any body that perturbs the channel.
 
-**Privacy model**
-- *Phone/MAC tracking:* relies on device identifiers, which can be personal data and miscount (one person, many devices). Industry guidance flags MAC-based tracking as a privacy concern ([PointGrab](https://pointgrab.com/occupancy-sensor-technologies-compared/)).
-- *Wavey:* no device IDs; reads [CSI](/glossary/), producing anonymous presence.
+## Data model
 
-**Maintenance**
-- *Wearables:* charging, pairing, replacing, remembering to wear.
-- *Wavey:* fixed nodes; nothing for occupants to maintain.
+Phone/MAC analytics produce device-level events: "MAC xx:xx connected," "beacon seen." Counting people
+requires mapping devices to humans — one person with three devices inflates count; five people sharing one
+laptop undercounts.
 
-## Why it matters
+CSI analytics produce space-level events: "zone occupied," "motion intensity 0.7." No device mapping
+needed. See [occupancy analytics](/use-cases/occupancy-analytics/).
 
-For [elder care](/use-cases/elder-care-monitoring/), the people who most need monitoring are the ones most
-likely to forget a wearable. For [security](/use-cases/security-intrusion-detection/), an intruder won't
-carry your tag. Device-free sensing covers everyone, which is the whole point.
+## Privacy and compliance
 
-## The bottom line
+MAC addresses and persistent device identifiers can constitute personal data under GDPR. CSI occupancy
+data — zone-level utilization without identifiers — sits in a different regulatory category, closer to
+anonymous people-counting beams.
 
-Wearables are great for opt-in personal metrics. For sensing a *space* and everyone in it, choose
-device-free [Wavey](/how-it-works/). See more [comparisons](/comparisons/) or jump to
-[occupancy analytics](/use-cases/occupancy-analytics/).
+## Maintenance burden
+
+Wearables: charging, pairing, replacement, compliance ("please wear this"). Per-person operational cost
+scales with occupancy.
+
+CSI nodes: fixed installation, zero per-person maintenance. Operational cost is per-zone, not per-person.
+
+## When to choose which
+
+**Wearable:** opt-in personal health metrics (heart rate, steps, SpO2), workforce safety with assigned
+devices, clinical trials with consenting participants.
+
+**WiFi CSI:** space-level occupancy, elder-care ambient monitoring, security, building analytics — anywhere
+you need to sense *everyone in a zone* without asking them to carry anything.
+
+See [elder-care monitoring](/use-cases/elder-care-monitoring/) and
+[security & intrusion](/use-cases/security-intrusion-detection/).

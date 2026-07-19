@@ -1,6 +1,6 @@
 ---
 title: "Wavey | WiFi CSI Sensing System (Device-Free, No Cameras)"
-description: "Wavey is an open-source WiFi CSI sensing system using ESP32 Channel State Information for device-free occupancy, motion, and presence detection - no cameras or wearables."
+description: "Wavey is an open-source WiFi CSI sensing system — subcarrier physics, signal processing pipelines, and deployable occupancy, motion, and presence detection on ESP32."
 sitemap:
   priority: 1.0
 keywords:
@@ -14,9 +14,9 @@ keywords:
   - RF sensing
 faq:
   - question: "Can WiFi sensing measure breathing or vital signs?"
-    answer: "WiFi CSI is sensitive enough to detect the chest motion of breathing, and research has demonstrated respiration-rate estimation from CSI. Reliability depends on range, environment, and signal quality, and Wavey treats this as awareness rather than a medical device."
+    answer: "CSI phase can pick up the periodic chest motion of respiration (0.1–0.5 Hz) after preprocessing, but reliability depends on range, node placement, and a quiet environment. Wavey treats this as presence awareness, not clinical vitals."
   - question: "Does WiFi sensing work through walls?"
-    answer: "Partially. WiFi passes through many interior walls, so CSI sensing can detect motion and presence in non-line-of-sight conditions better than cameras. Accuracy drops with thicker or denser materials, and detailed through-wall reconstruction remains a research topic."
+    answer: "WiFi penetrates drywall and interior partitions, so CSI can detect motion in adjacent rooms without line of sight. Dense materials like concrete block most of the signal; expect zone-level motion detection, not precise through-wall mapping."
 ---
 
 Homepage for Wavey, an open-source WiFi CSI sensing project.

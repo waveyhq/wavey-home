@@ -1,54 +1,89 @@
 ---
-title: "WiFi Motion & Activity Detection (No Camera)"
+title: "WiFi Motion & Activity Detection"
 linkTitle: "Motion & activity detection"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 20
 schema_type: "TechArticle"
-description: "Detect movement and infer activity from WiFi CSI - WiFi motion detection without a camera, using Wavey's ESP32 sensing nodes and signal processing."
+description: "Human activity recognition on WiFi CSI — CSI-speed modeling, dual-stream transformers, spectrogram classifiers, and cross-site transfer."
 keywords:
   - WiFi motion detection
-  - WiFi motion detection without camera
-  - WiFi activity recognition
-  - human activity recognition WiFi
-  - CSI motion detection
-faq:
-  - question: "Can WiFi detect motion without a camera?"
-    answer: "Yes. Movement changes the WiFi multipath environment, shifting the amplitude and phase of the signal across subcarriers. Wavey reads those shifts to detect motion - no camera and no device on the moving person."
-  - question: "Can WiFi tell what activity someone is doing?"
-    answer: "To a degree. Coarse activities (walking, sitting down, large gestures) produce distinct CSI patterns that can be classified. Fine-grained or multi-person activity recognition is harder and is an active research area."
+  - WiFi human activity recognition
+  - CSI spectrogram classifier
+  - HAR WiFi sensing
 ---
 
-Movement is the easiest thing for WiFi to see. As a person walks, gestures, or shifts position, they
-reshape the radio paths between Wavey's nodes - and that shows up immediately in the
-[CSI](/glossary/). This makes **WiFi motion detection without a camera** one of Wavey's most robust
-capabilities.
+Movement is the strongest signal in CSI. Limb acceleration creates broadband energy in the 1–5 Hz band,
+variance spikes across subcarriers, and the channel changes within a single packet window. Detecting *that
+something moved* is straightforward. Classifying *what* happened is where a decade of published systems
+disagree on approach.
 
 ## From motion to activity
 
-Raw motion ("something moved") is the foundation. On top of it, Wavey extracts features that capture *how*
-the signal changed - speed, direction, and rhythm - which can be used to infer coarse **activities**. This
-is the same principle behind academic WiFi activity-recognition work and CMU's
-[DensePose-from-WiFi](https://arxiv.org/abs/2301.00250), which recovered full body pose from WiFi alone.
+**Motion detection** is a threshold on variance or spectral power — binary, fast, environment-agnostic within
+a single deployment.
 
-## What you can build
+**Activity recognition (HAR)** has three generations in the literature:
 
-- Motion-triggered lighting and alerts that work in the dark
-- Activity-aware [smart-home automation](/use-cases/smart-home-automation/)
-- Movement logging for [occupancy analytics](/use-cases/occupancy-analytics/)
-- A privacy-friendly layer for [security & intrusion detection](/use-cases/security-intrusion-detection/)
+### Generation 1: physics-linked models (CARM, MobiCom 2015)
 
-## How it compares
+Before deep learning dominated, CARM built quantitative models:
 
-WiFi motion sensing covers a whole space from a couple of nodes, works in darkness and around obstacles,
-and never captures an image - unlike a [camera](/comparisons/wifi-sensing-vs-cameras/). For deeper
-technical context, read [how Wavey works](/how-it-works/).
+- **CSI–speed** — amplitude change frequency maps to limb speed via Doppler (path-length change of one
+  wavelength = 2π phase shift).
+- **CSI–activity** — activities differ by which body parts move at which speeds (legs periodic in walking,
+  torso impulse in falling).
 
-## Get started
+Features: PCA denoising, discrete wavelet transform, HMM per activity for state transitions. >96% on COTS
+WiFi using **amplitude**, not phase — CFO on commodity hardware makes raw phase unusable for macro-motion
+HAR. Still a strong baseline because features encode mechanism, not just correlation.
 
-Jump into [getting started](/getting-started/), read the related post
-[WiFi motion detection without a camera](/posts/wifi-motion-detection-without-camera/), or explore live signals in the
-[Wavey Console](https://console.wavey.nopejs.me).
+### Generation 2: spectrogram CNNs
+
+STFT tiles (time × frequency) fed to CNNs. Learns motion textures without explicit speed models. Works when
+you have labels; brittle cross-room without adaptation.
+
+### Generation 3: dual-stream transformers (THAT, AAAI 2021)
+
+CSI has two informative axes:
+
+| Stream | What it captures | Missed by LSTM-only |
+|--------|------------------|---------------------|
+| Channel-over-time | How each subcarrier evolves | — |
+| Time-over-channel | Subcarrier correlation at one instant | ✓ |
+
+THAT's Multi-scale Convolution Augmented Transformer (MCAT) processes both streams with Gaussian range
+encoding. +2.2 pts accuracy over ABLSTM, 1.8–3.4× faster — because a single temporal sample is too
+elementary to represent a CSI pattern.
+
+## The cross-room transfer problem
+
+CrossSense (MobiCom 2018) showed gesture recognition accuracy collapse from >90% in-room to ~20% cross-site
+with a single global model. Their fix: a **roaming model** that synthesizes target-environment training data
+from a small calibration set, plus a **mixture-of-experts** runtime selector (DTW-based) that routes signals
+to specialized models.
+
+Separately, the EI framework (MobiCom 2018) uses adversarial training — feature extractor vs domain
+discriminator — to strip environment-specific information before classification.
+
+Without one of these (or per-site fine-tuning), do not deploy a model trained elsewhere. See the
+[sensing pipeline](/sensing-pipeline/) for the full adaptation landscape.
+
+## What Wavey targets
+
+Wavey emits motion events (intensity, duration) as the primary output. Coarse activity classes are supported
+where labeled data from the deployment environment justifies a classifier. Multi-person 3D pose (CVPR 2024:
+~92–125 mm joint error with dense WiFi nodes in a 4×3.5 m rig) is research territory — not ESP32 territory.
+See the [detection ladder](/detection/), rung 4.
+
+For building a classifier from scratch, read
+[building an activity classifier on CSI](/posts/wifi-motion-detection-without-camera/).
+
+## Further reading
+
+- [Detection ladder](/detection/) — HAR feasibility and limits
+- [Security & intrusion](/use-cases/security-intrusion-detection/) — motion as a zone alarm
+- [Getting started](/getting-started/)

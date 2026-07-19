@@ -2,58 +2,60 @@
 title: "WiFi Sensing vs Cameras for Occupancy & Motion"
 linkTitle: "WiFi sensing vs cameras"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 10
 schema_type: "TechArticle"
-description: "WiFi CSI sensing vs cameras for detecting people: privacy, lighting, coverage, and cost compared - and why WiFi sensing is a privacy-first alternative."
+description: "WiFi CSI vs cameras — sensing mechanism, data payload, latency, coverage geometry, and when each modality fits occupancy vs identification tasks."
 keywords:
   - WiFi sensing vs cameras
-  - privacy-first occupancy sensing
   - camera alternative occupancy
-  - device-free vs camera
-faq:
-  - question: "Is WiFi sensing more private than a camera?"
-    answer: "Yes. A camera captures images that can identify people, which is why it is the highest-privacy-risk option for occupancy sensing. WiFi CSI sensing never captures an image - it reads how bodies disturb radio signals - so it can detect presence and motion without any identifiable visual data."
-  - question: "When is a camera still the better choice?"
-    answer: "When you specifically need visual detail - identifying who someone is, reading text, or precise pose - a camera is more capable. If you only need to know that a space is occupied or that something moved, WiFi sensing delivers that privately and cheaply."
+  - non-visual occupancy sensing
 ---
 
-Cameras are the most capable and the most invasive way to sense people. **WiFi CSI sensing** flips that
-trade-off: a little less visual detail, dramatically more privacy.
+Cameras and WiFi CSI solve overlapping but not identical problems. The choice is about what data you need
+from the sensor, not just privacy preferences.
 
-## At a glance
+## Sensing mechanism
 
-**Privacy**
-- *Cameras:* highest risk - capture identifiable images; sensitive in homes, bathrooms, and workplaces.
-- *Wavey (WiFi CSI):* no images at all; senses the radio environment, not appearance.
+| | Camera | WiFi CSI |
+|---|--------|----------|
+| Signal | Visible light (photons) | Radio channel (amplitude + phase per subcarrier) |
+| Output | Image frames (pixels) | Channel measurements (complex vectors) |
+| Identity | Trivial (face recognition) | Not available by design |
+| Pose | Direct (keypoint models) | Research frontier; not on commodity ESP32 |
 
-**Lighting & obstacles**
-- *Cameras:* need light; blocked by walls and furniture.
-- *Wavey:* works in total darkness and penetrates many interior walls.
+A camera answers "what does this look like?" CSI answers "how did the radio channel change?"
 
-**Coverage & cost**
-- *Cameras:* one device per sightline; cabling and storage add up.
-- *Wavey:* a couple of low-cost ESP32 nodes can cover a room, no line of sight required.
+## Coverage geometry
 
-**Detail & accuracy**
-- *Cameras:* rich detail, identity, precise pose.
-- *Wavey:* presence, motion, and coarse activity - anonymous by design.
+Cameras need line of sight per zone — one camera per sightline, blind behind furniture and walls. CSI
+propagates through drywall and around obstacles; a node pair can cover a whole room without aiming.
 
-## Why it matters
+Cameras win when you need per-pixel detail in a specific field of view. CSI wins for whole-room, NLOS,
+darkness-invariant occupancy and motion.
 
-Industry guidance consistently rates camera-based people sensing as the **highest privacy risk**, precisely
-because images can identify individuals, while non-visual sensors are treated as far lower risk
-([PointGrab](https://pointgrab.com/occupancy-sensor-technologies-compared/),
-[Terabee](https://www.terabee.com/count-with-caution-security-challenges-of-camera-based-people-counting-devices/)).
-For occupancy, motion, and presence - the jobs most "camera" deployments are actually doing - Wavey gets you
-there without the footage.
+## Latency and compute
 
-## The bottom line
+Camera pipelines: capture → decode frame → run vision model → emit event. Typical end-to-end 50–200 ms on
+edge hardware, higher if frames go to cloud.
 
-Choose a camera when you genuinely need to *see*. Choose [Wavey](/how-it-works/) when you need to *know*
-a space is occupied or active - privately, cheaply, and in the dark. Explore
-[occupancy detection](/use-cases/occupancy-detection/) and [presence detection](/use-cases/presence-detection/),
-or see the other [comparisons](/comparisons/).
+CSI pipelines: capture packet → preprocess → feature extract → infer. Comparable latency on the same host,
+but the input is orders of magnitude smaller (kilobytes of complex numbers vs megapixel frames).
+
+## Deployment cost
+
+A room with four sightlines needs four cameras, cabling, storage, and often cloud processing. The same room
+needs two ESP32 nodes and a host running the Python pipeline. No video storage, no bandwidth for frame upload.
+
+## When to choose which
+
+**Camera:** identity verification, reading text, precise pose in a controlled FOV, forensic video.
+
+**WiFi CSI:** anonymous occupancy, motion in the dark, whole-room presence, energy analytics, elder-care
+awareness without surveillance.
+
+See [occupancy detection](/use-cases/occupancy-detection/) and the [detection ladder](/detection/) for what
+CSI delivers without images.

@@ -2,52 +2,71 @@
 title: "Presence & Breathing Detection with WiFi CSI"
 linkTitle: "Presence & breathing detection"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.7
 weight: 30
 schema_type: "TechArticle"
-description: "Detect a still person - even by their breathing - using WiFi CSI. How Wavey does device-free presence and micro-motion sensing without cameras or wearables."
+description: "Micro-Doppler presence sensing from WiFi CSI — respiration band physics, SNR requirements, still-person detection, and why PIR cannot see periodic chest motion."
 keywords:
-  - presence detection without camera
+  - WiFi presence detection
   - WiFi breathing detection
-  - WiFi presence sensing
-  - micro-motion sensing
-  - vital sign sensing WiFi
-faq:
-  - question: "Can WiFi detect a person who is sitting still?"
-    answer: "Yes - this is where WiFi CSI shines compared to PIR. The tiny, periodic motion of breathing modulates the WiFi signal, so Wavey can detect a still-but-present person that a motion-only sensor would miss."
-  - question: "Can WiFi sensing measure breathing rate?"
-    answer: "WiFi CSI is sensitive enough to pick up the chest motion of breathing, and research has demonstrated respiration-rate estimation from CSI. Reliability depends on distance, environment, and signal quality."
+  - micro-Doppler WiFi
+  - still person detection WiFi
 ---
 
-The hardest case for most sensors is a person who isn't moving. **Presence detection** with WiFi CSI solves
-it by reading **micro-motion** - the subtle, continuous disturbances a body creates even when sitting still,
-including the rise and fall of **breathing**.
+The hardest sensing case for conventional sensors is a person who is not moving. PIR reports empty. Cameras
+work but raise privacy concerns. CSI can detect **micro-presence** — a still body whose chest rises and
+falls with respiration.
 
-## Why CSI can sense breathing
+## Micro-Doppler physics
 
-[Channel State Information](/glossary/) captures amplitude and phase across many subcarriers, which makes it
-sensitive to motion far smaller than a footstep. The periodic chest movement of respiration produces a
-small, rhythmic signature in the CSI. Wavey isolates that rhythm to confirm a person is present even when
-they appear motionless - something a single [RSSI](/glossary/) value or [PIR sensor](/comparisons/wifi-sensing-vs-pir/)
-cannot reliably do.
+Breathing displaces the chest wall by a few millimeters at 0.1–0.5 Hz (6–30 breaths per minute). This
+creates a **micro-Doppler** modulation on the CSI phase — a narrowband periodic signal far weaker than
+footstep energy but structurally distinct from an empty room.
 
-## Where presence sensing matters
+Detection requires:
 
-- Occupancy that doesn't time out on a still person (reading, sleeping, working)
-- [Elder-care monitoring](/use-cases/elder-care-monitoring/) where stillness can matter
-- Comfort automation that keeps lights and climate on while you're present
-- More dependable [occupancy detection](/use-cases/occupancy-detection/)
+1. **Clean phase** — CFO/SFO removed via sanitization; raw phase is unusable at this scale.
+2. **Sufficient SNR** — the subject should be within a few meters of a link, not at the edge of coverage.
+3. **Quiet environment** — another person walking nearby masks the periodic component.
 
-## A note on accuracy
+Bandpass filtering in the respiration band (0.1–0.5 Hz) followed by periodicity detection (autocorrelation or
+peak finding in the spectrum) confirms presence even when macro-motion variance is near zero.
 
-Micro-motion sensing is more demanding than detecting walking. Range, room layout, and interference all
-affect it, and results improve with good node placement and a clean baseline. See
-[how Wavey works](/how-it-works/) for the signal-processing details.
+A complementary approach treats the breathing spectrogram as an **image**: in-car child-presence detection
+uses CSI power autocorrelation for macro motion and spectrogram enhancement + CNN for breathing classification
+— 99% detection at 5 GHz with 58 subcarriers sampled at 30 Hz. The image-classification path on spectrograms
+is increasingly common when packet rate and SNR are sufficient; ESP32 deployments need careful placement and
+consistent traffic to reach comparable confidence.
 
-## Get started
+## Still person vs empty room
 
-Try it via [getting started](/getting-started/), or visualize live CSI in the
-[Wavey Console](https://console.wavey.nopejs.me).
+The decision is SNR-dependent. An empty room has no periodic component in the respiration band. A still
+person adds one. The signal-to-noise ratio depends on distance, body orientation relative to the link, and
+how much multipath the torso perturbs.
+
+This is why presence is rung 5 on the [detection ladder](/detection/) — achievable with good setup, not
+guaranteed everywhere. Wavey treats it as **awareness**, not a medical vitals measurement.
+
+## Why PIR fails here
+
+PIR detects changes in infrared radiation within a narrow cone. A motionless person emits steady IR — no
+change, no trigger. The sensor reports empty after its timeout.
+
+CSI does not measure heat. It measures how the radio channel changes. Periodic chest displacement modulates
+phase even when the person is otherwise still. This is a fundamental sensing mechanism difference, not a
+software improvement on the same hardware.
+
+## Where presence matters
+
+- Occupancy that does not time out on a still reader, sleeper, or worker
+- [Elder-care monitoring](/use-cases/elder-care-monitoring/) — confirming someone is in the room
+- [Smart-home automation](/use-cases/smart-home-automation/) — lights and climate that hold while you are present
+
+## Further reading
+
+- [Sensing pipeline](/sensing-pipeline/) — phase sanitization before micro-motion inference
+- [How it works](/how-it-works/) — macro vs micro-Doppler bands
+- [Getting started](/getting-started/)

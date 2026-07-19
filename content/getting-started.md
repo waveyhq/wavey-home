@@ -2,70 +2,70 @@
 title: "Getting Started with Wavey"
 linkTitle: "Get started"
 date: 2026-06-20T12:00:00Z
-lastmod: 2026-06-25T12:00:00Z
+lastmod: 2026-07-19T12:00:00Z
 draft: false
 sitemap:
   priority: 0.9
 schema_type: "TechArticle"
-description: "Get started with Wavey, the open-source WiFi CSI sensing system. The architecture, the ESP32-CSI approach, and how to follow development and contribute."
+description: "Deploy Wavey — ESP32 CSI node architecture, Python pipeline layers, detection task selection, and how to follow development on GitHub."
 keywords:
   - getting started Wavey
   - ESP32 CSI setup
-  - WiFi CSI sensing project
+  - WiFi CSI sensing deployment
   - open-source WiFi sensing
-  - how to build WiFi sensing
 faq:
   - question: "Is Wavey ready to install today?"
-    answer: "Wavey is an open-source project in active development. This page explains the architecture and approach so you can follow along and contribute. For the latest code, releases, and setup status, follow the GitHub project at github.com/waveyhq."
-  - question: "What will I need to run Wavey?"
-    answer: "At a high level: one or more ESP32 sensing nodes (any CSI-capable ESP32 works), a WiFi environment to sense, and a host machine to run the Python analysis pipeline. Exact hardware and steps are tracked in the GitHub repository."
-  - question: "How can I contribute to Wavey?"
-    answer: "Star and watch the GitHub repo, join the Discord community, and reach out at mail@wavey.nopejs.me. Contributions to firmware, the signal-processing pipeline, integrations, and docs are all welcome."
+    answer: "Wavey is in active development. This page covers architecture; github.com/waveyhq has current setup steps and release status."
+  - question: "What will I need?"
+    answer: "CSI-capable ESP32 nodes, a WiFi environment, and a host running the Python pipeline. Start with one node; add more for coverage."
+  - question: "How can I contribute?"
+    answer: "Star the GitHub repo, join Discord, or email mail@wavey.nopejs.me. Firmware, pipeline, integrations, and docs all welcome."
 ---
 
-Wavey is an **open-source WiFi CSI sensing** system, built in the open. This guide explains how Wavey is
-put together and how to follow along - so you understand the approach before you dive into the code.
+Wavey is an open-source WiFi CSI sensing system. This page covers deployment architecture — for signal
+processing detail, see the [sensing pipeline](/sensing-pipeline/). For what to detect first, see the
+[detection ladder](/detection/).
 
-> Wavey is in active development. For the current code, hardware list, and step-by-step setup, follow the
-> [GitHub repository](https://github.com/waveyhq) - that's the source of truth as the project evolves.
+> Setup steps live in the [GitHub repository](https://github.com/waveyhq) — they change as the project matures.
 
-## How a Wavey deployment is structured
-
-At a high level, Wavey has three layers (see [how it works](/how-it-works/) for the signal details):
+## Three-layer architecture
 
 ```text
-[ ESP32 CSI nodes ]  ->  [ real-time pipeline ]  ->  [ console / automations ]
-   capture CSI            clean + extract +            visualize, alert,
-   from WiFi              infer presence/motion        and integrate
+[ ESP32 CSI nodes ]  ->  [ Python pipeline ]  ->  [ console / automations ]
+   capture CSI            preprocess + features       visualize + emit events
 ```
 
-1. **Sensing nodes (ESP32).** Inexpensive ESP32 modules capture [Channel State Information](/glossary/) from WiFi. The whole ESP32 family supports CSI, so nodes are cheap and easy to source.
-2. **Analysis pipeline (Python).** A host ingests CSI, removes noise, extracts features, and infers occupancy, motion, and presence against a learned baseline of the empty space.
-3. **Console & integrations.** Results stream to the [Wavey Console](https://console.wavey.nopejs.me) for live visualization and can drive [smart-home automation](/use-cases/smart-home-automation/), alerts, or [analytics](/use-cases/occupancy-analytics/).
+1. **Sensing nodes (ESP32).** Capture [CSI](/glossary/) from ambient WiFi traffic. See
+   [commodity CSI limits](/posts/esp32-csi-explained/) for hardware constraints.
+2. **Analysis pipeline (Python).** Outlier rejection, amplitude features (primary on ESP32), phase
+   sanitization for micro-motion, baseline learning, inference. See the
+   [sensing pipeline](/sensing-pipeline/) for the processing stack.
+3. **Console and integrations.** Live visualization at [console.wavey.nopejs.me](https://console.wavey.nopejs.me);
+   events for [automation](/use-cases/smart-home-automation/) and [analytics](/use-cases/occupancy-analytics/).
 
-## What you'll want before you begin
+## Before you begin
 
-- **One or more CSI-capable ESP32 nodes.** Start with one to experiment; add nodes for coverage and robustness.
-- **A WiFi environment to sense.** Wavey reads the signals already present in a space.
-- **A host for the pipeline.** Any machine that can run the Python analysis stack.
+- One or more CSI-capable ESP32 modules (any ESP32 family chip)
+- A WiFi environment with traffic the nodes can sniff
+- A host machine for the Python stack
 
-(Exact models, wiring, and commands live in the repo so they stay accurate as Wavey matures - we
-intentionally don't duplicate fast-moving setup steps here.)
+## Pick your first detection task
 
-## Plan your first sensing task
+Start at the bottom of the [detection ladder](/detection/) — the most robust tasks first:
 
-The easiest wins come first. We recommend starting with the most robust capability and building up:
+1. **Occupancy** — [change-point detection on a baseline](/use-cases/occupancy-detection/)
+2. **Motion** — [variance and spectral features](/use-cases/motion-activity-detection/)
+3. **Presence** — [micro-Doppler in the respiration band](/use-cases/presence-detection/)
 
-1. **Occupancy** - [is the room occupied?](/use-cases/occupancy-detection/)
-2. **Motion** - [detect movement and activity](/use-cases/motion-activity-detection/)
-3. **Presence** - [sense a still person by breathing](/use-cases/presence-detection/)
+Each level adds preprocessing requirements and tuning complexity. Get occupancy working before attempting HAR.
+Every deployment needs its own empty-room baseline — cross-site transfer without per-site calibration
+remains an open problem on commodity hardware.
 
-## Follow development and get involved
+## Follow development
 
-- **Code & releases:** [github.com/waveyhq](https://github.com/waveyhq)
-- **Live console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
+- **Code:** [github.com/waveyhq](https://github.com/waveyhq)
+- **Console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
 - **Community:** [Discord](https://discord.gg/sxh9r9UTtW)
 - **Contact:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
 
-New to the field? Read [how Wavey works](/how-it-works/), skim the [glossary](/glossary/), browse the
-[FAQ](/faq/), read posts like [ESP32 CSI explained](/posts/esp32-csi-explained/), or learn more [about Wavey](/about/).
+Background reading: [how it works](/how-it-works/), [glossary](/glossary/), [FAQ](/faq/).
