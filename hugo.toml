@@ -27,6 +27,7 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 
 [params]
   siteName = "Wavey"
+  siteAlternateNames = ["Wavey RF Sensing", "Wavey WiFi Sensing", "WaveyHQ"]
   description = "Open-source WiFi CSI sensing on ESP32: device-free occupancy, motion, and presence detection without cameras or wearables."
   tagline = "Occupancy, motion, and presence from the WiFi environment."
   author = "Wavey Team"
@@ -72,25 +73,25 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   twitter = "nopeJS"
 
 [[params.navlinks]]
-  name = "working"
+  name = "Working"
   url = "how-it-works/"
 
 [[params.navlinks]]
-  name = "uses"
+  name = "Uses"
   url = "use-cases/"
 
 [[params.navlinks]]
-  name = "posts"
-  url = "posts/"
+  name = "Comparisons"
+  url = "comparisons/"
 
 [[params.navlinks]]
-  name = "faq"
+  name = "FAQ"
   url = "faq/"
 
 [[params.navlinks]]
-  name = "about"
+  name = "About"
   url = "about/"
 
 [[params.navlinks]]
-  name = "contact"
+  name = "Contact"
   url = "contact/"

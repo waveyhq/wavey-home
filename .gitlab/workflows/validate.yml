@@ -8,6 +8,27 @@ hugo:validate:
     - test -f public/index.html
     - test -f public/sitemap.xml
     - test -f public/llms.txt
+    - test -f public/robots.txt
+    - grep -q 'og:image.*\.webp' public/index.html
+    - grep -q FAQPage public/faq/index.html
+    - grep -q 'noindex, nofollow' public/404.html
+    - |
+      if grep -q FAQPage public/index.html; then
+        echo "Homepage should not emit FAQPage JSON-LD"
+        exit 1
+      fi
+      if grep -q FAQPage public/how-it-works/index.html; then
+        echo "Non-FAQ pages should not emit FAQPage JSON-LD"
+        exit 1
+      fi
+      if grep -q 'rel="canonical"' public/404.html; then
+        echo "404 page should not include a canonical tag"
+        exit 1
+      fi
+      if grep -q 'og:image' public/404.html; then
+        echo "404 page should not include Open Graph image tags"
+        exit 1
+      fi
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
