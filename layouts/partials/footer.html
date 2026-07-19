@@ -1,4 +1,3 @@
-{{ partial "footer-icons.html" . }}
 <footer class="footer">
   <div class="footer-main">
     <nav class="footer-col footer-col-product" aria-label="Product">
@@ -38,15 +37,8 @@
   </div>
   {{ partial "footer-ask-ai.html" . }}
   <div class="footer-bar">
-    <a href="{{ .Site.Params.status }}" target="_blank" rel="noopener" class="status-link footer-status-link" data-status-api="{{ .Site.Params.status }}index.json" aria-label="Service uptime"><span class="status-dot" aria-hidden="true"></span><span class="status-label">Uptime</span></a>
+    {{ partial "status-link.html" (dict "Site" .Site "class" "footer-status-link") }}
     <span class="footer-copy">&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</span>
-    <button type="button" class="theme-toggle footer-theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
-      <span class="footer-icon-slot">
-        <span class="theme-icon theme-icon-sun">{{ template "icon-sun" . }}</span>
-        <span class="theme-icon theme-icon-moon">{{ template "icon-moon" . }}</span>
-      </span>
-      <span class="footer-icon-label">Theme</span>
-    </button>
+    {{ partial "theme-toggle.html" (dict "context" . "class" "footer-theme-toggle" "labelClass" "footer-icon-label" "label" "Theme") }}
   </div>
 </footer>
-<script src="{{ "js/status-indicator.js" | relURL }}"></script>

@@ -1,0 +1,7 @@
+<button type="button" class="theme-toggle {{ .class }}" aria-label="Toggle dark/light theme" title="Toggle theme">
+  <span class="footer-icon-slot">
+    <span class="theme-icon theme-icon-sun">{{ template "icon-sun" .context }}</span>
+    <span class="theme-icon theme-icon-moon">{{ template "icon-moon" .context }}</span>
+  </span>
+  <span class="{{ .labelClass }}">{{ .label }}</span>
+</button>
