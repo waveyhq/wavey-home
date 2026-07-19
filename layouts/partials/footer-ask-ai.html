@@ -1,11 +1,14 @@
-{{- $prompt := printf "What is Wavey (%s)? How does it use WiFi CSI on ESP32 to detect occupancy and motion?" (strings.TrimSuffix "/" .Site.BaseURL) -}}
-{{- $q := $prompt | urlquery -}}
+{{- $domain := "" -}}
+{{- with urls.Parse .Site.BaseURL }}{{ $domain = .Host }}{{ end -}}
+{{- $prompt := printf "What is Wavey (%s)? How does it use WiFi CSI on ESP32 to detect occupancy and motion?" $domain -}}
+{{- $space := print "%" "20" -}}
+{{- $q := replace (replace ($prompt | urlquery) "+" "SPACEENC") "SPACEENC" $space -}}
 {{- $providers := slice
-  (dict "name" "ChatGPT" "url" (printf "https://chatgpt.com/?q=%s" $q) "icon" "chatgpt.svg")
-  (dict "name" "Claude" "url" (printf "https://claude.ai/new?q=%s" $q) "icon" "claude.svg")
-  (dict "name" "Gemini" "url" (printf "https://gemini.google.com/app?q=%s" $q) "icon" "gemini.svg")
-  (dict "name" "Perplexity" "url" (printf "https://www.perplexity.ai/search?q=%s" $q) "icon" "perplexity.svg")
-  (dict "name" "Grok" "url" (printf "https://grok.com/?q=%s" $q) "icon" "grok.svg")
+  (dict "name" "ChatGPT" "url" (print "https://chatgpt.com/?q=" $q) "icon" "chatgpt.svg")
+  (dict "name" "Claude" "url" (print "https://claude.ai/new?q=" $q) "icon" "claude.svg")
+  (dict "name" "Gemini" "url" (print "https://www.google.com/search?udm=50&q=" $q) "icon" "gemini.svg")
+  (dict "name" "Perplexity" "url" (print "https://www.perplexity.ai/search?q=" $q) "icon" "perplexity.svg")
+  (dict "name" "Grok" "url" (print "https://grok.com/?q=" $q) "icon" "grok.svg")
 -}}
 <section class="footer-ask-ai" aria-label="Ask about Wavey on AI assistants">
   <p class="footer-ask-ai-label"><strong>Ask about Wavey on</strong></p>
