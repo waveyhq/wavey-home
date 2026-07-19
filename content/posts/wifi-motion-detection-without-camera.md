@@ -54,4 +54,4 @@ even notices a still person. See the full [WiFi sensing vs PIR](/comparisons/wif
 ## Try it with Wavey
 
 Wavey is an open-source system for exactly this. Read [how it works](/how-it-works/), follow
-[getting started](/getting-started/), or explore the code on [GitHub](https://github.com/trywavey).
+[getting started](/getting-started/), or explore the code on [GitHub](https://github.com/waveyhq).

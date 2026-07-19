@@ -10,7 +10,7 @@ Thank you for helping improve [wavey.nopejs.me](https://wavey.nopejs.me).
 ## Local development
 
 ```bash
-git clone https://github.com/trywavey/wavey-home.git
+git clone https://github.com/waveyhq/wavey-home.git
 cd wavey-home
 hugo server -D
 ```

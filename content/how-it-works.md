@@ -120,4 +120,4 @@ Wavey brings these ideas into an open-source system you can actually run.
 - [Explore use cases](/use-cases/)
 - [Compare WiFi sensing to cameras, radar, and wearables](/comparisons/)
 - [Browse the glossary](/glossary/) or [read the FAQ](/faq/)
-- Star or contribute on [GitHub](https://github.com/trywavey)
+- Star or contribute on [GitHub](https://github.com/waveyhq)

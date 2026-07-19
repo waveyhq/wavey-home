@@ -38,7 +38,7 @@ faq:
   - question: "How is this different from WiFi MAC-address tracking?"
     answer: "MAC-based tracking follows device identifiers, which can be personal data and tends to miscount (one person with several devices, or many people sharing one). Wavey reads CSI - the body's effect on the signal - so it produces anonymous occupancy without tracking phones or individuals."
   - question: "Is Wavey open source, and where is the code?"
-    answer: "Yes. Wavey is open source and developed in the open at github.com/trywavey. You can follow progress there, join the community on Discord, and reach the team at mail@wavey.nopejs.me."
+    answer: "Yes. Wavey is open source and developed in the open at github.com/waveyhq. You can follow progress there, join the community on Discord, and reach the team at mail@wavey.nopejs.me."
   - question: "What is IEEE 802.11bf?"
     answer: "IEEE 802.11bf is the amendment to the WiFi standard dedicated to WiFi sensing. Its existence signals that sensing is becoming a first-class, standardized capability of WiFi itself - the same phenomenon Wavey builds on with CSI."
   - question: "How do I get started with Wavey?"

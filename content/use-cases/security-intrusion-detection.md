@@ -49,4 +49,4 @@ than used for identification.
 ## Get started
 
 Read [how Wavey works](/how-it-works/), then [get started](/getting-started/) or explore the
-[GitHub project](https://github.com/trywavey).
+[GitHub project](https://github.com/waveyhq).

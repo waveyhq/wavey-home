@@ -16,7 +16,7 @@ keywords:
   - how to build WiFi sensing
 faq:
   - question: "Is Wavey ready to install today?"
-    answer: "Wavey is an open-source project in active development. This page explains the architecture and approach so you can follow along and contribute. For the latest code, releases, and setup status, follow the GitHub project at github.com/trywavey."
+    answer: "Wavey is an open-source project in active development. This page explains the architecture and approach so you can follow along and contribute. For the latest code, releases, and setup status, follow the GitHub project at github.com/waveyhq."
   - question: "What will I need to run Wavey?"
     answer: "At a high level: one or more ESP32 sensing nodes (any CSI-capable ESP32 works), a WiFi environment to sense, and a host machine to run the Python analysis pipeline. Exact hardware and steps are tracked in the GitHub repository."
   - question: "How can I contribute to Wavey?"
@@ -27,7 +27,7 @@ Wavey is an **open-source WiFi CSI sensing** system, built in the open. This gui
 put together and how to follow along - so you understand the approach before you dive into the code.
 
 > Wavey is in active development. For the current code, hardware list, and step-by-step setup, follow the
-> [GitHub repository](https://github.com/trywavey) - that's the source of truth as the project evolves.
+> [GitHub repository](https://github.com/waveyhq) - that's the source of truth as the project evolves.
 
 ## How a Wavey deployment is structured
 
@@ -62,7 +62,7 @@ The easiest wins come first. We recommend starting with the most robust capabili
 
 ## Follow development and get involved
 
-- **Code & releases:** [github.com/trywavey](https://github.com/trywavey)
+- **Code & releases:** [github.com/waveyhq](https://github.com/waveyhq)
 - **Live console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
 - **Community:** [Discord](https://discord.gg/sxh9r9UTtW)
 - **Contact:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)

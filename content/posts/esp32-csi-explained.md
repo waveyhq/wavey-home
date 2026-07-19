@@ -59,5 +59,5 @@ standard. Affordable hardware is what brings those ideas within reach of everyon
 ## Get hands-on
 
 Wavey turns ESP32 CSI into a usable system, in the open. Follow [getting started](/getting-started/), browse
-the [GitHub project](https://github.com/trywavey), or visualize live CSI in the
+the [GitHub project](https://github.com/waveyhq), or visualize live CSI in the
 [Wavey Console](https://console.wavey.nopejs.me).

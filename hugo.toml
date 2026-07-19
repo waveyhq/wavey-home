@@ -37,11 +37,11 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
   console = "https://console.wavey.nopejs.me"
   status = "https://status.wavey.nopejs.me/"
-  github = "https://github.com/trywavey"
+  github = "https://github.com/waveyhq"
   discord = "https://discord.gg/sxh9r9UTtW"
   twitter = "https://x.com/nopeJS"
   email = "mail@wavey.nopejs.me"
-  repo = "https://github.com/trywavey"
+  repo = "https://github.com/waveyhq"
   location = "India"
 
   keywords = [
@@ -63,7 +63,7 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   ]
 
 [params.social]
-  github = "trywavey"
+  github = "waveyhq"
   discord = "sxh9r9UTtW"
   twitter = "nopeJS"
 

@@ -58,7 +58,7 @@
   // Named events only for destinations used in conversion funnels.
   function namedEvent(url, destination) {
     var path = url.pathname.toLowerCase();
-    if (destination === 'github' && path.indexOf('/trywavey') === 0) return 'github_clicked';
+    if (destination === 'github' && path.indexOf('/waveyhq') === 0) return 'github_clicked';
     if (destination === 'gitlab' && path.indexOf('/waveyhq') === 0) return 'gitlab_clicked';
     if (destination === 'discord') return 'discord_clicked';
     if (destination === 'console') return 'console_clicked';

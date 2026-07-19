@@ -46,4 +46,4 @@ can adapt the events to your platform of choice.
 ## Get started
 
 See [how Wavey works](/how-it-works/), follow [getting started](/getting-started/), and join the build on
-[Discord](https://discord.gg/sxh9r9UTtW) or [GitHub](https://github.com/trywavey).
+[Discord](https://discord.gg/sxh9r9UTtW) or [GitHub](https://github.com/waveyhq).
