@@ -8,7 +8,7 @@
   var API = links[0].dataset.statusApi;
   var dotClass = { operational: 'status-dot--operational', degraded: 'status-dot--degraded', down: 'status-dot--down', maintenance: 'status-dot--maintenance' };
   var labelClass = { operational: 'status-label--operational', degraded: 'status-label--degraded', down: 'status-label--down', maintenance: 'status-label--maintenance' };
-  var copy = { operational: 'All Operations Running', degraded: 'Degraded Performance', down: 'Service Disruption', maintenance: 'Under Maintenance', unknown: 'Uptime' };
+  var copy = { operational: 'Operational', degraded: 'Degraded', down: 'Service Disruption', maintenance: 'Under Maintenance', unknown: 'Uptime' };
 
   function render(s) {
     links.forEach(function (link) {
