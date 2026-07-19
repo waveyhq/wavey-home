@@ -36,6 +36,7 @@
       </div>
     </div>
   </div>
+  {{ partial "footer-ask-ai.html" . }}
   <div class="footer-bar">
     <a href="{{ .Site.Params.status }}" target="_blank" rel="noopener" class="status-link footer-status-link" data-status-api="{{ .Site.Params.status }}index.json" aria-label="Service uptime"><span class="status-dot" aria-hidden="true"></span><span class="status-label">Uptime</span></a>
     <span class="footer-copy">&copy; {{ now.Format "2006" }} {{ .Site.Params.siteName }}. All rights reserved.</span>

@@ -1,0 +1,24 @@
+{{- $prompt := printf "What is Wavey (%s)? How does it use WiFi CSI on ESP32 to detect occupancy and motion?" (strings.TrimSuffix "/" .Site.BaseURL) -}}
+{{- $q := $prompt | urlquery -}}
+{{- $providers := slice
+  (dict "name" "ChatGPT" "url" (printf "https://chatgpt.com/?q=%s" $q) "icon" "chatgpt.svg")
+  (dict "name" "Claude" "url" (printf "https://claude.ai/new?q=%s" $q) "icon" "claude.svg")
+  (dict "name" "Gemini" "url" (printf "https://gemini.google.com/app?q=%s" $q) "icon" "gemini.svg")
+  (dict "name" "Perplexity" "url" (printf "https://www.perplexity.ai/search?q=%s" $q) "icon" "perplexity.svg")
+  (dict "name" "Grok" "url" (printf "https://grok.com/?q=%s" $q) "icon" "grok.svg")
+-}}
+<section class="footer-ask-ai" aria-label="Ask about Wavey on AI assistants">
+  <p class="footer-ask-ai-label"><strong>Ask about Wavey on</strong></p>
+  <div class="footer-ask-ai-icons">
+    {{- range $providers }}
+    <a href="{{ .url }}"
+       class="footer-ask-ai-link"
+       title="Ask {{ .name }} about Wavey"
+       aria-label="Ask {{ .name }} about Wavey"
+       target="_blank"
+       rel="noopener noreferrer">
+      {{- readFile (printf "static/icons/ai/%s" .icon) | safeHTML -}}
+    </a>
+    {{- end }}
+  </div>
+</section>

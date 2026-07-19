@@ -497,6 +497,63 @@ figure {
     gap: 0.35rem;
 }
 
+.footer-ask-ai {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--secondary-color) 35%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--secondary-color) 35%, transparent);
+    min-width: 0;
+}
+
+.footer-ask-ai-label {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--font-color);
+    line-height: 1.4;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.footer-ask-ai-icons {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.footer-ask-ai-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: var(--font-color);
+    background-color: color-mix(in srgb, var(--secondary-color) 12%, transparent);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-ask-ai-link:hover,
+.footer-ask-ai-link:focus-visible {
+    color: var(--primary-color);
+    background-color: color-mix(in srgb, var(--primary-color) 14%, transparent);
+    text-decoration: none;
+}
+
+.footer-ask-ai-link svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
 .footer-bar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -504,7 +561,6 @@ figure {
     gap: 1rem;
     max-width: 100%;
     padding-top: 1.25rem;
-    border-top: 1px solid color-mix(in srgb, var(--secondary-color) 35%, transparent);
 }
 
 .footer-copy {
@@ -1151,6 +1207,32 @@ body.nav-open {
         margin-bottom: 1.25rem;
     }
 
+    .footer-ask-ai {
+        gap: 0.5rem 0.65rem;
+        margin-bottom: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .footer-ask-ai-label {
+        font-size: 0.78rem;
+    }
+
+    .footer-ask-ai-icons {
+        gap: 0.35rem;
+    }
+
+    .footer-ask-ai-link {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+    }
+
+    .footer-ask-ai-link svg {
+        width: 20px;
+        height: 20px;
+    }
+
     .footer-col-product {
         grid-column: 2;
         grid-row: 1;
@@ -1209,6 +1291,32 @@ body.nav-open {
 @media only screen and (max-width: 480px) {
     .footer {
         padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    }
+
+    .footer-ask-ai {
+        gap: 0.35rem 0.5rem;
+        margin-bottom: 0.85rem;
+        padding-top: 0.85rem;
+        padding-bottom: 0.85rem;
+    }
+
+    .footer-ask-ai-label {
+        font-size: 0.72rem;
+    }
+
+    .footer-ask-ai-icons {
+        gap: 0.25rem;
+    }
+
+    .footer-ask-ai-link {
+        width: 26px;
+        height: 26px;
+        border-radius: 5px;
+    }
+
+    .footer-ask-ai-link svg {
+        width: 18px;
+        height: 18px;
     }
 
     .footer-main {
