@@ -1,6 +1,6 @@
 ---
-title: "Wavey | WiFi CSI Sensing System (Device-Free, No Cameras)"
-description: "Wavey is an open-source WiFi CSI sensing system — subcarrier physics, signal processing pipelines, and deployable occupancy, motion, and presence detection on ESP32."
+title: "Wavey | WiFi CSI Sensing System"
+description: "Wavey is an open-source WiFi CSI sensing stack: ESP32 nodes capture Channel State Information from the ambient WiFi channel in real time to detect occupancy, motion, and presence."
 sitemap:
   priority: 1.0
 keywords:
@@ -10,8 +10,10 @@ keywords:
   - device-free occupancy detection
   - ESP32 CSI
   - WiFi motion detection
+  - WiFi presence detection
   - presence detection without camera
   - RF sensing
+  - Open-source
 faq:
   - question: "Can WiFi sensing measure breathing or vital signs?"
     answer: "CSI phase can pick up the periodic chest motion of respiration (0.1–0.5 Hz) after preprocessing, but reliability depends on range, node placement, and a quiet environment. Wavey treats this as presence awareness, not clinical vitals."
