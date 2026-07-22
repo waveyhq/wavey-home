@@ -90,3 +90,10 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 [[params.navlinks]]
   name = "Contact"
   url = "contact/"
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]

@@ -1,0 +1,2 @@
+{{- $display := .Get "display" | default false -}}
+<script type="math/tex{{ if $display }}; mode=display{{ end }}">{{ .Inner }}</script>

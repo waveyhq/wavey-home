@@ -91,5 +91,6 @@
     <script defer src="{{ $oneko.RelPermalink }}" integrity="{{ $oneko.Data.Integrity }}" crossorigin="anonymous" data-cat="{{ "oneko.gif" | relURL }}"></script>
     <script defer src="{{ $monitoring.RelPermalink }}" integrity="{{ $monitoring.Data.Integrity }}" crossorigin="anonymous" data-env="{{ hugo.Environment }}"{{ with getenv "COMMIT_REF" }} data-release="{{ . }}"{{ end }}></script>
     <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}"></script>
+    {{- partial "katex.html" . -}}
   </body>
 </html>

@@ -1,0 +1,17 @@
+{{- $hasMath := false -}}
+{{- if .Params.math -}}
+  {{- $hasMath = true -}}
+{{- else -}}
+  {{- $raw := .RawContent -}}
+  {{- with .Params.faq -}}
+    {{- range . -}}
+      {{- $answer := .answer | default .a | default "" -}}
+      {{- $raw = printf "%s\n%s" $raw $answer -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $patterns := `\$\$[\s\S]+?\$\$|\$[^\$\n]+?\$|\\\([\s\S]+?\\\)|\\\[([\s\S]+?)\\\]|type="math/tex"` -}}
+  {{- if findRE $patterns $raw -}}
+    {{- $hasMath = true -}}
+  {{- end -}}
+{{- end -}}
+{{- return $hasMath -}}

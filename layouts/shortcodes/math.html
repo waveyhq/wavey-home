@@ -1,0 +1,7 @@
+{{- $display := or (.Get "display") (eq (.Get 0) "display") -}}
+{{- $content := trim .Inner "\n" -}}
+{{- if $display -}}
+{{ printf "$$%s$$" $content }}
+{{- else -}}
+\({{ $content }}\)
+{{- end -}}
