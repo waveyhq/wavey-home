@@ -893,11 +893,12 @@ body.nav-open {
 
 @media only screen and (min-width: 851px) {
     .nav-toggle,
-    .nav-overlay {
+    .nav-overlay,
+    .nav-drawer--mobile {
         display: none !important;
     }
 
-    .nav-drawer {
+    .nav-drawer--desktop {
         position: static;
         transform: none;
         width: auto;
@@ -922,6 +923,10 @@ body.nav-open {
 @media only screen and (max-width: 850px) {
     h1 {
         margin-bottom: 2.5rem;
+    }
+
+    .nav-drawer--desktop {
+        display: none !important;
     }
 
     .terminal-prompt {
@@ -1016,7 +1021,7 @@ body.nav-open {
         display: none !important;
     }
 
-    .nav-drawer {
+    .nav-drawer--mobile {
         position: fixed;
         top: 0;
         right: 0;
@@ -1066,12 +1071,12 @@ body.nav-open {
         opacity: 0.85;
     }
 
-    .nav-drawer.is-open {
+    .nav-drawer--mobile.is-open {
         transform: translateX(0);
         pointer-events: auto;
     }
 
-    .nav-drawer .terminal-menu {
+    .nav-drawer--mobile .terminal-menu {
         width: 100%;
         flex: 0 1 auto;
     }
