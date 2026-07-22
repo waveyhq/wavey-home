@@ -1254,8 +1254,13 @@ body.nav-open {
     @media (prefers-reduced-motion: reduce) {
         .nav-toggle-bar,
         .nav-overlay,
-        .nav-drawer {
+        .nav-drawer,
+        #oneko {
             transition: none;
+        }
+
+        #oneko {
+            display: none;
         }
     }
 

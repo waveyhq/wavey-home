@@ -83,10 +83,12 @@
     </div>
 
     {{- $siteUI := resources.Get "js/site-ui.js" | resources.Copy "resources/js/site-ui.js" | minify | fingerprint "sha384" -}}
+    {{- $oneko := resources.FromString "resources/js/oneko.js" (readFile "static/js/oneko.js") | minify | fingerprint "sha384" -}}
     {{- $monitoring := resources.FromString "resources/js/deferred-monitoring.js" (readFile "static/js/deferred-monitoring.js") | fingerprint "sha384" -}}
     {{- $analyticsLoader := resources.FromString "resources/js/deferred-analytics.js" (readFile "static/js/deferred-analytics.js") | fingerprint "sha384" -}}
     {{- $analytics := resources.FromString "resources/js/analytics.js" (readFile "static/js/analytics.js") | fingerprint "sha384" -}}
     <script defer src="{{ $siteUI.RelPermalink }}" integrity="{{ $siteUI.Data.Integrity }}" crossorigin="anonymous"></script>
+    <script defer src="{{ $oneko.RelPermalink }}" integrity="{{ $oneko.Data.Integrity }}" crossorigin="anonymous" data-cat="{{ "oneko.gif" | relURL }}"></script>
     <script defer src="{{ $monitoring.RelPermalink }}" integrity="{{ $monitoring.Data.Integrity }}" crossorigin="anonymous" data-env="{{ hugo.Environment }}"{{ with getenv "COMMIT_REF" }} data-release="{{ . }}"{{ end }}></script>
     <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}"></script>
   </body>
