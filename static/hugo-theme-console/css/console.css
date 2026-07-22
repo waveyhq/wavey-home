@@ -134,7 +134,7 @@ body {
     font-family: var(--font-stack);
     font-size: var(--global-font-size);
     background-color: transparent;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
     overflow-x: clip;
 }
 
@@ -1252,7 +1252,7 @@ body.nav-open {
     .footer {
         margin-top: 50px;
         padding-top: 1.5rem;
-        padding-bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
         max-width: 100%;
         min-width: 0;
     }
@@ -1341,13 +1341,13 @@ body.nav-open {
     }
 
     body {
-        margin-bottom: 20px;
+        margin-bottom: 8px;
     }
 }
 
 @media only screen and (max-width: 480px) {
     .footer {
-        padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     .footer-ask-ai {
@@ -1424,6 +1424,6 @@ body.nav-open {
     }
 
     body {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
     }
 }
