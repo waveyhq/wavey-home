@@ -1,0 +1,14 @@
+<div class="grain" aria-hidden="true">
+  <svg width="0" height="0" focusable="false">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.913" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.45" intercept="-0.12"/>
+        <feFuncG type="linear" slope="1.45" intercept="-0.12"/>
+        <feFuncB type="linear" slope="1.45" intercept="-0.12"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+  <div class="grain__layer"></div>
+</div>
