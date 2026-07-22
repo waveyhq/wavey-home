@@ -1,8 +1,11 @@
 {{- if partial "has-math.html" . -}}
+  {{- $katexJS := resources.FromString "resources/js/katex.min.js" (readFile "static/katex/katex.min.js") | fingerprint "sha384" -}}
+  {{- $autoRenderJS := resources.FromString "resources/js/auto-render.min.js" (readFile "static/katex/auto-render.min.js") | fingerprint "sha384" -}}
+  {{- $mathtexJS := resources.FromString "resources/js/mathtex-script-type.min.js" (readFile "static/katex/mathtex-script-type.min.js") | fingerprint "sha384" -}}
   {{- $katexInitJS := partial "js-build.html" (resources.Get "js/katex-init.js") | fingerprint "sha384" -}}
   <link rel="stylesheet" href="{{ "katex/katex.min.css" | relURL }}">
-  <script defer src="{{ "katex/katex.min.js" | relURL }}"></script>
-  <script defer src="{{ "katex/auto-render.min.js" | relURL }}"></script>
-  <script defer src="{{ "katex/mathtex-script-type.min.js" | relURL }}"></script>
+  <script defer src="{{ $katexJS.RelPermalink }}" integrity="{{ $katexJS.Data.Integrity }}" crossorigin="anonymous"></script>
+  <script defer src="{{ $autoRenderJS.RelPermalink }}" integrity="{{ $autoRenderJS.Data.Integrity }}" crossorigin="anonymous"></script>
+  <script defer src="{{ $mathtexJS.RelPermalink }}" integrity="{{ $mathtexJS.Data.Integrity }}" crossorigin="anonymous"></script>
   <script defer src="{{ $katexInitJS.RelPermalink }}" integrity="{{ $katexInitJS.Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end -}}
