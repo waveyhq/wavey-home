@@ -1,0 +1,30 @@
+<div class="nav-overlay" hidden></div>
+
+<aside id="site-nav-drawer" class="nav-drawer" aria-hidden="true">
+  <div class="nav-drawer-header">
+    <a href="{{ .Site.BaseURL }}" class="nav-drawer-logo">{{ .Site.Title }}</a>
+  </div>
+  <nav class="terminal-menu" aria-label="Main navigation">
+    <ul>
+      {{ range .Site.Params.navlinks }}
+      <li>
+        <a href="{{ relURL .url }}">{{ .name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+  <div class="nav-drawer-bottom">
+    <nav class="nav-drawer-more" aria-label="More links">
+      <ul>
+        <li><a href="{{ "faq/" | relURL }}">FAQ</a></li>
+        <li><a href="{{ "glossary/" | relURL }}">Glossary</a></li>
+        <li><a href="{{ "posts/" | relURL }}">Posts</a></li>
+        <li><a href="{{ "getting-started/" | relURL }}">Get started</a></li>
+      </ul>
+    </nav>
+    <div class="nav-drawer-footer">
+      {{ partial "status-link.html" (dict "Site" .Site "class" "nav-drawer-status-link") }}
+      {{ partial "theme-toggle.html" (dict "context" . "class" "nav-drawer-theme-toggle" "labelClass" "nav-drawer-theme-label" "label" "Toggle theme") }}
+    </div>
+  </div>
+</aside>

@@ -133,9 +133,49 @@ html[data-theme="light"] {
 body {
     font-family: var(--font-stack);
     font-size: var(--global-font-size);
-    background-color: var(--background-color);
+    background-color: transparent;
     margin-bottom: 32px;
     overflow-x: clip;
+}
+
+html {
+    background-color: var(--background-color);
+}
+
+body > :not(.grain):not(.nav-overlay):not(.nav-drawer) {
+    position: relative;
+    z-index: 1;
+}
+
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    isolation: isolate;
+    background: var(--background-color);
+}
+
+.grain__layer {
+    position: absolute;
+    inset: 0;
+    filter: url(#grain);
+    opacity: 0.2;
+    mix-blend-mode: soft-light;
+}
+
+html[data-theme="light"] .grain__layer {
+    filter: url(#grain) invert(1);
+    opacity: 0.28;
+    mix-blend-mode: multiply;
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme="dark"]) .grain__layer {
+        filter: url(#grain) invert(1);
+        opacity: 0.28;
+        mix-blend-mode: multiply;
+    }
 }
 
 .container {
@@ -989,7 +1029,8 @@ body.nav-open {
         height: 100dvh;
         transform: translateX(100%);
         transition: transform 0.25s ease;
-        background: var(--background-color);
+        background-color: var(--background-color);
+        isolation: isolate;
         overflow-y: auto;
         pointer-events: none;
         padding:
