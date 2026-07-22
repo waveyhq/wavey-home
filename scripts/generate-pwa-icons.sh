@@ -16,13 +16,14 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$ROOT/static/images/wavey-meta/wavey-logo.png"
 OUT="$ROOT/static/images/wavey-meta"
+ASSET_OUT="$ROOT/assets/images/wavey-meta"
 
 if [[ ! -f "$SRC" ]]; then
   echo "Source not found: $SRC" >&2
   exit 1
 fi
 
-python3 - "$SRC" "$OUT" <<'PY'
+python3 - "$SRC" "$OUT" "$ASSET_OUT" <<'PY'
 import sys
 from pathlib import Path
 
@@ -30,7 +31,9 @@ from PIL import Image, ImageChops, ImageDraw
 
 src_path = Path(sys.argv[1])
 out_dir = Path(sys.argv[2])
+asset_out_dir = Path(sys.argv[3])
 out_dir.mkdir(parents=True, exist_ok=True)
+asset_out_dir.mkdir(parents=True, exist_ok=True)
 
 BG = (34, 34, 37)  # #222225 — matches manifest background_color
 THEME = (98, 196, 255)  # #62c4ff — subtle shape outline
@@ -53,7 +56,7 @@ def extract_logo(img: Image.Image, threshold: int = 40) -> Image.Image:
 logo = extract_logo(raw)
 nobg_bbox = logo.getbbox()
 if nobg_bbox:
-    nobg_path = out_dir / "wavey-logo-nobg.png"
+    nobg_path = asset_out_dir / "wavey-logo-nobg.png"
     logo.crop(nobg_bbox).save(nobg_path, optimize=True)
     print(f"wrote {nobg_path}")
 

@@ -33,7 +33,6 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   author = "Wavey Team"
   locale = "en_US"
   TitleCutting = false
-  animateStyle = "animated fadeIn"
 
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
   console = "https://console.wavey.nopejs.me"

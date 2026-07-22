@@ -31,9 +31,11 @@
     <meta name="google-site-verification" content="Q_4YQonYh0O1JZmmhSFWL7sWdwUU5oVhPHISgWOD6u0" />
     {{- partial "head_extra.html" . -}}
 
-    <link rel="stylesheet" href="{{ "hugo-theme-console/css/terminal-0.7.4.min.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "hugo-theme-console/css/animate-4.1.1.min.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "hugo-theme-console/css/console.css" | relURL }}">
+    {{- $terminalCSS := resources.FromString "resources/css/terminal.css" (readFile "static/hugo-theme-console/css/terminal-0.7.4.min.css") -}}
+    {{- $consoleCSS := resources.FromString "resources/css/console.css" (readFile "static/hugo-theme-console/css/console.css") -}}
+    {{- $styles := slice $terminalCSS $consoleCSS | resources.Concat "resources/css/site.css" | minify | fingerprint "sha384" -}}
+    <link rel="preload" href="{{ "hugo-theme-console/font/RobotoMono-Variable-Latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
     {{ `
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -60,7 +62,10 @@
               {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
               {{ $.Scratch.Add "path" .Site.BaseURL }}
               <a href="{{ .Site.BaseURL }}" class="site-brand no-style">
-                <img src="{{ "images/wavey-meta/wavey-logo-nobg.png" | relURL }}" alt="Wavey" class="site-brand-icon" width="20" height="24" decoding="async">
+                {{- $logo := resources.Get "images/wavey-meta/wavey-logo-nobg.png" | resources.Copy "resources/images/wavey-logo-nobg.png" -}}
+                {{- $logo1x := $logo.Resize "20x24 webp q90" -}}
+                {{- $logo2x := $logo.Resize "40x48 webp q90" -}}
+                <img src="{{ $logo1x.RelPermalink }}" srcset="{{ $logo1x.RelPermalink }} 1x, {{ $logo2x.RelPermalink }} 2x" alt="Wavey" class="site-brand-icon" width="20" height="24" decoding="async">
                 <span class="site-brand-text{{ with .Site.Params.TitleCutting }} site-name{{ end }}">{{ .Site.Title }}</span>
               </a>:~#
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
@@ -68,87 +73,21 @@
         </div>
     </div>
 
-    <div class="container {{ .Site.Params.animateStyle }}" >
-        {{ block "main" . }}
-        {{ end }}
-        {{ partial "feedback-form.html" . }}
+    <div class="container">
+        <main id="main-content">
+            {{ block "main" . }}
+            {{ end }}
+            {{ partial "feedback-form.html" . }}
+        </main>
         {{ partial "footer.html" . }}
     </div>
 
-    <script>
-    (function(){
-      function getTheme(){
-        var stored=localStorage.getItem('theme');
-        if(stored==='dark'||stored==='light')return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
-      }
-      function applyTheme(theme){
-        document.documentElement.setAttribute('data-theme',theme);
-        var meta=document.querySelector('meta[name="theme-color"]');
-        if(meta)meta.setAttribute('content',theme==='dark'?'#000000':'#ffffff');
-      }
-      applyTheme(getTheme());
-      document.querySelectorAll('.theme-toggle').forEach(function(toggle){
-        toggle.addEventListener('click',function(){
-          var next=getTheme()==='dark'?'light':'dark';
-          localStorage.setItem('theme',next);
-          applyTheme(next);
-        });
-      });
-
-      var navToggle=document.querySelector('.nav-toggle');
-      var navDrawer=document.getElementById('site-nav-drawer');
-      var navOverlay=document.querySelector('.nav-overlay');
-      if(!navToggle||!navDrawer||!navOverlay)return;
-
-      var reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      function setDrawerOpen(open){
-        navToggle.classList.toggle('is-open',open);
-        navDrawer.classList.toggle('is-open',open);
-        navOverlay.classList.toggle('is-open',open);
-        document.body.classList.toggle('nav-open',open);
-        navToggle.setAttribute('aria-expanded',open?'true':'false');
-        navToggle.setAttribute('aria-label',open?'Close menu':'Open menu');
-        navDrawer.setAttribute('aria-hidden',open?'false':'true');
-        if(open){
-          navOverlay.removeAttribute('hidden');
-          var firstLink=navDrawer.querySelector('a');
-          if(firstLink)firstLink.focus();
-        }else{
-          navOverlay.setAttribute('hidden','');
-          navToggle.focus();
-        }
-      }
-
-      function closeDrawer(){
-        setDrawerOpen(false);
-      }
-
-      navToggle.addEventListener('click',function(){
-        setDrawerOpen(!navDrawer.classList.contains('is-open'));
-      });
-
-      navOverlay.addEventListener('click',closeDrawer);
-
-      navDrawer.querySelectorAll('a').forEach(function(link){
-        link.addEventListener('click',closeDrawer);
-      });
-
-      document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'&&navDrawer.classList.contains('is-open')){
-          closeDrawer();
-        }
-      });
-
-      if(reducedMotion){
-        navDrawer.style.transition='none';
-        navOverlay.style.transition='none';
-      }
-    })();
-    </script>
-    <script src="{{ "js/status-indicator.js" | relURL }}"></script>
-    <script defer src="{{ "js/deferred-monitoring.js" | relURL }}" data-env="{{ hugo.Environment }}"{{ with getenv "COMMIT_REF" }} data-release="{{ . }}"{{ end }}></script>
-    <script defer src="{{ "js/deferred-analytics.js" | relURL }}" data-analytics-src="{{ "js/analytics.js" | relURL }}"></script>
+    {{- $siteUI := resources.Get "js/site-ui.js" | resources.Copy "resources/js/site-ui.js" | minify | fingerprint "sha384" -}}
+    {{- $monitoring := resources.FromString "resources/js/deferred-monitoring.js" (readFile "static/js/deferred-monitoring.js") | fingerprint "sha384" -}}
+    {{- $analyticsLoader := resources.FromString "resources/js/deferred-analytics.js" (readFile "static/js/deferred-analytics.js") | fingerprint "sha384" -}}
+    {{- $analytics := resources.FromString "resources/js/analytics.js" (readFile "static/js/analytics.js") | fingerprint "sha384" -}}
+    <script defer src="{{ $siteUI.RelPermalink }}" integrity="{{ $siteUI.Data.Integrity }}" crossorigin="anonymous"></script>
+    <script defer src="{{ $monitoring.RelPermalink }}" integrity="{{ $monitoring.Data.Integrity }}" crossorigin="anonymous" data-env="{{ hugo.Environment }}"{{ with getenv "COMMIT_REF" }} data-release="{{ . }}"{{ end }}></script>
+    <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}"></script>
   </body>
 </html>

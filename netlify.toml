@@ -8,10 +8,10 @@
   HUGO_ENV = "production"
 
 [context.deploy-preview]
-  command = "hugo --buildFuture --buildDrafts"
+  command = "hugo --gc --minify --buildFuture --buildDrafts"
 
 [context.branch-deploy]
-  command = "hugo --buildFuture"
+  command = "hugo --gc --minify --buildFuture"
 
 [[headers]]
   for = "/resources/*"
@@ -19,6 +19,20 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/hugo-theme-console/font/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-1Qiq9kwIp9qejpW+9w5YNtzC0RiAf2NQrMo0DCBRisY=' 'sha384-lzsVEFBPQGIpxjy9nXdXGZgvIRGen5l1u0W8bs7XAV7mXUfthsHM1JRfmQMBfV9p' 'sha384-orJIqRfdGEQFJaZV1WcKlaiYVFBODQt/9Rkq7ghem94QhFJ+sKVOiIZPWrITQJm8' 'sha384-ApOft1p0S0aCvEVvZa4MhYsL0w+B/954ELTkeU6R0JOQXSbQ/DeX9vtONHlKChUT' 'strict-dynamic' https://js.sentry-cdn.com https://browser.sentry-cdn.com https://www.datadoghq-browser-agent.com https://www.googletagmanager.com https://cloud.umami.is https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://wavey.nopejs.me https://www.google-analytics.com https://www.googletagmanager.com https://*.sentry.io https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com https://*.posthogusercontent.com; font-src 'self'; connect-src 'self' https://status.wavey.nopejs.me https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.sentry.io https://browser-intake-us5-datadoghq.com https://*.browser-intake-us5-datadoghq.com https://*.datadoghq.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://cloud.umami.is https://gateway.umami.is https://pstat.wavey.nopejs.me https://us.posthog.com https://*.i.posthog.com https://*.posthog.com wss://pstat.wavey.nopejs.me; worker-src 'self' blob:; child-src blob:; frame-src 'self' https://*.sentry.io https://*.posthog.com; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=(), payment=(), usb=()"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
