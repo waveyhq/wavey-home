@@ -46,7 +46,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-	--background-color: #0a0a0a;
+	--background-color: #000000;
 	--page-width: 60em;
 	--font-color: #e8e9ed;
 	--invert-font-color: #112121;
@@ -76,7 +76,7 @@
 
 html[data-theme="dark"] {
     color-scheme: dark;
-    --background-color: #0a0a0a;
+    --background-color: #000000;
     --page-width: 60em;
     --font-color: #e8e9ed;
     --invert-font-color: #112121;
@@ -160,8 +160,8 @@ body > :not(.grain):not(.nav-overlay):not(.nav-drawer) {
     position: absolute;
     inset: 0;
     filter: url(#grain);
-    opacity: 0.28;
-    mix-blend-mode: soft-light;
+    opacity: 0.15;
+    mix-blend-mode: screen;
 }
 
 html[data-theme="light"] .grain__layer {
