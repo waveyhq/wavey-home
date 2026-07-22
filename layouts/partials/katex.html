@@ -1,5 +1,5 @@
 {{- if partial "has-math.html" . -}}
-  {{- $katexInitJS := resources.Get "js/katex-init.js" | minify | fingerprint "sha384" -}}
+  {{- $katexInitJS := partial "js-build.html" (resources.Get "js/katex-init.js") | fingerprint "sha384" -}}
   <link rel="stylesheet" href="{{ "katex/katex.min.css" | relURL }}">
   <script defer src="{{ "katex/katex.min.js" | relURL }}"></script>
   <script defer src="{{ "katex/auto-render.min.js" | relURL }}"></script>

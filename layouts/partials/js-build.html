@@ -1,0 +1,6 @@
+{{- $src := . -}}
+{{- $opts := dict "minify" true -}}
+{{- if eq hugo.Environment "production" -}}
+  {{- $opts = merge $opts (dict "drop" "console") -}}
+{{- end -}}
+{{- return ($src | js.Build $opts) -}}
