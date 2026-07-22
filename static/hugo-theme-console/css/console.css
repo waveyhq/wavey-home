@@ -1339,11 +1339,19 @@ body.nav-open {
         border-radius: 6px;
     }
 
-    .landing-use-cases a {
-        display: flex;
-        align-items: center;
+    .landing-use-cases li {
         min-height: 48px;
         padding-block: 0.5rem;
+    }
+
+    .landing-use-cases li::after {
+        top: 0.5rem;
+    }
+
+    .landing-use-cases a {
+        display: block;
+        min-height: 0;
+        padding: 0;
     }
 
     .footer-ask-ai-link svg {
