@@ -14,18 +14,22 @@
   command = "hugo --gc --minify --buildFuture"
 
 [[edge_functions]]
+  path = "/.well-known/http-message-signatures-directory"
+  function = "web-bot-auth-directory"
+
+[[edge_functions]]
   path = "/*"
   function = "markdown-negotiation"
 
 [[headers]]
   for = "/"
   [headers.values]
-    Link = '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </auth.md>; rel="service-doc"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="describedby"; type="application/json", </.well-known/oauth-authorization-server>; rel="service-desc"; type="application/json"'
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </auth.md>; rel="service-doc"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="describedby"; type="application/json", </.well-known/oauth-authorization-server>; rel="service-desc"; type="application/json", </.well-known/http-message-signatures-directory>; rel="describedby"; type="application/http-message-signatures-directory+json"'
 
 [[headers]]
   for = "/index.html"
   [headers.values]
-    Link = '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </auth.md>; rel="service-doc"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="describedby"; type="application/json", </.well-known/oauth-authorization-server>; rel="service-desc"; type="application/json"'
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </auth.md>; rel="service-doc"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="describedby"; type="application/json", </.well-known/oauth-authorization-server>; rel="service-desc"; type="application/json", </.well-known/http-message-signatures-directory>; rel="describedby"; type="application/http-message-signatures-directory+json"'
 
 [[headers]]
   for = "/.well-known/api-catalog"
@@ -46,6 +50,12 @@
   for = "/.well-known/openid-configuration"
   [headers.values]
     Content-Type = "application/json"
+
+[[headers]]
+  for = "/.well-known/http-message-signatures-directory"
+  [headers.values]
+    Content-Type = "application/http-message-signatures-directory+json"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
   for = "/.well-known/jwks.json"
@@ -105,7 +115,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'sha256-1Qiq9kwIp9qejpW+9w5YNtzC0RiAf2NQrMo0DCBRisY=' 'sha384-8GQF3YN5BSrBflgFd3KjgY5ETSiWNZwlUKHhKQB/XeACoEZcyTnncViEfyO9VlDh' 'sha384-MsXY0DSsFAl7pD36l8Kd4U334IAWclTLcX+2Mpw3us54EiSnVCu7rCoIc0D9gT2l' 'sha384-TpwAaxaru1d2wqRUoiVI6pmBAAAAuz4UwRv/qGZC5T67vtyQA6tMROHkB2xVlqdQ' 'sha384-UkE7LjkLR6O+kgLv2y5cdYSq7reGZ3tf50/By4d/ux7bP4I/9S05uIt1n6AZm5fM' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh' 'sha384-nZ3wXMtnkUAAIxyNVL5lIIL2HEcMDiq3MqZQoPyIIC9u5JSwop+VrKyaLS9FxJXI' 'sha384-oVYXTAmyr6qvPEBJ6C3tMLDjByjF0fojzccSPbSbHZv7IRCgJbypjGzoJr+qvkGZ' 'sha384-sg4gBRJTqTCyzYbB7e72xGs3dA2LK994XRZS6urZW6Uh6Mu3j2JJ3YG2s9HALO8U' 'strict-dynamic' https://js.sentry-cdn.com https://browser.sentry-cdn.com https://www.datadoghq-browser-agent.com https://www.googletagmanager.com https://cloud.umami.is https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://wavey.nopejs.me https://www.google-analytics.com https://www.googletagmanager.com https://*.sentry.io https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com https://*.posthogusercontent.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://status.wavey.nopejs.me https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.sentry.io https://browser-intake-us5-datadoghq.com https://*.browser-intake-us5-datadoghq.com https://*.datadoghq.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://cloud.umami.is https://gateway.umami.is https://pstat.wavey.nopejs.me https://us.posthog.com https://*.i.posthog.com https://*.posthog.com wss://pstat.wavey.nopejs.me; worker-src 'self' blob:; child-src blob:; frame-src 'self' https://*.sentry.io https://*.posthog.com; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'sha256-1Qiq9kwIp9qejpW+9w5YNtzC0RiAf2NQrMo0DCBRisY=' 'sha384-8GQF3YN5BSrBflgFd3KjgY5ETSiWNZwlUKHhKQB/XeACoEZcyTnncViEfyO9VlDh' 'sha384-MsXY0DSsFAl7pD36l8Kd4U334IAWclTLcX+2Mpw3us54EiSnVCu7rCoIc0D9gT2l' 'sha384-TpwAaxaru1d2wqRUoiVI6pmBAAAAuz4UwRv/qGZC5T67vtyQA6tMROHkB2xVlqdQ' 'sha384-UkE7LjkLR6O+kgLv2y5cdYSq7reGZ3tf50/By4d/ux7bP4I/9S05uIt1n6AZm5fM' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh' 'sha384-nVbLTRr1+bTfMzKVo4ClKod8fVt4QXzJnEZalvaXreiCh20Kr3BepcleHikCMAX6' 'sha384-nZ3wXMtnkUAAIxyNVL5lIIL2HEcMDiq3MqZQoPyIIC9u5JSwop+VrKyaLS9FxJXI' 'sha384-oVYXTAmyr6qvPEBJ6C3tMLDjByjF0fojzccSPbSbHZv7IRCgJbypjGzoJr+qvkGZ' 'sha384-sg4gBRJTqTCyzYbB7e72xGs3dA2LK994XRZS6urZW6Uh6Mu3j2JJ3YG2s9HALO8U' 'strict-dynamic' https://js.sentry-cdn.com https://browser.sentry-cdn.com https://www.datadoghq-browser-agent.com https://www.googletagmanager.com https://cloud.umami.is https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://wavey.nopejs.me https://www.google-analytics.com https://www.googletagmanager.com https://*.sentry.io https://pstat.wavey.nopejs.me https://*.i.posthog.com https://*.posthog.com https://*.posthogusercontent.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://status.wavey.nopejs.me https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.sentry.io https://browser-intake-us5-datadoghq.com https://*.browser-intake-us5-datadoghq.com https://*.datadoghq.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://cloud.umami.is https://gateway.umami.is https://pstat.wavey.nopejs.me https://us.posthog.com https://*.i.posthog.com https://*.posthog.com wss://pstat.wavey.nopejs.me; worker-src 'self' blob:; child-src blob:; frame-src 'self' https://*.sentry.io https://*.posthog.com; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
     Permissions-Policy = "camera=(), geolocation=(), microphone=(), payment=(), usb=()"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
