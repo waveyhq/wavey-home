@@ -31,7 +31,7 @@ All Wavey products and infrastructure are in scope, including:
 - [Status page](https://status.wavey.nopejs.me/) and operational infrastructure
 - ESP32 sensing nodes, firmware, and the signal-processing pipeline
 - CI/CD pipelines (GitLab CI, GitHub Actions, Netlify deploys)
-- Third-party integrations (Netlify, Datadog, Sentry) when misconfigured in a way that affects Wavey
+- Third-party integrations (such as Netlify) when misconfigured in a way that affects Wavey
 - Misconfigurations that expose secrets, credentials, or private data
 
 ## Safe harbor

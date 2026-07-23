@@ -85,13 +85,11 @@
     {{- $siteUI := partial "js-build.html" (resources.Get "js/site-ui.js" | resources.Copy "resources/js/site-ui.js") | fingerprint "sha384" -}}
     {{- $webMcp := partial "js-build.html" (resources.Get "js/webmcp.js" | resources.Copy "resources/js/webmcp.js") | fingerprint "sha384" -}}
     {{- $oneko := partial "js-build.html" (resources.FromString "resources/js/oneko.js" (readFile "static/js/oneko.js")) | fingerprint "sha384" -}}
-    {{- $monitoring := partial "js-build.html" (resources.FromString "resources/js/deferred-monitoring.js" (readFile "static/js/deferred-monitoring.js")) | fingerprint "sha384" -}}
     {{- $analyticsLoader := partial "js-build.html" (resources.FromString "resources/js/deferred-analytics.js" (readFile "static/js/deferred-analytics.js")) | fingerprint "sha384" -}}
     {{- $analytics := partial "js-build.html" (resources.FromString "resources/js/analytics.js" (readFile "static/js/analytics.js")) | fingerprint "sha384" -}}
     <script src="{{ $webMcp.RelPermalink }}" integrity="{{ $webMcp.Data.Integrity }}" crossorigin="anonymous"></script>
     <script defer src="{{ $siteUI.RelPermalink }}" integrity="{{ $siteUI.Data.Integrity }}" crossorigin="anonymous"></script>
     <script defer src="{{ $oneko.RelPermalink }}" integrity="{{ $oneko.Data.Integrity }}" crossorigin="anonymous" data-cat="{{ "oneko.gif" | relURL }}"></script>
-    <script defer src="{{ $monitoring.RelPermalink }}" integrity="{{ $monitoring.Data.Integrity }}" crossorigin="anonymous" data-env="{{ hugo.Environment }}"{{ with getenv "COMMIT_REF" }} data-release="{{ . }}"{{ end }}></script>
     <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}"></script>
     {{- partial "katex.html" . -}}
   </body>
