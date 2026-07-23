@@ -1,0 +1,69 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://wavey.nopejs.me/",
+      "service-desc": [
+        {
+          "href": "https://wavey.nopejs.me/llms.txt",
+          "type": "text/plain"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://wavey.nopejs.me/getting-started/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://wavey.nopejs.me/llms.txt",
+          "type": "text/plain"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.wavey.nopejs.me/index.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://status.wavey.nopejs.me/",
+      "service-desc": [
+        {
+          "href": "https://status.wavey.nopejs.me/index.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://status.wavey.nopejs.me/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.wavey.nopejs.me/index.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://console.wavey.nopejs.me/",
+      "service-doc": [
+        {
+          "href": "https://console.wavey.nopejs.me/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://wavey.nopejs.me/getting-started/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.wavey.nopejs.me/index.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

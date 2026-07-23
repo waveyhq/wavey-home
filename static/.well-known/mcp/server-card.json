@@ -1,0 +1,34 @@
+{
+  "serverInfo": {
+    "name": "wavey-web",
+    "version": "1.0.0",
+    "title": "Wavey Website",
+    "description": "WebMCP tools for exploring Wavey WiFi CSI sensing documentation and service status."
+  },
+  "endpoint": "https://wavey.nopejs.me/",
+  "transport": {
+    "type": "webmcp",
+    "url": "https://wavey.nopejs.me/"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": true
+    },
+    "resources": {},
+    "prompts": {}
+  },
+  "tools": [
+    {
+      "name": "get-service-status",
+      "description": "Fetch current Wavey platform operational status from the public status page API."
+    },
+    {
+      "name": "navigate-to-docs",
+      "description": "Return the canonical URL for a Wavey documentation page by slug."
+    },
+    {
+      "name": "get-site-summary",
+      "description": "Return the Wavey llms.txt site summary for LLM and agent discovery."
+    }
+  ]
+}

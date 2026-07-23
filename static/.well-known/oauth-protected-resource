@@ -1,0 +1,14 @@
+{
+  "resource": "https://wavey.nopejs.me/",
+  "resource_name": "Wavey",
+  "authorization_servers": [
+    "https://wavey.nopejs.me/"
+  ],
+  "scopes_supported": [
+    "site.read",
+    "feedback.submit"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}

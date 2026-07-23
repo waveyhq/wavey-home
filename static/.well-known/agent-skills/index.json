@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "wavey-overview",
+      "type": "skill-md",
+      "description": "Overview of Wavey open-source WiFi CSI sensing — occupancy, motion, and presence detection on ESP32 without cameras or wearables.",
+      "url": "https://wavey.nopejs.me/.well-known/agent-skills/wavey-overview/SKILL.md",
+      "digest": "sha256:5412142cbb257107b00b2c0ce1d9e86027fa68fdf74f76ccf78ff7b52fc1c07a"
+    },
+    {
+      "name": "getting-started",
+      "type": "skill-md",
+      "description": "Guide agents to Wavey hardware setup, firmware, console access, and first CSI sensing deployment steps.",
+      "url": "https://wavey.nopejs.me/.well-known/agent-skills/getting-started/SKILL.md",
+      "digest": "sha256:e46e808e98df052ed214301c8cb3a1ddb551e909ac930088aa39a6ffb7066791"
+    },
+    {
+      "name": "api-discovery",
+      "type": "skill-md",
+      "description": "Discover Wavey public APIs, status endpoints, and machine-readable catalogs for automated integration.",
+      "url": "https://wavey.nopejs.me/.well-known/agent-skills/api-discovery/SKILL.md",
+      "digest": "sha256:f23345e8f76845b458be321dd4eafc71c1780a5fccc27c7fb5072b1831e6684c"
+    }
+  ]
+}
