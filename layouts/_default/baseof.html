@@ -63,9 +63,9 @@
               {{ $.Scratch.Add "path" .Site.BaseURL }}
               <a href="{{ .Site.BaseURL }}" class="site-brand no-style">
                 {{- $logo := resources.Get "images/wavey-meta/wavey-logo-nobg.png" | resources.Copy "resources/images/wavey-logo-nobg.png" -}}
-                {{- $logo1x := $logo.Resize "20x24 webp q90" -}}
-                {{- $logo2x := $logo.Resize "40x48 webp q90" -}}
-                <img src="{{ $logo1x.RelPermalink }}" srcset="{{ $logo1x.RelPermalink }} 1x, {{ $logo2x.RelPermalink }} 2x" alt="Wavey" class="site-brand-icon" width="20" height="24" decoding="async">
+                {{- $logo1x := $logo.Resize "x20 webp q90" -}}
+                {{- $logo2x := $logo.Resize "x40 webp q90" -}}
+                <img src="{{ $logo1x.RelPermalink }}" srcset="{{ $logo1x.RelPermalink }} 1x, {{ $logo2x.RelPermalink }} 2x" alt="Wavey" class="site-brand-icon" width="{{ $logo1x.Width }}" height="{{ $logo1x.Height }}" decoding="async">
                 <span class="site-brand-text{{ with .Site.Params.TitleCutting }} site-name{{ end }}">{{ .Site.Title }}</span>
               </a>:~#
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>

@@ -1,5 +1,6 @@
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(max-width: 850px)").matches) return;
 
   var nekoEl = document.createElement("div");
   var nekoPosX = 32;
@@ -208,23 +209,13 @@
   syncDom();
   document.body.appendChild(nekoEl);
 
-  document.addEventListener("mousemove", function (e) {
-    setPointer(e.clientX, e.clientY);
-  });
   document.addEventListener("mousedown", function (e) {
-    if (e.button !== 0 || !isNearCat(e.clientX, e.clientY)) return;
+    if (e.button !== 0) return;
     setPointer(e.clientX, e.clientY);
-    petCat();
+    if (isNearCat(e.clientX, e.clientY)) petCat();
   });
   document.addEventListener(
     "touchstart",
-    function (e) {
-      if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY);
-    },
-    { passive: true }
-  );
-  document.addEventListener(
-    "touchmove",
     function (e) {
       if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY);
     },
