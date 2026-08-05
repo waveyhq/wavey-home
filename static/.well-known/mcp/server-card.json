@@ -5,10 +5,10 @@
     "title": "Wavey Website",
     "description": "WebMCP tools for exploring Wavey WiFi CSI sensing documentation and service status."
   },
-  "endpoint": "https://wavey.nopejs.me/",
+  "endpoint": "https://waveyhq.dev/",
   "transport": {
     "type": "webmcp",
-    "url": "https://wavey.nopejs.me/"
+    "url": "https://waveyhq.dev/"
   },
   "capabilities": {
     "tools": {

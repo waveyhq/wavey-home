@@ -1,6 +1,6 @@
 # Contributing to Wavey Home
 
-Thank you for helping improve [wavey.nopejs.me](https://wavey.nopejs.me).
+Thank you for helping improve [waveyhq.dev](https://waveyhq.dev).
 
 ## Prerequisites
 

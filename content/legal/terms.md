@@ -10,7 +10,7 @@ sitemap:
 
 **Effective date: 23 July 2026**
 
-These Terms of Use ("**Terms**") govern your access to and use of [wavey.nopejs.me](https://wavey.nopejs.me/) (the "**Site**"), operated by the Wavey project team ("**Wavey**", "**we**", "**us**", or "**our**").
+These Terms of Use ("**Terms**") govern your access to and use of [waveyhq.dev](https://waveyhq.dev/) (the "**Site**"), operated by the Wavey project team ("**Wavey**", "**we**", "**us**", or "**our**").
 
 Please read these Terms carefully. By accessing or using the Site, you agree to these Terms to the extent permitted by applicable law. If you do not agree, do not use the Site.
 
@@ -20,7 +20,7 @@ The Site publishes documentation, technical articles, project information, publi
 
 These Terms apply only to the public Site. They do not govern:
 
-- the Wavey Console at [console.wavey.nopejs.me](https://console.wavey.nopejs.me);
+- the Wavey Console at [console.waveyhq.dev](https://console.waveyhq.dev);
 - software, firmware, models, APIs, or other materials governed by a separate agreement or license;
 - a Wavey deployment operated by another person or organization; or
 - third-party websites, repositories, communities, products, or services.
@@ -156,5 +156,5 @@ Headings are for convenience only. The words "including" and "includes" mean "in
 
 **Wavey project team**  
 India  
-[mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
+[mail@waveyhq.dev](mailto:mail@waveyhq.dev)
 

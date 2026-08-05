@@ -10,15 +10,15 @@ sitemap:
 
 **Effective date: 23 July 2026**
 
-This Privacy Policy explains how the Wavey project team ("**Wavey**", "**we**", "**us**", or "**our**") collects, uses, discloses, and otherwise processes information when you visit [wavey.nopejs.me](https://wavey.nopejs.me/) (the "**Site**") or submit feedback through it.
+This Privacy Policy explains how the Wavey project team ("**Wavey**", "**we**", "**us**", or "**our**") collects, uses, discloses, and otherwise processes information when you visit [waveyhq.dev](https://waveyhq.dev/) (the "**Site**") or submit feedback through it.
 
-The Wavey project team operates the Site from India. For privacy questions or requests, contact [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me).
+The Wavey project team operates the Site from India. For privacy questions or requests, contact [mail@waveyhq.dev](mailto:mail@waveyhq.dev).
 
 ## 1. Scope
 
 This Policy applies only to the public Site. It does not govern:
 
-- the Wavey Console at [console.wavey.nopejs.me](https://console.wavey.nopejs.me);
+- the Wavey Console at [console.waveyhq.dev](https://console.waveyhq.dev);
 - data collected by a Wavey software or hardware deployment;
 - third-party websites, repositories, communities, or services linked from the Site; or
 - information processed by a person or organization that deploys Wavey independently.
@@ -60,7 +60,7 @@ The Site currently loads the following services automatically when a page loads:
 
 - **Google Analytics** — measures visits, sessions, and engagement. See [Google's Privacy Policy](https://policies.google.com/privacy) and [Analytics data safeguards](https://support.google.com/analytics/answer/6004245).
 - **Umami Cloud** — provides website-usage analytics. See [Umami's Privacy Policy](https://umami.is/privacy).
-- **PostHog** — provides product analytics, autocapture, heatmaps, and session replay. Site events are sent through `pstat.wavey.nopejs.me` to a PostHog Cloud project hosted in the United States. See [PostHog's Privacy Policy](https://posthog.com/privacy) and [session-replay privacy controls](https://posthog.com/docs/session-replay/privacy).
+- **PostHog** — provides product analytics, autocapture, heatmaps, and session replay. Site events are sent through `pstat.waveyhq.dev` to a PostHog Cloud project hosted in the United States. See [PostHog's Privacy Policy](https://posthog.com/privacy) and [session-replay privacy controls](https://posthog.com/docs/session-replay/privacy).
 
 This Policy is notice about those technologies; it is not itself consent. Where applicable law requires prior consent for non-essential analytics, cookies, or replay, those technologies should not be activated until valid consent has been obtained.
 
@@ -131,7 +131,7 @@ Depending on applicable law, you may have rights to:
 - appeal certain decisions; and
 - complain to an appropriate data-protection authority.
 
-To exercise a right, email [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me) and describe your request. We may ask for information reasonably necessary to verify it. Analytics data may be difficult to associate with you unless you provide the relevant browser or service identifier.
+To exercise a right, email [mail@waveyhq.dev](mailto:mail@waveyhq.dev) and describe your request. We may ask for information reasonably necessary to verify it. Analytics data may be difficult to associate with you unless you provide the relevant browser or service identifier.
 
 The Site does not currently respond to browser "Do Not Track" signals. We will honor legally binding opt-out signals where required and technically applicable.
 
@@ -151,5 +151,5 @@ We may update this Policy to reflect changes in the Site, our practices, provide
 
 **Wavey project team**  
 India  
-[mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
+[mail@waveyhq.dev](mailto:mail@waveyhq.dev)
 

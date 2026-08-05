@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://wavey.nopejs.me
+      url: https://waveyhq.dev
     steps:
       - uses: actions/checkout@v4
 

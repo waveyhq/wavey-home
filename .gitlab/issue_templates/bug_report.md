@@ -8,7 +8,7 @@ labels: bug
 
 ## URL (if on the live site)
 
-https://wavey.nopejs.me/...
+https://waveyhq.dev/...
 
 ## Steps to reproduce
 

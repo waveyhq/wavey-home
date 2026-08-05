@@ -35,7 +35,7 @@ detection, motion tracking, and behavioral inference while keeping raw signals o
 - **Camera-free and image-free.** Wavey senses the radio environment, not your appearance, so there are no images to leak. See how this compares in [WiFi sensing vs cameras](/comparisons/wifi-sensing-vs-cameras/).
 - **Device-free.** People don't need to carry a phone, tag, or wearable to be sensed.
 - **Low-cost and open.** Built on ESP32-CSI and a Python pipeline, so anyone can inspect, self-host, and extend it.
-- **Real-time.** Sensing nodes stream CSI into a processing pipeline you can watch live in the [Wavey Console](https://console.wavey.nopejs.me).
+- **Real-time.** Sensing nodes stream CSI into a processing pipeline you can watch live in the [Wavey Console](https://console.waveyhq.dev).
 
 ## The technology, in one paragraph
 
@@ -58,8 +58,8 @@ feasible today vs research frontier.
 Wavey is built in the open and we'd love your help.
 
 - **GitHub:** [github.com/waveyhq](https://github.com/waveyhq)
-- **Console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
+- **Console:** [console.waveyhq.dev](https://console.waveyhq.dev)
 - **Discord:** [Join the community](https://discord.gg/sxh9r9UTtW)
-- **Email:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
+- **Email:** [mail@waveyhq.dev](mailto:mail@waveyhq.dev)
 
 Questions or partnerships? See [contact](/contact/).

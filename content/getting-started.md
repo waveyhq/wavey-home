@@ -19,7 +19,7 @@ faq:
   - question: "What will I need?"
     answer: "CSI-capable ESP32 nodes, a WiFi environment, and a host running the Python pipeline. Start with one node; add more for coverage."
   - question: "How can I contribute?"
-    answer: "Star the GitHub repo, join Discord, or email mail@wavey.nopejs.me. Firmware, pipeline, integrations, and docs all welcome."
+    answer: "Star the GitHub repo, join Discord, or email mail@waveyhq.dev. Firmware, pipeline, integrations, and docs all welcome."
 ---
 
 Wavey is an open-source WiFi CSI sensing system. This page covers deployment architecture — for signal
@@ -40,7 +40,7 @@ processing detail, see the [sensing pipeline](/sensing-pipeline/). For what to d
 2. **Analysis pipeline (Python).** Outlier rejection, amplitude features (primary on ESP32), phase
    sanitization for micro-motion, baseline learning, inference. See the
    [sensing pipeline](/sensing-pipeline/) for the processing stack.
-3. **Console and integrations.** Live visualization at [console.wavey.nopejs.me](https://console.wavey.nopejs.me);
+3. **Console and integrations.** Live visualization at [console.waveyhq.dev](https://console.waveyhq.dev);
    events for [automation](/use-cases/smart-home-automation/) and [analytics](/use-cases/occupancy-analytics/).
 
 ## Before you begin
@@ -64,8 +64,8 @@ remains an open problem on commodity hardware.
 ## Follow development
 
 - **Code:** [github.com/waveyhq](https://github.com/waveyhq)
-- **Console:** [console.wavey.nopejs.me](https://console.wavey.nopejs.me)
+- **Console:** [console.waveyhq.dev](https://console.waveyhq.dev)
 - **Community:** [Discord](https://discord.gg/sxh9r9UTtW)
-- **Contact:** [mail@wavey.nopejs.me](mailto:mail@wavey.nopejs.me)
+- **Contact:** [mail@waveyhq.dev](mailto:mail@waveyhq.dev)
 
 Background reading: [how it works](/how-it-works/), [glossary](/glossary/), [FAQ](/faq/).

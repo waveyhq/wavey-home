@@ -47,8 +47,8 @@ runs:
           exit 1
         fi
 
-        if ! grep -q '"name":"Wavey"' public/index.html || ! grep -q 'wavey.nopejs.me' public/index.html; then
-          echo "Homepage WebSite schema should declare Wavey with wavey.nopejs.me alternateName"
+        if ! grep -q '"name":"Wavey"' public/index.html || ! grep -q 'waveyhq.dev' public/index.html; then
+          echo "Homepage WebSite schema should declare Wavey with waveyhq.dev alternateName"
           exit 1
         fi
 

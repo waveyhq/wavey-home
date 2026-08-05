@@ -58,7 +58,7 @@
   }
 
   function registerWaveyTools(modelContext, signal) {
-    var statusApi = "https://status.wavey.nopejs.me/index.json";
+    var statusApi = "https://status.waveyhq.dev/index.json";
     var siteOrigin = window.location.origin;
     var options = signal ? { signal: signal } : undefined;
 

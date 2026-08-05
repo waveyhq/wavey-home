@@ -42,7 +42,7 @@ faq:
   - question: "How is this different from WiFi MAC tracking?"
     answer: "MAC tracking follows device identifiers. Wavey reads CSI — how bodies disturb the signal — producing anonymous occupancy without tracking phones."
   - question: "Is Wavey open source?"
-    answer: "Yes. github.com/waveyhq, Discord community, mail@wavey.nopejs.me."
+    answer: "Yes. github.com/waveyhq, Discord community, mail@waveyhq.dev."
   - question: "What is IEEE 802.11bf?"
     answer: "The WiFi standard amendment for native sensing. Signals that WiFi sensing is becoming a first-class capability."
   - question: "How do I get started?"

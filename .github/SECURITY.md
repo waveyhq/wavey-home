@@ -11,7 +11,7 @@
 
 **Do not** open a public GitHub issue for security vulnerabilities.
 
-Email **mail@wavey.nopejs.me** with:
+Email **mail@waveyhq.dev** with:
 
 - Description of the issue
 - Steps to reproduce
@@ -26,9 +26,9 @@ timeline when a vulnerability is confirmed.
 All Wavey products and infrastructure are in scope, including:
 
 - This repository (`wavey-home`) — Hugo site, static assets, and client-side scripts
-- [wavey.nopejs.me](https://wavey.nopejs.me) and related public endpoints
-- [Wavey Console](https://console.wavey.nopejs.me) — backend APIs, authentication, and data handling
-- [Status page](https://status.wavey.nopejs.me/) and operational infrastructure
+- [waveyhq.dev](https://waveyhq.dev) and related public endpoints
+- [Wavey Console](https://console.waveyhq.dev) — backend APIs, authentication, and data handling
+- [Status page](https://status.waveyhq.dev/) and operational infrastructure
 - ESP32 sensing nodes, firmware, and the signal-processing pipeline
 - CI/CD pipelines (GitLab CI, GitHub Actions, Netlify deploys)
 - Third-party integrations (such as Netlify) when misconfigured in a way that affects Wavey

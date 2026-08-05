@@ -137,7 +137,7 @@ ESP32 CSI capture ──▶ preprocess + features ──▶ inference ──▶ 
 
 Wavey captures CSI on inexpensive ESP32 nodes, processes it through the pipeline above, and emits occupancy,
 motion, and presence events. The open-source stack is on [GitHub](https://github.com/waveyhq); live signals
-are visible in the [Console](https://console.wavey.nopejs.me).
+are visible in the [Console](https://console.waveyhq.dev).
 
 ## Next steps
 

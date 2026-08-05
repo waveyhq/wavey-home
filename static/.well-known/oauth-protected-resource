@@ -1,8 +1,8 @@
 {
-  "resource": "https://wavey.nopejs.me/",
+  "resource": "https://waveyhq.dev/",
   "resource_name": "Wavey",
   "authorization_servers": [
-    "https://wavey.nopejs.me/"
+    "https://waveyhq.dev/"
   ],
   "scopes_supported": [
     "site.read",

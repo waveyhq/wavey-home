@@ -1,4 +1,4 @@
-baseURL = "https://wavey.nopejs.me/"
+baseURL = "https://waveyhq.dev/"
 languageCode = "en-us"
 title = "Wavey"
 enableRobotsTXT = true
@@ -35,7 +35,7 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 
 [params]
   siteName = "Wavey"
-  siteAlternateNames = ["Wavey RF Sensing", "Wavey WiFi Sensing", "WaveyHQ"]
+  siteAlternateNames = ["Wavey RF Sensing", "Wavey WiFi Sensing", "WaveyHQ", "waveyhq.dev"]
   description = "Open-source WiFi CSI sensing on ESP32: device-free occupancy, motion, and presence detection without cameras or wearables."
   tagline = "Occupancy, motion, and presence from the WiFi environment."
   author = "Wavey Team"
@@ -43,12 +43,12 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   TitleCutting = false
 
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
-  console = "https://console.wavey.nopejs.me"
-  status = "https://status.wavey.nopejs.me/"
+  console = "https://console.waveyhq.dev"
+  status = "https://status.waveyhq.dev/"
   github = "https://github.com/waveyhq"
   discord = "https://discord.gg/sxh9r9UTtW"
   twitter = "https://x.com/nopeJS"
-  email = "mail@wavey.nopejs.me"
+  email = "mail@waveyhq.dev"
   repo = "https://github.com/waveyhq"
   location = "India"
 

@@ -1,9 +1,9 @@
 {
-  "issuer": "https://wavey.nopejs.me/",
-  "authorization_endpoint": "https://console.wavey.nopejs.me/oauth/authorize",
-  "token_endpoint": "https://console.wavey.nopejs.me/oauth/token",
-  "revocation_endpoint": "https://console.wavey.nopejs.me/oauth/revoke",
-  "jwks_uri": "https://wavey.nopejs.me/.well-known/jwks.json",
+  "issuer": "https://waveyhq.dev/",
+  "authorization_endpoint": "https://console.waveyhq.dev/oauth/authorize",
+  "token_endpoint": "https://console.waveyhq.dev/oauth/token",
+  "revocation_endpoint": "https://console.waveyhq.dev/oauth/revoke",
+  "jwks_uri": "https://waveyhq.dev/.well-known/jwks.json",
   "response_types_supported": [
     "code"
   ],
@@ -27,10 +27,10 @@
     "console.write"
   ],
   "agent_auth": {
-    "skill": "https://wavey.nopejs.me/auth.md",
-    "identity_endpoint": "https://console.wavey.nopejs.me/agent/identity",
-    "claim_endpoint": "https://console.wavey.nopejs.me/agent/identity/claim",
-    "events_endpoint": "https://console.wavey.nopejs.me/agent/event/notify",
+    "skill": "https://waveyhq.dev/auth.md",
+    "identity_endpoint": "https://console.waveyhq.dev/agent/identity",
+    "claim_endpoint": "https://console.waveyhq.dev/agent/identity/claim",
+    "events_endpoint": "https://console.waveyhq.dev/agent/event/notify",
     "identity_types_supported": [
       "anonymous",
       "service_auth"

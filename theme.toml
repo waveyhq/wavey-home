@@ -2,14 +2,14 @@ name = "hugo-theme-wavey"
 license = "All Rights Reserved"
 licenselink = ""
 description = "A sleek, minimal, and responsive Hugo theme inspired by the system console, custom-tailored for the Wavey RF Sensing System."
-homepage = "https://wavey.nopejs.me"
+homepage = "https://waveyhq.dev"
 tags = ["blog", "console", "terminal", "clean", "minimal", "monotone", "simple", "technical", "responsive", "retro", "animation", "csi", "rf-sensing"]
 features = ["responsive", "google analytics"]
 min_version = "0.90.0"
 
 [author]
   name = "Sabique Islam"
-  homepage = "https://wavey.nopejs.me"
+  homepage = "https://waveyhq.dev"
   github = "https://github.com/waveyhq"
 
 [original]

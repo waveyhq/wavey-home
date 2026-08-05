@@ -13,19 +13,19 @@ Wavey is an open-source WiFi Channel State Information (CSI) sensing stack. ESP3
 
 ## Key links
 
-- Website: https://wavey.nopejs.me/
-- Console (live CSI visualization): https://console.wavey.nopejs.me
+- Website: https://waveyhq.dev/
+- Console (live CSI visualization): https://console.waveyhq.dev
 - GitHub: https://github.com/waveyhq
-- Status: https://status.wavey.nopejs.me/
-- LLM site summary: https://wavey.nopejs.me/llms.txt
-- API catalog: https://wavey.nopejs.me/.well-known/api-catalog
+- Status: https://status.waveyhq.dev/
+- LLM site summary: https://waveyhq.dev/llms.txt
+- API catalog: https://waveyhq.dev/.well-known/api-catalog
 
 ## Start here pages
 
-- How it works: https://wavey.nopejs.me/how-it-works/
-- Getting started: https://wavey.nopejs.me/getting-started/
-- FAQ: https://wavey.nopejs.me/faq/
-- Glossary: https://wavey.nopejs.me/glossary/
+- How it works: https://waveyhq.dev/how-it-works/
+- Getting started: https://waveyhq.dev/getting-started/
+- FAQ: https://waveyhq.dev/faq/
+- Glossary: https://waveyhq.dev/glossary/
 
 ## Facts to preserve
 

@@ -1,66 +1,66 @@
 {
   "linkset": [
     {
-      "anchor": "https://wavey.nopejs.me/",
+      "anchor": "https://waveyhq.dev/",
       "service-desc": [
         {
-          "href": "https://wavey.nopejs.me/llms.txt",
+          "href": "https://waveyhq.dev/llms.txt",
           "type": "text/plain"
         }
       ],
       "service-doc": [
         {
-          "href": "https://wavey.nopejs.me/getting-started/",
+          "href": "https://waveyhq.dev/getting-started/",
           "type": "text/html"
         },
         {
-          "href": "https://wavey.nopejs.me/llms.txt",
+          "href": "https://waveyhq.dev/llms.txt",
           "type": "text/plain"
         }
       ],
       "status": [
         {
-          "href": "https://status.wavey.nopejs.me/index.json",
+          "href": "https://status.waveyhq.dev/index.json",
           "type": "application/json"
         }
       ]
     },
     {
-      "anchor": "https://status.wavey.nopejs.me/",
+      "anchor": "https://status.waveyhq.dev/",
       "service-desc": [
         {
-          "href": "https://status.wavey.nopejs.me/index.json",
+          "href": "https://status.waveyhq.dev/index.json",
           "type": "application/json"
         }
       ],
       "service-doc": [
         {
-          "href": "https://status.wavey.nopejs.me/",
+          "href": "https://status.waveyhq.dev/",
           "type": "text/html"
         }
       ],
       "status": [
         {
-          "href": "https://status.wavey.nopejs.me/index.json",
+          "href": "https://status.waveyhq.dev/index.json",
           "type": "application/json"
         }
       ]
     },
     {
-      "anchor": "https://console.wavey.nopejs.me/",
+      "anchor": "https://console.waveyhq.dev/",
       "service-doc": [
         {
-          "href": "https://console.wavey.nopejs.me/",
+          "href": "https://console.waveyhq.dev/",
           "type": "text/html"
         },
         {
-          "href": "https://wavey.nopejs.me/getting-started/",
+          "href": "https://waveyhq.dev/getting-started/",
           "type": "text/html"
         }
       ],
       "status": [
         {
-          "href": "https://status.wavey.nopejs.me/index.json",
+          "href": "https://status.waveyhq.dev/index.json",
           "type": "application/json"
         }
       ]

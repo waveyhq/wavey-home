@@ -193,7 +193,7 @@ Wavey is built as an open pipeline, not a black-box API:
 4. **Features** — variance, spectral energy, and spectrogram tiles depending on the detection task.
 5. **Infer** — lightweight models for occupancy, motion, and presence; heavier classifiers where labeled data
    justifies them.
-6. **Emit** — events to the [Console](https://console.wavey.nopejs.me) and downstream automations.
+6. **Emit** — events to the [Console](https://console.waveyhq.dev) and downstream automations.
 
 What is shipped vs experimental changes as the project matures — the [GitHub repo](https://github.com/waveyhq)
 is the source of truth for current capabilities. The architecture is designed so you can swap a variance

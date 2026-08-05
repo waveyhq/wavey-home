@@ -46,8 +46,8 @@
     if (host === 'github.com') return 'github';
     if (host === 'gitlab.com') return 'gitlab';
     if (host === 'discord.gg' || host === 'discord.com') return 'discord';
-    if (host === 'console.wavey.nopejs.me') return 'console';
-    if (host === 'status.wavey.nopejs.me') return 'status_page';
+    if (host === 'console.waveyhq.dev') return 'console';
+    if (host === 'status.waveyhq.dev') return 'status_page';
     if (host === 'arxiv.org' || host.indexOf('diva-portal.org') !== -1) return 'research_paper';
     if (host.indexOf('wikipedia.org') !== -1) return 'wikipedia';
     if (host === 'x.com' || host === 'twitter.com') return 'twitter';
