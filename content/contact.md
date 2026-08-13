@@ -16,6 +16,5 @@ sitemap:
 If you have questions, contributions, or ideas for Wavey, we'd love to hear from you!
 
 - **Discord**: [Hang out with us!](https://discord.gg/sxh9r9UTtW)
-- **GitHub**: [Wavey Project](https://github.com/waveyhq)
-- **GitLab**: [WaveyHQ](https://gitlab.com/waveyhq)
+- **GitHub**: [WaveyHQ](https://github.com/waveyhq)
 - **Email**: mail@waveyhq.dev
