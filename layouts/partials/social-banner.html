@@ -1,13 +1,15 @@
-{{- /* Shared wavey-banner social preview (1200x630 webp from assets). */ -}}
-{{- $image := "" -}}
-{{- $type := "image/png" -}}
-{{- $alt := "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
-{{- with resources.Get "images/wavey-meta/wavey-banner.png" -}}
-  {{- $image = (.Resize "1200x630 q82 webp").Permalink -}}
-  {{- $type = "image/webp" -}}
-{{- else -}}
-  {{- $image = absURL "images/wavey-meta/wavey-banner.png" -}}
+{{- /* Shared social preview from assets/images/wavey-meta/og.png.
+     Exact 1200x630 JPEG (1.91:1) — Facebook, LinkedIn, X, Slack, Discord,
+     WhatsApp, Telegram, and iMessage all accept this size/format. Raw PNG
+     is 1731x909 / ~2.3MB and fails size and dimension checks. */ -}}
+{{- if not (.Scratch.Get "socialImage") -}}
+  {{- $alt := "Wavey | open-source WiFi CSI sensing for device-free occupancy and motion detection" -}}
+  {{- with resources.Get "images/wavey-meta/og.png" -}}
+    {{- $og := .Resize "1200x630 jpg q85" | resources.Copy "resources/images/og-1200x630.jpg" | fingerprint -}}
+    {{- $.Scratch.Set "socialImage" $og.Permalink -}}
+    {{- $.Scratch.Set "socialImageType" $og.MediaType.Type -}}
+    {{- $.Scratch.Set "socialImageWidth" $og.Width -}}
+    {{- $.Scratch.Set "socialImageHeight" $og.Height -}}
+    {{- $.Scratch.Set "socialImageAlt" $alt -}}
+  {{- end -}}
 {{- end -}}
-{{- $.Scratch.Set "socialImage" $image -}}
-{{- $.Scratch.Set "socialImageType" $type -}}
-{{- $.Scratch.Set "socialImageAlt" $alt -}}

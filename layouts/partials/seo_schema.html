@@ -24,10 +24,18 @@
 
 {{- $orgAlt := .Site.Params.siteAlternateNames | default (slice "Wavey RF Sensing" "Wavey WiFi Sensing") -}}
 
-{{- /* Social/schema banner (processed webp from assets) */ -}}
-{{- $bannerImg := absURL "images/wavey-meta/wavey-banner.png" -}}
-{{- with resources.Get "images/wavey-meta/wavey-banner.png" -}}
-  {{- $bannerImg = (.Resize "1200x630 q82 webp").Permalink -}}
+{{- /* Shared 1200x630 JPEG from social-banner (og.png). */ -}}
+{{- partial "social-banner.html" . -}}
+{{- $bannerImg := .Scratch.Get "socialImage" -}}
+{{- $bannerImgObj := dict "@type" "ImageObject" "url" $bannerImg -}}
+{{- with .Scratch.Get "socialImageWidth" -}}
+  {{- $bannerImgObj = merge $bannerImgObj (dict
+    "contentUrl" $bannerImg
+    "width" .
+    "height" ($.Scratch.Get "socialImageHeight")
+    "encodingFormat" ($.Scratch.Get "socialImageType")
+    "caption" ($.Scratch.Get "socialImageAlt")
+  ) -}}
 {{- end -}}
 
 {{- $org := dict
@@ -85,8 +93,8 @@
 
 {{- $graph := slice $org $website $software -}}
 
-{{- /* Per-page image — shared wavey-banner for all pages */ -}}
-{{- $img := $bannerImg -}}
+{{- /* Per-page image — shared og.png 1200x630 JPEG for all pages */ -}}
+{{- $img := $bannerImgObj -}}
 
 {{- $pageDesc := .Description | default .Summary | default $desc -}}
 {{- $iso := "2006-01-02T15:04:05-07:00" -}}
@@ -117,7 +125,7 @@
     "inLanguage" "en-US"
     "isPartOf" (dict "@id" $siteID)
     "about" (dict "@id" $softwareID)
-    "primaryImageOfPage" (dict "@type" "ImageObject" "url" $img)
+    "primaryImageOfPage" $img
   -}}
   {{- $graph = $graph | append $home -}}
 {{- else if ne .Kind "404" -}}
@@ -142,7 +150,7 @@
     "inLanguage" "en-US"
     "isPartOf" (dict "@id" $siteID)
     "about" (dict "@id" $softwareID)
-    "image" (dict "@type" "ImageObject" "url" $img)
+    "image" $img
   -}}
 
   {{- /* Article-like nodes get authorship + dates */ -}}

@@ -4,6 +4,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 {{- if $twitterImage }}
 <meta name="twitter:image" content="{{ $twitterImage }}">
+<meta name="twitter:image:width" content="{{ .Scratch.Get "socialImageWidth" }}">
+<meta name="twitter:image:height" content="{{ .Scratch.Get "socialImageHeight" }}">
 <meta name="twitter:image:alt" content="{{ .Scratch.Get "socialImageAlt" }}">
 {{- end }}
 {{- $siteName := .Site.Params.siteName | default .Site.Title -}}
