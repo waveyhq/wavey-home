@@ -1,6 +1,13 @@
 (function () {
   "use strict";
 
+  var thisScript = document.currentScript;
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register((thisScript && thisScript.dataset.sw) || "/sw.js")
+      .catch(function () {});
+  }
+
   function readStoredTheme() {
     try {
       var stored = localStorage.getItem("theme");

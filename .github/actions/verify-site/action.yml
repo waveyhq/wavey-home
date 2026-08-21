@@ -12,6 +12,7 @@ runs:
         test -f public/sitemap.xml
         test -f public/llms.txt
         test -f public/robots.txt
+        test -f public/sw.js
 
         # OG images should be processed webp, not the raw multi-MB PNG fallback
         if ! grep -q 'og:image.*\.webp' public/index.html; then

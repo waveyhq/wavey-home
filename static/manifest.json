@@ -4,6 +4,7 @@
   "short_name": "Wavey",
   "description": "Open-source WiFi CSI sensing for device-free occupancy, motion, and presence detection on ESP32 - no cameras, wearables, or apps.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#222225",
   "theme_color": "#62c4ff",
