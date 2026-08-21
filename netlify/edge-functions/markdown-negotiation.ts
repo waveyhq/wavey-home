@@ -18,16 +18,32 @@ function estimateTokens(text: string): number {
   return Math.max(1, Math.ceil(text.length / 4));
 }
 
+function withoutExpectCt(response: Response): Response {
+  if (!response.headers.has("Expect-CT")) return response;
+  try {
+    response.headers.delete("Expect-CT");
+    return response;
+  } catch {
+    const headers = new Headers(response.headers);
+    headers.delete("Expect-CT");
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  }
+}
+
 export default async function markdownNegotiation(
   request: Request,
   context: Context,
 ): Promise<Response> {
   if (request.method !== "GET" && request.method !== "HEAD") {
-    return context.next();
+    return withoutExpectCt(await context.next());
   }
 
   if (!wantsMarkdown(request.headers.get("Accept"))) {
-    return context.next();
+    return withoutExpectCt(await context.next());
   }
 
   const url = new URL(request.url);
@@ -38,7 +54,7 @@ export default async function markdownNegotiation(
     const llmsUrl = new URL("/llms.txt", url.origin);
     const llmsResponse = await context.rewrite(llmsUrl.toString());
     if (llmsResponse.status !== 200) {
-      return context.next();
+      return withoutExpectCt(await context.next());
     }
 
     const llmsBody = request.method === "HEAD" ? null : await llmsResponse.text();
@@ -49,11 +65,11 @@ export default async function markdownNegotiation(
     if (llmsBody) {
       headers.set("x-markdown-tokens", String(estimateTokens(llmsBody)));
     }
-    return new Response(llmsBody, { status: 200, headers });
+    return withoutExpectCt(new Response(llmsBody, { status: 200, headers }));
   }
 
   if (mdResponse.status !== 200) {
-    return context.next();
+    return withoutExpectCt(await context.next());
   }
 
   const body = request.method === "HEAD" ? null : await mdResponse.text();
@@ -65,5 +81,5 @@ export default async function markdownNegotiation(
   }
   headers.delete("Content-Disposition");
 
-  return new Response(body, { status: 200, headers });
+  return withoutExpectCt(new Response(body, { status: 200, headers }));
 }
