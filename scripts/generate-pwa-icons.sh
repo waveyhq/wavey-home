@@ -36,7 +36,6 @@ out_dir.mkdir(parents=True, exist_ok=True)
 asset_out_dir.mkdir(parents=True, exist_ok=True)
 
 BG = (34, 34, 37)  # #222225 — matches manifest background_color
-THEME = (98, 196, 255)  # #62c4ff — subtle shape outline
 
 raw = Image.open(src_path).convert("RGBA")
 
@@ -75,29 +74,6 @@ def shape_mask(size: int, shape: str) -> Image.Image:
     return mask
 
 
-def draw_shape_outline(size: int, shape: str, width: int = 2) -> Image.Image:
-    """Thin theme-colored border so the platform shape is obvious in previews."""
-    outline = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(outline)
-    inset = max(1, width // 2)
-    if shape == "squircle":
-        radius = max(1, int(size * 0.28))
-        draw.rounded_rectangle(
-            (inset, inset, size - 1 - inset, size - 1 - inset),
-            radius=max(1, radius - inset),
-            outline=(*THEME, 180),
-            width=width,
-        )
-    elif shape == "circle":
-        pad = max(inset, int(size * 0.04))
-        draw.ellipse(
-            (pad, pad, size - 1 - pad, size - 1 - pad),
-            outline=(*THEME, 180),
-            width=width,
-        )
-    return outline
-
-
 def composite_logo(size: int, scale: float, mask: Image.Image) -> Image.Image:
     target = int(size * scale)
     resized = logo.resize((target, target), Image.Resampling.LANCZOS)
@@ -108,7 +84,7 @@ def composite_logo(size: int, scale: float, mask: Image.Image) -> Image.Image:
     return layer
 
 
-def fit_in_shape(size: int, scale: float, shape: str, outline: bool = True) -> Image.Image:
+def fit_in_shape(size: int, scale: float, shape: str) -> Image.Image:
     """Background and logo clipped to circle/squircle; exterior stays transparent."""
     mask = shape_mask(size, shape)
     canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
@@ -117,8 +93,6 @@ def fit_in_shape(size: int, scale: float, shape: str, outline: bool = True) -> I
     bg.putalpha(mask)
     canvas = Image.alpha_composite(canvas, bg)
     canvas = Image.alpha_composite(canvas, composite_logo(size, scale, mask))
-    if outline:
-        canvas = Image.alpha_composite(canvas, draw_shape_outline(size, shape))
     return canvas
 
 
