@@ -14,6 +14,11 @@ runs:
         test -f public/robots.txt
         test -f public/sw.js
 
+        if grep -qiE '^Content-Signal:' public/robots.txt; then
+          echo "robots.txt must not include Content-Signal (Lighthouse unknown directive)"
+          exit 1
+        fi
+
         # OG images should be processed webp, not the raw multi-MB PNG fallback
         if ! grep -q 'og:image.*\.webp' public/index.html; then
           echo "Expected homepage og:image to use processed webp"
