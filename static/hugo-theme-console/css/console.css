@@ -166,42 +166,6 @@ html {
     background-color: var(--background-color);
 }
 
-body > :not(.grain):not(.nav-overlay):not(.nav-drawer) {
-    position: relative;
-    z-index: 1;
-}
-
-.grain {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    isolation: isolate;
-    background: var(--background-color);
-}
-
-.grain__layer {
-    position: absolute;
-    inset: 0;
-    filter: url(#grain);
-    opacity: 0.15;
-    mix-blend-mode: screen;
-}
-
-html[data-theme="light"] .grain__layer {
-    filter: url(#grain) invert(1);
-    opacity: 0.38;
-    mix-blend-mode: multiply;
-}
-
-@media (prefers-color-scheme: light) {
-    html:not([data-theme="dark"]) .grain__layer {
-        filter: url(#grain) invert(1);
-        opacity: 0.38;
-        mix-blend-mode: multiply;
-    }
-}
-
 .container {
     max-width: min(var(--page-width), 100%);
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
@@ -1270,13 +1234,8 @@ body.nav-open {
     @media (prefers-reduced-motion: reduce) {
         .nav-toggle-bar,
         .nav-overlay,
-        .nav-drawer,
-        #oneko {
+        .nav-drawer {
             transition: none;
-        }
-
-        #oneko {
-            display: none;
         }
     }
 
