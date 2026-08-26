@@ -408,32 +408,26 @@ figure {
 
 .footer-main {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: start;
-    gap: 2rem 2.5rem;
+    gap: 2rem 2rem;
     margin-bottom: 1.75rem;
     width: 100%;
     max-width: 100%;
     min-width: 0;
 }
 
-.footer-col-product {
-    justify-self: start;
+.footer-col-product,
+.footer-col-resources,
+.footer-col-connect,
+.footer-col-supported {
+    justify-self: stretch;
     text-align: left;
-}
-
-.footer-col-resources {
-    justify-self: center;
-    text-align: left;
+    min-width: 0;
 }
 
 .footer-col-resources .footer-links {
     align-items: flex-start;
-}
-
-.footer-col-connect {
-    justify-self: end;
-    text-align: left;
 }
 
 .footer-col {
@@ -613,6 +607,37 @@ figure {
     min-width: 0;
     overflow-wrap: anywhere;
     text-align: center;
+}
+
+.footer-col-supported .footer-netlify {
+    display: inline-flex;
+    line-height: 0;
+    text-decoration: none;
+    max-width: 100%;
+}
+
+.footer-netlify:hover,
+.footer-netlify:focus-visible {
+    background-color: transparent;
+    color: var(--primary-color);
+    opacity: 0.92;
+}
+
+.footer-netlify-badge {
+    display: block;
+    width: 114px;
+    height: 50px;
+    max-width: 100%;
+}
+
+html[data-theme="light"] .footer-netlify-badge {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) .footer-netlify-badge {
+        filter: invert(1);
+    }
 }
 
 .footer-theme-toggle {
@@ -902,6 +927,19 @@ body.nav-open {
     .nav-overlay,
     .nav-drawer--mobile {
         display: none !important;
+    }
+
+    .footer-main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: auto;
+    }
+
+    .footer-col-product,
+    .footer-col-resources,
+    .footer-col-connect,
+    .footer-col-supported {
+        grid-column: auto;
+        grid-row: auto;
     }
 
     .nav-drawer--desktop {
@@ -1270,7 +1308,7 @@ body.nav-open {
 
     .footer-main {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-rows: auto auto;
+        grid-template-rows: auto auto auto;
         gap: 1.25rem 1rem;
         margin-bottom: 1.25rem;
     }
@@ -1351,6 +1389,13 @@ body.nav-open {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
+    }
+
+    .footer-col-supported {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        justify-self: start;
+        text-align: left;
     }
 
     .footer-bar {
