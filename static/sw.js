@@ -1,4 +1,4 @@
-var CACHE_NAME = "wavey-v5";
+var CACHE_NAME = "wavey-v6";
 
 self.addEventListener("install", function (event) {
   event.waitUntil(self.skipWaiting());

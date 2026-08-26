@@ -13,6 +13,7 @@ runs:
         test -f public/llms.txt
         test -f public/robots.txt
         test -f public/sw.js
+        test -f public/command-search.json
 
         if grep -qiE '^Content-Signal:' public/robots.txt; then
           echo "robots.txt must not include Content-Signal (Lighthouse unknown directive)"

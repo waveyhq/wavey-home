@@ -1385,6 +1385,16 @@ html:not(.os-macos) .command-menu-trigger__kbd-group--win {
     object-fit: contain;
 }
 
+html[data-theme="light"] .cmdk__footer-mark {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) .cmdk__footer-mark {
+        filter: invert(1);
+    }
+}
+
 .cmdk__footer-action {
     display: none;
     align-items: center;

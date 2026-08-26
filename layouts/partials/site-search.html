@@ -1,48 +1,3 @@
-{{- $menuUrls := slice (strings.TrimSuffix "/" (relURL "/")) -}}
-{{- $menuItems := slice -}}
-{{- $menuItems = $menuItems | append (dict "title" "Home" "url" (relURL "/") "kind" "page" "icon" "home" "keywords" (slice "home")) -}}
-{{- range .Site.Params.navlinks -}}
-  {{- $href := strings.TrimSuffix "/" (relURL .url) -}}
-  {{- $menuItems = $menuItems | append (dict "title" .name "url" $href "kind" "page" "icon" "file" "keywords" (slice (lower .name))) -}}
-  {{- $menuUrls = $menuUrls | append $href -}}
-{{- end -}}
-{{- $faqUrl := strings.TrimSuffix "/" (relURL "faq/") -}}
-{{- $menuItems = $menuItems | append (dict "title" "FAQ" "url" $faqUrl "kind" "page" "icon" "file" "keywords" (slice "faq")) -}}
-{{- $menuUrls = $menuUrls | append $faqUrl -}}
-{{- $glossaryUrl := strings.TrimSuffix "/" (relURL "glossary/") -}}
-{{- $menuItems = $menuItems | append (dict "title" "Glossary" "url" $glossaryUrl "kind" "page" "icon" "file" "keywords" (slice "glossary")) -}}
-{{- $menuUrls = $menuUrls | append $glossaryUrl -}}
-{{- $startUrl := strings.TrimSuffix "/" (relURL "getting-started/") -}}
-{{- $menuItems = $menuItems | append (dict "title" "Get started" "url" $startUrl "kind" "page" "icon" "file" "keywords" (slice "getting started" "start")) -}}
-{{- $menuUrls = $menuUrls | append $startUrl -}}
-
-{{- $pageItems := slice -}}
-{{- range sort .Site.RegularPages "Title" -}}
-  {{- $pageUrl := strings.TrimSuffix "/" .RelPermalink -}}
-  {{- if not (in $menuUrls $pageUrl) -}}
-    {{- $icon := "file" -}}
-    {{- if eq .Section "posts" -}}{{- $icon = "news" -}}{{- end -}}
-    {{- $pageItems = $pageItems | append (dict "title" .Title "url" $pageUrl "kind" "page" "icon" $icon "description" (.Description | default .Summary | plainify | truncate 120) "keywords" (slice .Section)) -}}
-  {{- end -}}
-{{- end -}}
-
-{{- $themeItems := slice
-  (dict "title" "Light" "action" "theme-light" "kind" "command" "icon" "sun" "keywords" (slice "theme" "light"))
-  (dict "title" "Dark" "action" "theme-dark" "kind" "command" "icon" "moon" "keywords" (slice "theme" "dark"))
--}}
-
-{{- $otherItems := slice
-  (dict "title" "llms.txt" "url" (relURL "llms.txt") "kind" "link" "icon" "file" "keywords" (slice "llms" "ai"))
-  (dict "title" "RSS Feed" "url" (relURL "index.xml") "kind" "link" "icon" "rss" "keywords" (slice "rss" "feed"))
--}}
-
-{{- $searchData := dict "groups" (slice
-  (dict "heading" "Menu" "items" $menuItems)
-  (dict "heading" "Pages" "items" $pageItems)
-  (dict "heading" "Theme" "items" $themeItems)
-  (dict "heading" "Other" "items" $otherItems)
-) -}}
-
 {{- $cmdkLogo := resources.Get "images/wavey-meta/wavey-logo-nobg.png" | resources.Copy "resources/images/wavey-logo-nobg.png" -}}
 {{- $cmdkLogo24 := $cmdkLogo.Resize "x24 webp q90" -}}
 
@@ -76,7 +31,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  window.__WAVEY_SEARCH__ = {{ $searchData | jsonify | safeJS }};
-</script>

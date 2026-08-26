@@ -313,16 +313,43 @@
     }
 
     var groups = [];
-    var rawSearch = window.__WAVEY_SEARCH__;
-    if (typeof rawSearch === "string") {
-      try {
-        groups = JSON.parse(rawSearch).groups || [];
-      } catch (error) {
-        groups = [];
+    var searchDataReady = false;
+    var searchDataPromise = null;
+    var searchDataUrl =
+      (thisScript && thisScript.dataset.commandSearch) || "/command-search.json";
+
+    function loadSearchData() {
+      if (searchDataReady) {
+        return Promise.resolve(groups);
       }
-    } else if (rawSearch && rawSearch.groups) {
-      groups = rawSearch.groups;
+      if (searchDataPromise) {
+        return searchDataPromise;
+      }
+
+      searchDataPromise = fetch(searchDataUrl, {
+        headers: { Accept: "application/json" },
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Command search data request failed");
+          }
+          return response.json();
+        })
+        .then(function (data) {
+          groups = data && data.groups ? data.groups : [];
+          searchDataReady = true;
+          return groups;
+        })
+        .catch(function () {
+          groups = [];
+          searchDataReady = true;
+          return groups;
+        });
+
+      return searchDataPromise;
     }
+
+    loadSearchData();
 
     var flatItems = [];
     var activeIndex = -1;
@@ -532,9 +559,11 @@
         searchRoot.removeAttribute("inert");
         searchInput.value = "";
         lastQuery = "";
-        renderResults("");
-        window.requestAnimationFrame(function () {
-          searchInput.focus();
+        loadSearchData().then(function () {
+          renderResults("");
+          window.requestAnimationFrame(function () {
+            searchInput.focus();
+          });
         });
       } else {
         searchRoot.setAttribute("hidden", "");
