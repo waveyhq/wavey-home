@@ -1,6 +1,6 @@
 name = "hugo-theme-wavey"
-license = "All Rights Reserved"
-licenselink = ""
+license = "MIT"
+licenselink = "https://github.com/waveyhq/wavey-home/-/blob/main/LICENSE"
 description = "A sleek, minimal, and responsive Hugo theme inspired by the system console, custom-tailored for the Wavey RF Sensing System."
 homepage = "https://waveyhq.dev"
 tags = ["blog", "console", "terminal", "clean", "minimal", "monotone", "simple", "technical", "responsive", "retro", "animation", "csi", "rf-sensing"]
