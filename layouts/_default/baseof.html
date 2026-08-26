@@ -52,7 +52,8 @@
     {{- partial "seo_schema.html" . -}}
 </head>
 <body class="terminal" data-page-section="{{ .Section }}">
-    {{- partial "mobile-drawer-panel.html" . -}}
+    {{- partial "mobile-bottom-nav.html" . -}}
+    {{- partial "site-search.html" . -}}
     {{- partial "footer-icons.html" . -}}
     <div class="container">
         <div class="terminal-nav">
@@ -69,6 +70,11 @@
               </a>:~#
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
           {{ partial "mobile-drawer.html" . }}
+          <div class="terminal-nav-actions">
+            <span class="terminal-nav-divider" aria-hidden="true"></span>
+            {{ partial "command-menu-trigger.html" (dict "variant" "header") }}
+            {{ partial "theme-toggle.html" (dict "context" . "class" "header-theme-toggle" "labelClass" "header-theme-label" "label" "Theme") }}
+          </div>
         </div>
     </div>
 

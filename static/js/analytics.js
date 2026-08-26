@@ -31,7 +31,8 @@
   }
 
   function locationOf(el) {
-    if (el.closest('.nav-drawer')) return 'mobile_drawer';
+    if (el.closest('.nav-popover')) return 'mobile_nav';
+    if (el.closest('.nav-bottom-bar')) return 'mobile_nav';
     if (el.closest('.terminal-nav')) return 'navbar';
     if (el.closest('footer.footer')) return 'footer';
     if (el.closest('.landing-about')) return 'hero';

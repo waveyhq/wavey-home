@@ -1,0 +1,13 @@
+<nav class="nav-popover__menu" aria-label="Main navigation">
+  <ul>
+    <li><a href="{{ .Site.BaseURL }}"{{ if .IsHome }} aria-current="page"{{ end }}>Home</a></li>
+    {{ range .Site.Params.navlinks }}
+    {{- $href := relURL .url -}}
+    {{- $active := eq (strings.TrimSuffix "/" $.RelPermalink) (strings.TrimSuffix "/" $href) -}}
+    <li><a href="{{ $href }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+    {{ end }}
+    <li><a href="{{ "faq/" | relURL }}"{{ if eq .RelPermalink (printf "%sfaq/" .Site.BaseURL) }} aria-current="page"{{ end }}>FAQ</a></li>
+    <li><a href="{{ "glossary/" | relURL }}"{{ if eq .Section "glossary" }} aria-current="page"{{ end }}>Glossary</a></li>
+    <li><a href="{{ "getting-started/" | relURL }}"{{ if eq .Section "getting-started" }} aria-current="page"{{ end }}>Get started</a></li>
+  </ul>
+</nav>

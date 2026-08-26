@@ -1,0 +1,16 @@
+<div class="nav-bottom-bar">
+  {{ partial "command-menu-trigger.html" (dict "variant" "bottom") }}
+  <span class="nav-bottom-divider" aria-hidden="true"></span>
+  <button type="button" class="nav-bottom-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav-popover">
+    <span class="nav-bottom-toggle-icon" aria-hidden="true">
+      <span class="nav-bottom-toggle-bar"></span>
+      <span class="nav-bottom-toggle-bar"></span>
+    </span>
+  </button>
+</div>
+
+<div class="nav-popover-overlay" hidden></div>
+
+<div id="site-nav-popover" class="nav-popover" role="dialog" aria-label="Navigation" aria-hidden="true" hidden inert>
+  {{- partial "nav-mobile-menu.html" . -}}
+</div>

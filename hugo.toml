@@ -17,9 +17,15 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
 
 # Generate an llms.txt for LLM/answer-engine discovery (https://llmstxt.org)
 [outputs]
-  home = ["HTML", "RSS", "LLMS", "MARKDOWN"]
+  home = ["HTML", "RSS", "LLMS", "MARKDOWN", "SEARCHJSON"]
   page = ["HTML", "MARKDOWN"]
   section = ["HTML", "MARKDOWN"]
+
+[outputFormats.SEARCHJSON]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
 
 [outputFormats.LLMS]
   mediaType = "text/plain"
