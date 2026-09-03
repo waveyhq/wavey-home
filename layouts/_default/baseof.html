@@ -93,7 +93,7 @@
     {{- $analytics := partial "js-build.html" (resources.FromString "resources/js/analytics.js" (readFile "static/js/analytics.js")) | fingerprint "sha384" -}}
     <script src="{{ $webMcp.RelPermalink }}" integrity="{{ $webMcp.Data.Integrity }}" crossorigin="anonymous"></script>
     <script defer src="{{ $siteUI.RelPermalink }}" integrity="{{ $siteUI.Data.Integrity }}" crossorigin="anonymous" data-sw="{{ "sw.js" | relURL }}" data-command-search="{{ "command-search.json" | relURL }}"></script>
-    <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}"></script>
+    <script defer src="{{ $analyticsLoader.RelPermalink }}" integrity="{{ $analyticsLoader.Data.Integrity }}" crossorigin="anonymous" data-analytics-src="{{ $analytics.RelPermalink }}" data-openpanel-client-id="{{ .Site.Params.openpanelClientId }}" data-openpanel-hosts="{{ delimit .Site.Params.openpanelHosts "," }}"></script>
     {{- partial "katex.html" . -}}
   </body>
 </html>

@@ -147,7 +147,7 @@
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
     if (url.hostname === window.location.hostname) {
-      if (link.closest('.status-link')) {
+      if (link.closest('.status-badge-link')) {
         track('status_link_clicked', {
           href: url.href,
           location: locationOf(link)

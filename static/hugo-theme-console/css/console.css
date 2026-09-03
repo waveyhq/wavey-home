@@ -542,11 +542,30 @@ figure {
     text-decoration: none;
 }
 
+.status-badge-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    line-height: 0;
+    text-decoration: none;
+    max-width: 100%;
+}
+
+.status-badge-link iframe {
+    display: block;
+    width: 190px;
+    height: 30px;
+    max-width: 100%;
+    border: 0;
+    overflow: hidden;
+    background: transparent;
+    pointer-events: none;
+    border-radius: 4px;
+}
+
 .footer-status-link {
-    font-size: 0.85em;
     justify-self: start;
     min-height: 0;
-    transform: translateY(-1px);
 }
 
 .status-label {
@@ -654,6 +673,7 @@ figure {
     text-align: center;
 }
 
+.footer-col-supported .footer-partner,
 .footer-col-supported .footer-netlify {
     display: inline-flex;
     line-height: 0;
@@ -661,6 +681,15 @@ figure {
     max-width: 100%;
 }
 
+.footer-supported-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.footer-partner:hover,
+.footer-partner:focus-visible,
 .footer-netlify:hover,
 .footer-netlify:focus-visible {
     background-color: transparent;
@@ -668,6 +697,7 @@ figure {
     opacity: 0.92;
 }
 
+.footer-partner-badge,
 .footer-netlify-badge {
     display: block;
     width: 114px;
@@ -675,11 +705,13 @@ figure {
     max-width: 100%;
 }
 
+html[data-theme="light"] .footer-partner-badge,
 html[data-theme="light"] .footer-netlify-badge {
     filter: invert(1);
 }
 
 @media (prefers-color-scheme: light) {
+    html:not([data-theme]) .footer-partner-badge,
     html:not([data-theme]) .footer-netlify-badge {
         filter: invert(1);
     }
@@ -1892,6 +1924,7 @@ html[data-theme="light"] .cmdk__footer-mark {
     }
 
     .footer-status-link,
+    .footer-status-link iframe,
     .footer-copy {
         justify-self: center;
     }
@@ -1950,8 +1983,8 @@ html[data-theme="light"] .cmdk__footer-mark {
         text-align: center;
     }
 
-    .footer-status-link .status-label {
-        overflow-wrap: anywhere;
+    .footer-status-link iframe {
+        margin-inline: auto;
     }
 
     .footer-copy {

@@ -58,7 +58,7 @@
   }
 
   function registerWaveyTools(modelContext, signal) {
-    var statusApi = "https://status.waveyhq.dev/index.json";
+    var statusApi = "https://status.waveyhq.dev/data?page=1";
     var siteOrigin = window.location.origin;
     var options = signal ? { signal: signal } : undefined;
 
@@ -82,29 +82,22 @@
               return response.json();
             })
             .then(function (data) {
-              var items = (data.included || []).filter(function (item) {
-                return (
-                  item.type === "status_page_resource" &&
-                  item.attributes &&
-                  item.attributes.status !== "not_monitored"
-                );
-              });
               return {
                 content: [
                   {
                     type: "text",
                     text: JSON.stringify(
                       {
-                        aggregate_state:
-                          data.data && data.data.attributes
-                            ? data.data.attributes.aggregate_state
-                            : "unknown",
-                        resources: items.map(function (item) {
+                        current_incident_impact:
+                          data.current_incident_impact || "unknown",
+                        availability: data.availability,
+                        updated_at: data.updated_at,
+                        active_incidents: data.active_incidents || [],
+                        components: (data.components || []).map(function (item) {
                           return {
-                            name:
-                              item.attributes.public_name ||
-                              item.attributes.name,
-                            status: item.attributes.status,
+                            name: item.name,
+                            status: item.current_incident_impact,
+                            availability: item.availability,
                           };
                         }),
                       },

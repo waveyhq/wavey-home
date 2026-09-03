@@ -41,9 +41,14 @@
     </div>
     <div class="footer-col footer-col-supported">
       <h2 class="footer-col-title">Supported By</h2>
-      <a class="footer-netlify" href="https://www.netlify.com" target="_blank" rel="noopener" title="Netlify for Open Source" aria-label="Netlify for Open Source">
-        <img class="footer-netlify-badge" src="{{ "icons/netlify-badge-light.svg" | relURL }}" alt="Netlify" width="114" height="50" decoding="async">
-      </a>
+      <div class="footer-supported-badges">
+        <a class="footer-partner footer-netlify" href="https://www.netlify.com" target="_blank" rel="noopener" title="Netlify for Open Source" aria-label="Netlify for Open Source">
+          <img class="footer-partner-badge" src="{{ "icons/netlify-badge-light.svg" | relURL }}" alt="Netlify" width="114" height="50" decoding="async">
+        </a>
+        <a class="footer-partner footer-phare" href="{{ .Site.Params.phare }}" target="_blank" rel="noopener" title="Phare for Good" aria-label="Phare for Good">
+          <img class="footer-partner-badge" src="{{ "icons/phare-badge-light.svg" | relURL }}" alt="Phare" width="114" height="50" decoding="async">
+        </a>
+      </div>
     </div>
   </div>
   {{ partial "footer-ask-ai.html" . }}

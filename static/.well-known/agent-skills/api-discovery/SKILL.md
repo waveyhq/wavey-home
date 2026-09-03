@@ -22,7 +22,8 @@ Use this skill when an agent needs to find Wavey APIs, health checks, or service
 ### Status page API
 
 - Base: https://status.waveyhq.dev/
-- Health JSON: https://status.waveyhq.dev/index.json
+- Status JSON: https://status.waveyhq.dev/data?page=1
+- RSS feed: https://status.waveyhq.dev/history.rss
 - Accept: `application/json`
 
 ### Wavey Console

@@ -1,9 +1,18 @@
-<a href="{{ .Site.Params.status }}"
-   target="_blank"
-   rel="noopener"
-   class="status-link {{ .class }}"
-   data-status-api="{{ .Site.Params.status }}index.json"
-   aria-label="Service uptime">
-  <span class="status-dot" aria-hidden="true"></span>
-  <span class="status-label">Uptime</span>
+<a
+  href="{{ .Site.Params.phare }}"
+  target="_blank"
+  rel="noopener"
+  class="footer-partner status-badge-link {{ .class }}"
+  title="Phare for Good"
+  aria-label="Phare for Good"
+>
+  <iframe
+    src="{{ .Site.Params.statusBadge }}"
+    width="190"
+    height="30"
+    loading="lazy"
+    title="Wavey service status"
+    tabindex="-1"
+    style="color-scheme: light dark;"
+  ></iframe>
 </a>

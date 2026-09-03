@@ -57,6 +57,11 @@ getenv = ['^HUGO_', '^CI$', '^COMMIT_REF$']
   # Entity / brand links (kept consistent across metadata, schema, footer, llms.txt)
   console = "https://console.waveyhq.dev"
   status = "https://status.waveyhq.dev/"
+  statusApi = "https://status.waveyhq.dev/data?page=1"
+  statusBadge = "https://status.waveyhq.dev/embed-badges/live-status?align=start&background-light=f5f5f5&text-light=000000&background-dark=171717&text-dark=ffffff"
+  phare = "https://phare.io"
+  openpanelClientId = "b56f5d67-4dcd-42e5-a110-a7e1778df8a1"
+  openpanelHosts = ["waveyhq.dev"]
   github = "https://github.com/waveyhq"
   discord = "https://discord.gg/sxh9r9UTtW"
   twitter = "https://x.com/nopeJS"

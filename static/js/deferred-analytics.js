@@ -1,50 +1,61 @@
 (function () {
   var current = document.currentScript;
   var analyticsSrc = (current && current.getAttribute('data-analytics-src')) || '/js/analytics.js';
+  var openpanelClientId = current && current.getAttribute('data-openpanel-client-id');
+  var openpanelHosts = ((current && current.getAttribute('data-openpanel-hosts')) || 'waveyhq.dev')
+    .split(',')
+    .map(function (host) { return host.trim(); })
+    .filter(Boolean);
+  var enableOpenpanel = Boolean(
+    openpanelClientId &&
+    openpanelHosts.indexOf(window.location.hostname) !== -1
+  );
 
   function loadAnalytics() {
-    window.op = window.op || function () {
-      var n = [];
-      return new Proxy(function () {
-        if (arguments.length) n.push([].slice.call(arguments));
-      }, {
-        get: function (t, r) {
-          return r === 'q' ? n : function () {
-            n.push([r].concat([].slice.call(arguments)));
-          };
-        },
-        has: function (t, r) {
-          return r === 'q';
+    if (enableOpenpanel) {
+      window.op = window.op || function () {
+        var n = [];
+        return new Proxy(function () {
+          if (arguments.length) n.push([].slice.call(arguments));
+        }, {
+          get: function (t, r) {
+            return r === 'q' ? n : function () {
+              n.push([r].concat([].slice.call(arguments)));
+            };
+          },
+          has: function (t, r) {
+            return r === 'q';
+          }
+        });
+      }();
+
+      window.op('init', {
+        clientId: openpanelClientId,
+        trackScreenViews: true,
+        trackOutgoingLinks: true,
+        trackAttributes: true,
+        trackHashChanges: true,
+        sessionReplay: {
+          enabled: true,
+          maskAllInputs: true,
+          maskAllText: false,
+          blockSelector: '.feedback-form, [data-openpanel-replay-block]',
+          unmaskTextSelector: '#main-content, .terminal-nav, footer.footer, .cmdk__panel, .landing-about, .landing-section',
+          ignoreSelector: '.feedback-form input, .feedback-form textarea'
         }
       });
-    }();
 
-    window.op('init', {
-      clientId: 'b56f5d67-4dcd-42e5-a110-a7e1778df8a1',
-      trackScreenViews: true,
-      trackOutgoingLinks: true,
-      trackAttributes: true,
-      trackHashChanges: true,
-      sessionReplay: {
-        enabled: true,
-        maskAllInputs: true,
-        maskAllText: false,
-        blockSelector: '.feedback-form, [data-openpanel-replay-block]',
-        unmaskTextSelector: '#main-content, .terminal-nav, footer.footer, .cmdk__panel, .landing-about, .landing-section',
-        ignoreSelector: '.feedback-form input, .feedback-form textarea'
-      }
-    });
+      window.op('setGlobalProperties', {
+        site: 'wavey-docs',
+        environment: 'production'
+      });
 
-    window.op('setGlobalProperties', {
-      site: 'wavey-docs',
-      environment: 'production'
-    });
-
-    var openpanelScript = document.createElement('script');
-    openpanelScript.src = 'https://openpanel.dev/op1.js';
-    openpanelScript.defer = true;
-    openpanelScript.async = true;
-    document.head.appendChild(openpanelScript);
+      var openpanelScript = document.createElement('script');
+      openpanelScript.src = 'https://openpanel.dev/op1.js';
+      openpanelScript.defer = true;
+      openpanelScript.async = true;
+      document.head.appendChild(openpanelScript);
+    }
 
     var gtagScript = document.createElement('script');
     gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-2Y7RXDFJ06';

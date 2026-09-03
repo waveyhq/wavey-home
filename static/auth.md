@@ -25,7 +25,7 @@ The `agent_auth` block in the authorization server response lists supported iden
 Most Wavey documentation, llms.txt, and the status API are public:
 
 - Site summary: https://waveyhq.dev/llms.txt
-- Status JSON: https://status.waveyhq.dev/index.json
+- Status JSON: https://status.waveyhq.dev/data?page=1
 
 No access token is required for these resources.
 

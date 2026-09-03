@@ -20,7 +20,7 @@
       ],
       "status": [
         {
-          "href": "https://status.waveyhq.dev/index.json",
+          "href": "https://status.waveyhq.dev/data?page=1",
           "type": "application/json"
         }
       ]
@@ -29,8 +29,12 @@
       "anchor": "https://status.waveyhq.dev/",
       "service-desc": [
         {
-          "href": "https://status.waveyhq.dev/index.json",
+          "href": "https://status.waveyhq.dev/data?page=1",
           "type": "application/json"
+        },
+        {
+          "href": "https://status.waveyhq.dev/history.rss",
+          "type": "application/rss+xml"
         }
       ],
       "service-doc": [
@@ -41,7 +45,7 @@
       ],
       "status": [
         {
-          "href": "https://status.waveyhq.dev/index.json",
+          "href": "https://status.waveyhq.dev/data?page=1",
           "type": "application/json"
         }
       ]
@@ -60,7 +64,7 @@
       ],
       "status": [
         {
-          "href": "https://status.waveyhq.dev/index.json",
+          "href": "https://status.waveyhq.dev/data?page=1",
           "type": "application/json"
         }
       ]
