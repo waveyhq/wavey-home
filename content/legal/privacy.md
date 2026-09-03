@@ -61,6 +61,7 @@ The Site currently loads the following services automatically when a page loads:
 - **Google Analytics** — measures visits, sessions, and engagement. See [Google's Privacy Policy](https://policies.google.com/privacy) and [Analytics data safeguards](https://support.google.com/analytics/answer/6004245).
 - **Umami Cloud** — provides website-usage analytics. See [Umami's Privacy Policy](https://umami.is/privacy).
 - **PostHog** — provides product analytics, autocapture, heatmaps, and session replay. Site events are sent through `pstat.waveyhq.dev` to a PostHog Cloud project hosted in the United States. See [PostHog's Privacy Policy](https://posthog.com/privacy) and [session-replay privacy controls](https://posthog.com/docs/session-replay/privacy).
+- **OpenPanel** — provides product analytics, screen views, outgoing-link tracking, and session replay. Site events are sent to OpenPanel Cloud (`api.openpanel.dev`). Feedback form content is blocked from replay; input fields are masked. See [OpenPanel's Privacy Policy](https://openpanel.dev/privacy) and [session-replay privacy controls](https://openpanel.dev/docs/session-replay).
 
 This Policy is notice about those technologies; it is not itself consent. Where applicable law requires prior consent for non-essential analytics, cookies, or replay, those technologies should not be activated until valid consent has been obtained.
 
